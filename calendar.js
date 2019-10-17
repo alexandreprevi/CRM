@@ -31,7 +31,7 @@ class Calendar{
             if (i == today.getDate() && date.getMonth() == today.getMonth()){
 
                 i = i.toString();
-                cells += `<div class="today day current-month ${date.getFullYear()}-${date.getMonth()+1}-${i.length == 1 ? '0' + i : i}">${i}<span class=''></span></div>`;
+                cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth()+1}-${i.length == 1 ? '0' + i : i} today">${i}<span class=''></span></div>`;
             } else {
                 
                 i = i.toString();
@@ -150,15 +150,18 @@ days.addEventListener("click", function(event){
 
     // display the events of this day
 
-    
     let pTest = document.getElementById("test");
-
+    let arrayTest = [];
     for (let i = 0; i < myCalendar.events.length; i++){
+        pTest.innerHTML = "";
         if(myCalendar.events[i].date == event.target.classList[2]){
-            pTest.innerHTML = myCalendar.events[i].title; // replace this by a function... add(paragraph or something)
-            break;
-        } else {
+            arrayTest.push(myCalendar.events[i]);
+        } else{
             pTest.innerHTML = "";
+        }
+
+        for (let i = 0; i < arrayTest.length; i ++){
+            pTest.innerHTML += arrayTest[i].startTime + ": " + arrayTest[i].title + "</br>";
         }
     }
 
