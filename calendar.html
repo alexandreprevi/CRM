@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/b47051db3a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="calendar.css">
+    <title>Calendar</title>
+</head>
+
+<body onload="myCalendar.renderDate()">
+    
+    <div id="modal-add" class="modal-add">
+        <div class="modal-add-header">
+            <p id="cancel-button">Cancel</p>
+            <h3>New Event</h3>
+            <p id="confirm-add-event-button">Add</p>
+        </div>
+        <div class="modal-add-form">
+            <div class="modal-add-form-1">
+                <input type="text" id="title-add" placeholder="Title">
+                <input type="text" id="place-add" placeholder="Place">
+            </div>
+            <div class="modal-add-form-2">
+                <label for="date-add">Date:</label><input type="date" id="date-add">
+                <label for="start-time-add">Begin:</label><input type="time" id="start-time-add">
+                <label for="end-time-add">End:</label><input type="time" id="end-time-add">
+            </div>
+            <div class="modal-add-form-3">
+                <label for="contact-add">Link to contact</label><input type="text" id="contact-add">
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modal-calender">
+        <div class="modal-content">
+              <!--  <span class="close" id="close-modal">&times;</span> -->
+            <div class="modal-content-events">
+                <h3>Events</h3>
+                <p id="test">...</p>
+                <p>...</p>
+                <p>...</p>
+            </div>
+            <div id="add-event-button" class="modal-content-add">
+                <i class="fas fa-plus"></i>
+                <p>Add Event</p>
+            </div>
+            <p id="date-modal" class="date-modal"></p>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="header">
+                <div class="logo">
+                        <img src="logo/emmiologo.png" alt="logo">
+                    </div>
+            <h1>Calendar</h1>
+        </div>
+        <div class="calendar">
+            <div class="month">
+                <!-- left arrow -->
+                <div class="prev" onclick="moveDate('prev')">
+                    <span>&#10094</span>
+                </div>
+                <div>
+                    <h2 id="month"></h2>
+                    <p id="date-str"></p>
+                </div>
+                <!-- right arrow -->
+                <div class="next" onclick="moveDate('next')">
+                    <span>&#10095</span>
+                </div>
+            </div>
+            <div class="weekdays">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="days" id="days">
+            </div>
+        </div>
+        <div class="navbar">
+            <a href="index.html"><i class="fas fa-home"></i></a>
+            <a href=""><i class="fas fa-address-book"></i></a>
+            <a href="calendar.html"><i class="fas fa-calendar-alt"></i></a>
+            <a href=""><i class="fas fa-sticky-note"></i></a>
+            <a href=""><i class="fas fa-history"></i></a>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="calendar.js"></script>
+</body>
+
+</html>
