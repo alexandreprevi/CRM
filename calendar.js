@@ -12,8 +12,6 @@ class Calendar{
         let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
         let today = new Date();
         
-    
-        
         document.getElementById("month").innerHTML = months[date.getMonth()];
         document.getElementById("date-str").innerHTML = today.toDateString();
         
@@ -23,9 +21,7 @@ class Calendar{
             cells += "<div class='prev-date day'>" + (prevDate - i + 1) + "<span class=''></span>" + "</div>";
         }
 
-        // add a "0" in front of numbers from 1 to 9. (with a if)
-        // change order to "year - month - day" and get rid of "day".
-
+        // Create one div for each day
         for (let i = 1; i <= endDate; i++){
             
             if (i == today.getDate() && date.getMonth() == today.getMonth()){
@@ -39,40 +35,64 @@ class Calendar{
             }
         }
 
-        
+
         document.getElementsByClassName("days")[0].innerHTML = cells;
-        
 
 
-
-        // DISPLAY DOT FOR EVENT
-
-        // check if there is an event.
-        // From the date of the event, add a class "eventToday" on the div of this day 
-        // on the calender to show a DOT
-
-        // Then go to the modal section and write innerHTMl with the event title, place.. etc
-
-
-        console.log(myCalendar);
-        // add an event class on days with event
-        for (let i = 0; i < myCalendar.events.length; i++){
-            
-        }
-
-
-
-
+        let arrayOfDatesWithEvent = [];
         let currentDaysArray = Array.from(document.getElementsByClassName("current-month"));
-        
 
-        // check for event
-        for (let i = 0; i < currentDaysArray.length; i++){
-            if (currentDaysArray[i].classList.contains("eventToday")){
-                currentDaysArray[i].classList.add("dot");
+        // Check for event in myCalendar.event. print a dot.
+
+        for (let i = 0; i < myCalendar.events.length; i++){
+        
+            //  Get the date
+
+            arrayOfDatesWithEvent.push(myCalendar.events[i].date);
+
+            for (let j = 0; j < currentDaysArray.length; j++){
+
+                if(currentDaysArray[j].classList.contains(myCalendar.events[i].date)){
+                    currentDaysArray[j].classList.add("eventToday");
+                }
+            }
+        }        
+    }
+
+    renderEvent(){
+        let pTest = document.getElementById("test");
+        let arrayTest = [];
+        for (let i = 0; i < myCalendar.events.length; i++){
+            pTest.innerHTML = "";
+            
+            if(myCalendar.events[i].date == event.target.classList[2]){
+
+                arrayTest.push(myCalendar.events[i]);
+            } else{
+                pTest.innerHTML = "";
+            }
+    
+            for (let i = 0; i < arrayTest.length; i ++){
+                pTest.innerHTML += arrayTest[i].startTime + ": " + arrayTest[i].title + "</br>";
             }
         }
+    }
+
+    renderDotForEvent(){
+        let currentDaysArray = Array.from(document.getElementsByClassName("current-month"));
         
+        // check for event
+        for (let i = 0; i < currentDaysArray.length; i++){
+            
+            /* console.log(currentDaysArray[i].classList); */
+        
+        }
+    }
+
+    getInputsEvent(){
+
+        let eventAdded = new Event(title_add.value, place_add.value, date_add.value, startTime_add.value, endTime_add.value, contact_add.value);
+        this.events.push(eventAdded);
     }
 
 }
@@ -86,11 +106,6 @@ class Event{
         this.startTime = startTime;
         this.endTime = endTime;
         this.contact = contact;
-    }
-
-    getEvent(){
-      //  return `${this.startTime}: ${this.title} at ${this.place}`;
-      console.log(date_add.value, startTime_add.value);
     }
 }
 
@@ -113,7 +128,6 @@ let months = [
 ];
 
 let days = document.getElementById("days");
-
 
 
 // MODAL show events
@@ -149,57 +163,43 @@ days.addEventListener("click", function(event){
     dateModal.innerHTML = event.target.innerHTML + " " + currentMonth.substring(0, 3);
 
     // display the events of this day
-
-    let pTest = document.getElementById("test");
-    let arrayTest = [];
-    for (let i = 0; i < myCalendar.events.length; i++){
-        pTest.innerHTML = "";
-        if(myCalendar.events[i].date == event.target.classList[2]){
-            arrayTest.push(myCalendar.events[i]);
-        } else{
-            pTest.innerHTML = "";
-        }
-
-        for (let i = 0; i < arrayTest.length; i ++){
-            pTest.innerHTML += arrayTest[i].startTime + ": " + arrayTest[i].title + "</br>";
-        }
-    }
-
-
-
+    myCalendar.renderEvent();
     
 });
+
+
+
 
 /* // Close modal
 closeModal.addEventListener("click", function(){
     modal.style.display = "none";
 }) */
+
+
+
 window.addEventListener("click", function(event){
     if (event.target == modal){
         modal.style.display = "none";
+        
     }
+    myCalendar.renderDate();
+    
 });
 
 addEventButton.addEventListener("click", function(){
     modalAdd.style.display = "flex";
+    
+    
 });
 cancelButton.addEventListener("click", function(){
     modalAdd.style.display = "none";
+    
 });
 confirmAddEvent.addEventListener("click", function(){
     modalAdd.style.display = "none";
-    getInputsEvent();
-    myCalendar.renderDate();
+    myCalendar.getInputsEvent();
+
 } );
-
-
-
-function getInputsEvent(){
-
-    let eventAdded = new Event(title_add.value, place_add.value, date_add.value, startTime_add.value, endTime_add.value, contact_add.value);
-    myCalendar.events.push(eventAdded);
-    console.log(myCalendar);
-}
 
 
 
@@ -212,6 +212,3 @@ function moveDate(para){
     myCalendar.renderDate();
 
 }
-
-
- 
