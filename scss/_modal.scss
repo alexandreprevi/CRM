@@ -1,0 +1,136 @@
+$primary-color: #8c4907;
+$secondary-color: #f27e0c;
+$text-color: #fff;
+
+.modal{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #fff;
+        border: 1px solid $primary-color;
+        width: 250px;
+        height: 300px;
+        border-radius: 5px;
+        padding: 0.3rem 0.5rem;
+
+        &-add {
+            display: flex;
+
+            i {
+                padding-right: 0.4rem;
+            }
+        }
+
+        &-events {
+            display: flex;
+            flex-direction: column;
+
+            h3 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.4rem;
+            }
+
+            p {
+                padding: 0.2rem;
+            }
+        }
+    }
+}
+
+.date-modal{
+    position: absolute;
+    right: 80px;
+    font-size: 1.8rem;
+    color: $primary-color;
+}
+
+.modal-add{
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #fff;
+}
+
+.modal-add-header{
+    display: flex;
+    height: 10%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-add-header p{
+    font-size: 20px;
+    padding: 1rem;
+    font-weight: bold;    
+}
+.modal-add-header p:nth-child(1){
+    color: rgba(255, 30, 0, 1); 
+}
+.modal-add-header p:nth-child(3){
+    color: rgba(34, 255, 34, 0.7); 
+}
+
+.modal-add-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.modal-add-form-1{
+    display: flex;
+    height: 20%;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.modal-add-form-2{
+    display: flex;
+    height: 20%;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.modal-add-form-3{
+    display: flex;
+    height: 20%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.close{
+    color: #aaa;
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    transition: all 0.4s;
+}
+
+.close:hover,
+.close:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.delete-button{
+    color: red;
+    float: right;
+    margin-right: 20px;
+    text-decoration: none;
+}
