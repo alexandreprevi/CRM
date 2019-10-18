@@ -1,95 +1,129 @@
-class Calendar{
-    constructor(){
+class Calendar {
+    constructor() {
         this.events = [];
     }
 
-    renderDate(){
-    
+    renderDate() {
+
         date.setDate(1);
-        
+
         let day = date.getDay();
         let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
         let today = new Date();
-        
+
         document.getElementById("month").innerHTML = months[date.getMonth()];
         document.getElementById("date-str").innerHTML = today.toDateString();
-        
+
         let cells = "";
-    
-        for (let i = day; i > 0; i--){ 
+
+        for (let i = day; i > 0; i--) {
             cells += "<div class='prev-date day'>" + (prevDate - i + 1) + "<span class=''></span>" + "</div>";
         }
 
         // Create one div for each day
-        for (let i = 1; i <= endDate; i++){
-            
-            if (i == today.getDate() && date.getMonth() == today.getMonth()){
+        for (let i = 1; i <= endDate; i++) {
+
+            if (i == today.getDate() && date.getMonth() == today.getMonth()) {
 
                 i = i.toString();
-                cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth()+1}-${i.length == 1 ? '0' + i : i} today">${i}<span class=''></span></div>`;
+                cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${i.length == 1 ? '0' + i : i} today">${i}<span class=''></span></div>`;
             } else {
-                
+
                 i = i.toString();
-                cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth()+1}-${i.length == 1 ? '0' + i : i}">${i}<span class=''></span></div>`;
+                cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${i.length == 1 ? '0' + i : i}">${i}<span class=''></span></div>`;
             }
         }
 
+        console.log(myCalendar);
 
         document.getElementsByClassName("days")[0].innerHTML = cells;
 
-
-        let arrayOfDatesWithEvent = [];
         let currentDaysArray = Array.from(document.getElementsByClassName("current-month"));
 
         // Check for event in myCalendar.event. print a dot.
 
-        for (let i = 0; i < myCalendar.events.length; i++){
-        
+        for (let i = 0; i < myCalendar.events.length; i++) {
+
             //  Get the date
 
-            arrayOfDatesWithEvent.push(myCalendar.events[i].date);
+            for (let j = 0; j < currentDaysArray.length; j++) {
 
-            for (let j = 0; j < currentDaysArray.length; j++){
-
-                if(currentDaysArray[j].classList.contains(myCalendar.events[i].date)){
+                if (currentDaysArray[j].classList.contains(myCalendar.events[i].date)) {
                     currentDaysArray[j].classList.add("eventToday");
                 }
             }
-        }        
-    }
-
-    renderEvent(){
-        let pTest = document.getElementById("test");
-        let arrayTest = [];
-        for (let i = 0; i < myCalendar.events.length; i++){
-            pTest.innerHTML = "";
-            
-            if(myCalendar.events[i].date == event.target.classList[2]){
-
-                arrayTest.push(myCalendar.events[i]);
-            } else{
-                pTest.innerHTML = "";
-            }
-    
-            for (let i = 0; i < arrayTest.length; i ++){
-                pTest.innerHTML += arrayTest[i].startTime + ": " + arrayTest[i].title + "</br>";
-            }
         }
     }
 
-    renderDotForEvent(){
+    renderEventList() {
+        const eventList = document.getElementById("event-list");
+        let eventArray = [];
+        for (let i = 0; i < myCalendar.events.length; i++) {
+            eventList.innerHTML = "";
+
+            if (myCalendar.events[i].date == event.target.classList[2]) {
+
+                eventArray.push(myCalendar.events[i]);
+            } else {
+                eventList.innerHTML = "";
+            }
+
+             eventArray.forEach((event) => this.renderThisEvent(event)); 
+
+            /* for (let i = 0; i < eventArray.length; i++) {
+                eventList.innerHTML += eventArray[i].startTime + ": " + eventArray[i].title + "</br>";
+            } */
+        }
+    }
+
+    renderThisEvent(event){
+        const eventList = document.getElementById("event-list");
+        const row = document.createElement("row");
+        row.id = event.id;
+        row.innerHTML = `
+        ${event.startTime} ${event.title} <a class="delete-button">X</a>
+        </br>`;
+
+        eventList.appendChild(row);
+
+    }
+
+    deleteEvent(el){
+        if (el.classList.contains("delete-button")){
+            
+
+            // Remove event from the list
+            let confirm = window.confirm("Are you sure you want to delete this event?");
+
+            if (confirm == true){
+                el.parentElement.remove();
+                
+                // remove event from myCalendar.events after confirmationAlert
+                myCalendar.events.forEach((event) => {
+                    if (el.parentElement.id == event.id){
+                        // remove the event from the calender.event array with the id of the event
+                        let eventToRemove = myCalendar.events.map(function(item) {return item.id}).indexOf(event.id);
+                        myCalendar.events.splice(eventToRemove, 1);
+                    }
+                })
+            }
+            
+        }
+    }
+
+    renderDotForEvent() {
         let currentDaysArray = Array.from(document.getElementsByClassName("current-month"));
-        
+
         // check for event
-        for (let i = 0; i < currentDaysArray.length; i++){
-            
+        for (let i = 0; i < currentDaysArray.length; i++) {
+
             /* console.log(currentDaysArray[i].classList); */
-        
+
         }
     }
 
-    getInputsEvent(){
+    getInputsEvent() {
 
         let eventAdded = new Event(title_add.value, place_add.value, date_add.value, startTime_add.value, endTime_add.value, contact_add.value);
         this.events.push(eventAdded);
@@ -98,15 +132,17 @@ class Calendar{
 }
 
 
-class Event{
-    constructor(title, place, date, startTime, endTime, contact = ""){
+class Event {
+    constructor(title, place, date, startTime, endTime, contact = "") {
         this.title = title;
         this.place = place;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.contact = contact;
+        this.id = date.replace(/-/g,"")+startTime.replace(":","");
     }
+
 }
 
 let myCalendar = new Calendar();
@@ -147,7 +183,7 @@ let endTime_add = document.getElementById("end-time-add");
 let contact_add = document.getElementById("contact-add");
 
 // Event listener on days
-days.addEventListener("click", function(event){
+days.addEventListener("click", function (event) {
 
 
     // display modal if clicked on day div
@@ -157,14 +193,14 @@ days.addEventListener("click", function(event){
     let dateModal = document.getElementById("date-modal");
 
     // check if it is previous month
-    event.target.classList.contains("prev-date") ? currentMonth =  months[(date.getMonth() - 1)] : currentMonth = months[date.getMonth()];
-    
+    event.target.classList.contains("prev-date") ? currentMonth = months[(date.getMonth() - 1)] : currentMonth = months[date.getMonth()];
+
     // display date on top right corner Modal
     dateModal.innerHTML = event.target.innerHTML + " " + currentMonth.substring(0, 3);
 
     // display the events of this day
-    myCalendar.renderEvent();
-    
+    myCalendar.renderEventList();
+
 });
 
 
@@ -177,38 +213,44 @@ closeModal.addEventListener("click", function(){
 
 
 
-window.addEventListener("click", function(event){
-    if (event.target == modal){
+window.addEventListener("click", function (event) {
+    if (event.target == modal) {
         modal.style.display = "none";
-        
+
     }
     myCalendar.renderDate();
-    
+
 });
 
-addEventButton.addEventListener("click", function(){
+addEventButton.addEventListener("click", function () {
     modalAdd.style.display = "flex";
-    
-    
+
+
 });
-cancelButton.addEventListener("click", function(){
+cancelButton.addEventListener("click", function () {
     modalAdd.style.display = "none";
-    
+
 });
-confirmAddEvent.addEventListener("click", function(){
+confirmAddEvent.addEventListener("click", function () {
     modalAdd.style.display = "none";
     myCalendar.getInputsEvent();
 
-} );
+});
 
 
 
-function moveDate(para){
-    if (para == 'prev'){
+function moveDate(para) {
+    if (para == 'prev') {
         date.setMonth(date.getMonth() - 1);
-    } else if (para == 'next'){
+    } else if (para == 'next') {
         date.setMonth(date.getMonth() + 1);
     }
     myCalendar.renderDate();
 
 }
+
+
+// Remove an event from the event-list
+document.getElementById("event-list").addEventListener("click", (e) => {
+    myCalendar.deleteEvent(e.target);
+});
