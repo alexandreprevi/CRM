@@ -81,17 +81,13 @@ class Calendar {
         const eventList = document.getElementById("event-list");
         const row = document.createElement("row");
         row.id = event.id;
-        row.innerHTML = `
-        ${event.startTime} ${event.title} <a class="delete-button">X</a>
-        </br>`;
-
+        row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
         eventList.appendChild(row);
 
     }
 
     deleteEvent(el){
         if (el.classList.contains("delete-button")){
-            
 
             // Remove event from the list
             let confirm = window.confirm("Are you sure you want to delete this event?");
@@ -99,7 +95,7 @@ class Calendar {
             if (confirm == true){
                 el.parentElement.remove();
                 
-                // remove event from myCalendar.events after confirmationAlert
+                // remove event from myCalendar.events after confirmation alert
                 myCalendar.events.forEach((event) => {
                     if (el.parentElement.id == event.id){
                         // remove the event from the calender.event array with the id of the event
@@ -109,17 +105,6 @@ class Calendar {
                 })
             }
             
-        }
-    }
-
-    renderDotForEvent() {
-        let currentDaysArray = Array.from(document.getElementsByClassName("current-month"));
-
-        // check for event
-        for (let i = 0; i < currentDaysArray.length; i++) {
-
-            /* console.log(currentDaysArray[i].classList); */
-
         }
     }
 
@@ -165,14 +150,13 @@ let months = [
 
 let days = document.getElementById("days");
 
-
-// MODAL show events
+// MODAL window with event list
 let modal = document.getElementById("modal-calender");
 let modalAdd = document.getElementById("modal-add");
 let closeModal = document.getElementById("close-modal");
 let addEventButton = document.getElementById("add-event-button");
 
-// MODAL add events
+// MODAL window/form to add events
 let cancelButton = document.getElementById("cancel-button");
 let confirmAddEvent = document.getElementById("confirm-add-event-button");
 let title_add = document.getElementById("title-add");
@@ -183,62 +167,53 @@ let endTime_add = document.getElementById("end-time-add");
 let contact_add = document.getElementById("contact-add");
 
 // Event listener on days
-days.addEventListener("click", function (event) {
-
+days.addEventListener("click", function (dayPressed) {
 
     // display modal if clicked on day div
-    event.target.classList.contains("days") ? modal.style.display = "none" : modal.style.display = "flex";
+    dayPressed.target.classList.contains("days") ? modal.style.display = "none" : modal.style.display = "flex";
 
     // get date clicked
     let dateModal = document.getElementById("date-modal");
 
     // check if it is previous month
-    event.target.classList.contains("prev-date") ? currentMonth = months[(date.getMonth() - 1)] : currentMonth = months[date.getMonth()];
+    dayPressed.target.classList.contains("prev-date") ? currentMonth = months[(date.getMonth() - 1)] : currentMonth = months[date.getMonth()];
 
     // display date on top right corner Modal
-    dateModal.innerHTML = event.target.innerHTML + " " + currentMonth.substring(0, 3);
+    dateModal.innerHTML = dayPressed.target.innerHTML + " " + currentMonth.substring(0, 3);
 
     // display the events of this day
     myCalendar.renderEventList();
-
 });
-
-
-
-
-/* // Close modal
-closeModal.addEventListener("click", function(){
-    modal.style.display = "none";
-}) */
-
-
 
 window.addEventListener("click", function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
-
     }
     myCalendar.renderDate();
-
 });
 
+// Opening the event form window
 addEventButton.addEventListener("click", function () {
     modalAdd.style.display = "flex";
-
-
 });
+
+// Cancel adding an event to the calendar
 cancelButton.addEventListener("click", function () {
     modalAdd.style.display = "none";
-
 });
+
+// Adding an event to the calendar
 confirmAddEvent.addEventListener("click", function () {
     modalAdd.style.display = "none";
     myCalendar.getInputsEvent();
-
 });
 
+// Remove an event from the event-list
+document.getElementById("event-list").addEventListener("click", (e) => {
+    myCalendar.deleteEvent(e.target);
+});
 
-
+// Move the previous or next month on the calendar
 function moveDate(para) {
     if (para == 'prev') {
         date.setMonth(date.getMonth() - 1);
@@ -248,9 +223,3 @@ function moveDate(para) {
     myCalendar.renderDate();
 
 }
-
-
-// Remove an event from the event-list
-document.getElementById("event-list").addEventListener("click", (e) => {
-    myCalendar.deleteEvent(e.target);
-});
