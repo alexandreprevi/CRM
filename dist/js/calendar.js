@@ -173,7 +173,7 @@ days.addEventListener("click", function (dayPressed) {
     dayPressed.target.classList.contains("days") ? modal.style.display = "none" : modal.style.display = "flex";
 
     // get date clicked
-    let dateModal = document.getElementById("date-modal");
+    let dateModal = document.getElementById("modal-date");
 
     // check if it is previous month
     dayPressed.target.classList.contains("prev-date") ? currentMonth = months[(date.getMonth() - 1)] : currentMonth = months[date.getMonth()];
@@ -195,15 +195,18 @@ window.addEventListener("click", function (event) {
 // Opening the event form window
 addEventButton.addEventListener("click", function () {
     modalAdd.style.display = "flex";
+    modalAdd.classList.add('open');
 });
 
 // Cancel adding an event to the calendar
 cancelButton.addEventListener("click", function () {
+    modalAdd.classList.remove('open');
     modalAdd.style.display = "none";
 });
 
 // Adding an event to the calendar
 confirmAddEvent.addEventListener("click", function () {
+    modalAdd.classList.remove('open');
     modalAdd.style.display = "none";
     myCalendar.getInputsEvent();
 });

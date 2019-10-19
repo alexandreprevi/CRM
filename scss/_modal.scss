@@ -1,6 +1,7 @@
 $primary-color: #8c4907;
 $secondary-color: #f27e0c;
 $text-color: #fff;
+$max-width: 500px;
 
 .modal{
     display: none;
@@ -10,10 +11,13 @@ $text-color: #fff;
     z-index: 1;
     width: 100%;
     height: 100%;
+    max-width: 500px;
     overflow: scroll;
     background-color: rgba(0, 0, 0, 0.5);
+    
 
     &-content {
+        position: absolute;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -23,6 +27,14 @@ $text-color: #fff;
         height: 300px;
         border-radius: 5px;
         padding: 0.3rem 0.5rem;
+
+        &-date {
+            position: absolute;
+            right: 0.5rem;
+            top: 0.2rem;
+            font-size: 2rem;
+            color: rgba($primary-color, 0.5);
+        }
 
         &-add {
             display: flex;
@@ -48,89 +60,82 @@ $text-color: #fff;
     }
 }
 
-.date-modal{
-    position: absolute;
-    right: 80px;
-    font-size: 1.8rem;
-    color: $primary-color;
-}
-
 .modal-add{
     display: none;
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     z-index: 2;
     width: 100%;
+    max-width: $max-width;
     height: 100%;
-    overflow: auto;
-    background-color: #fff;
-}
-
-.modal-add-header{
-    display: flex;
-    height: 10%;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-add-header p{
-    font-size: 20px;
-    padding: 1rem;
-    font-weight: bold;    
-}
-.modal-add-header p:nth-child(1){
-    color: rgba(255, 30, 0, 1); 
-}
-.modal-add-header p:nth-child(3){
-    color: rgba(34, 255, 34, 0.7); 
-}
-
-.modal-add-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 20px;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
-}
-.modal-add-form-1{
-    display: flex;
-    height: 20%;
-    justify-content: space-around;
-    flex-direction: column;
-}
-.modal-add-form-2{
-    display: flex;
-    height: 20%;
-    justify-content: space-around;
-    flex-direction: column;
-}
-.modal-add-form-3{
-    display: flex;
-    height: 20%;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.close{
-    color: #aaa;
-    float: right;
-    font-size: 2rem;
-    font-weight: bold;
+    background-color: $text-color;
     transition: all 0.4s;
+    transform: translateY(100vh);
+
+    &.open {
+        transform: translateY(0);
+    }
+
+    &-header {
+        display: flex;
+        height: 10%;
+        justify-content: space-between;
+        align-items: center;
+        background-color: lighten($secondary-color, 30%);
+        border: $secondary-color 1px solid;
+    
+        p{
+            font-size: 20px;
+            padding: 1rem;
+            font-weight: bold;
+    
+            &:nth-child(1) {
+                color: rgba(255, 30, 0, 0.7);
+    
+                &:hover {
+                    color: rgba(255, 30, 0, 1);
+                    cursor: pointer;
+                }
+            }
+    
+            &:nth-child(2) {
+                color: rgba(7, 204, 7, 0.7); 
+    
+                &:hover {
+                    color: rgba(7, 204, 7, 1);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 100%;
+        padding: 1rem 2rem;
+        background-color: darken($text-color, 10%);
+        border: $secondary-color solid 1px;
+        border-top: none;
+    
+        h3 {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+    }
 }
 
-.close:hover,
-.close:focus{
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
 
 .delete-button{
     color: red;
     float: right;
     margin-right: 20px;
     text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
