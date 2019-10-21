@@ -196,3 +196,18 @@ function filter() {
         }
     }
 }
+
+
+
+let previousEvents = document.getElementById("prev-events");
+let upcomingEvents = document.getElementById("upcoming-events");
+previousEvents.style.display = "flex";
+upcomingEvents.style.display = "flex";
+
+previousEvents.addEventListener("click", function(){
+    upcomingEvents.style.display == "flex" ? upcomingEvents.style.display = "none" : upcomingEvents.style.display = "flex";
+});
+
+upcomingEvents.addEventListener("click", function() {
+    previousEvents.style.display == "flex" ? previousEvents.style.display = "none" : previousEvents.style.display = "flex";
+})
