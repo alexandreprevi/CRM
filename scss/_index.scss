@@ -1,0 +1,13 @@
+@import 'variables';
+
+.weekdays-index{
+    display: flex;
+    background-color: $text-color;
+    color: $primary-color;
+    padding: 7px 0;
+}
+
+.weekdays-index div{
+    width: 14.28%;
+    text-align: center;
+}

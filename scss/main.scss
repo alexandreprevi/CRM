@@ -1,12 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import 'modal';
 @import 'calendar';
-
-
-$primary-color: #8c4907;
-$secondary-color: #f27e0c;
-$text-color: #fff;
-$max-width: 500px;
+@import 'index';
+@import 'history';
+@import 'variables';
 
 
 *{

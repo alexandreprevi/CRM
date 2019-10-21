@@ -1,0 +1,23 @@
+@import 'variables';
+
+.history {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-filter {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.past-events {
+    height: 45%;
+    background-color: lightblue;
+}
+
+.upcoming-events {
+    height: 45%;
+    background-color: lightcoral;
+}

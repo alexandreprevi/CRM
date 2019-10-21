@@ -78,7 +78,7 @@ class Calendar {
     }
 
     renderHistoric(){
-        console.log("lets work from here");
+        console.log("OK");
     }
 
     renderPreviousEvents(event){
@@ -190,24 +190,7 @@ let startTime_add = document.getElementById("start-time-add");
 let endTime_add = document.getElementById("end-time-add");
 let contact_add = document.getElementById("contact-add");
 
-// Event listener on days
-days.addEventListener("click", function (dayPressed) {
-    
-    // display modal if clicked on day div
-     dayPressed.target.classList.contains("days") ? modal.style.display = "none" : modal.style.display = "flex";
 
-    // get date clicked
-    let dateModal = document.getElementById("modal-date");
-
-    // check if it is previous month
-    dayPressed.target.classList.contains("prev-date") ? currentMonth = months[(date.getMonth() - 1)] : currentMonth = months[date.getMonth()];
-
-    // display date on top right corner Modal
-    dateModal.innerHTML = dayPressed.target.innerHTML + " " + currentMonth.substring(0, 3);
-
-    // display the events of this day
-    myCalendar.renderEventList(); 
-});
 
 window.addEventListener("click", function (event) {
     if (event.target == modal) {
@@ -216,30 +199,8 @@ window.addEventListener("click", function (event) {
     myCalendar.renderDate();
 });
 
-// Opening the event form window
-addEventButton.addEventListener("click", function () {
-    modalAdd.style.display = "flex";
-    modalAdd.classList.add('open');
-});
 
-// Cancel adding an event to the calendar
-cancelButton.addEventListener("click", function () {
-    modalAdd.classList.remove('open');
-    modalAdd.style.display = "none";
-});
 
-// Adding an event to the calendar
-confirmAddEvent.addEventListener("click", function () {
-    modalAdd.style.display = "none";
-    modalAdd.classList.remove('open');
-    
-    myCalendar.getInputsEvent();
-});
-
-// Remove an event from the event-list
-document.getElementById("event-list").addEventListener("click", (e) => {
-    myCalendar.deleteEvent(e.target);
-});
 
 // Move the previous or next month on the calendar
 function moveDate(para) {
