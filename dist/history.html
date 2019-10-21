@@ -20,14 +20,30 @@
 
         <div class="main history">
             <div class="history-filter">
-                <p>Filter</p>
-                <input type="text" id="inputFilter" onkeyup="filter()" placeholder="Search by Name or Date">
+                <i class="fas fa-search"></i>
+                <input type="text" id="inputFilter" onkeyup="filter()" placeholder="Search Contact or Date">
             </div>
-            <div class="past-events" id="past-events-list">
+            <div class="past-events">
                 <h2>Previous events</h2>
+                <table id="past-events-table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Title</th>
+                        <th>Contact</th>
+                    </tr>
+                </table>
             </div>
-            <div class="upcoming-events" id="upcoming-events-list">
+            <div class="upcoming-events">
                 <h2>Upcoming events</h2>
+                <table id="upcoming-events-table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Title</th>
+                        <th>Contact</th>
+                    </tr>
+                </table>
             </div>
         </div>
 

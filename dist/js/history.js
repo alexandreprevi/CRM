@@ -83,14 +83,13 @@ class Calendar {
         let date = new Date();
         let today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
 
-        const previousEventsList = document.getElementById("past-events-list");
-        const upcomingEventsList = document.getElementById("upcoming-events-list");
+        const previousEventsTable = document.getElementById("past-events-table");
+        const upcomingEventsTable = document.getElementById("upcoming-events-table");
 
         for (let event of myCalendar.events) {
-            let row = document.createElement("row");
-            row.innerHTML = `${event.date} ${event.startTime} ${event.title} </br>`;
-
-            event.date < today ?   previousEventsList.appendChild(row) : upcomingEventsList.appendChild(row);
+            let tr = document.createElement("tr");
+            tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.contact}</td>`;
+            event.date < today ?   previousEventsTable.appendChild(tr) : upcomingEventsTable.appendChild(tr);
         }
     }
 
@@ -162,37 +161,37 @@ console.log(myCalendar);
 function filter() {
     let inputFilter = document.getElementById("inputFilter");
     let filter = inputFilter.value.toUpperCase();
-    const previousEventsList = document.getElementById("past-events-list");
-    const upcomingEventsList = document.getElementById("upcoming-events-list");
-    let eventsInPreviousEventsList = previousEventsList.getElementsByTagName("row");
-    let eventsInUpcomingEventsList = upcomingEventsList.getElementsByTagName("row");
+    const previousEventsTable = document.getElementById("past-events-table");
+    const upcomingEventsTable = document.getElementById("upcoming-events-table");
+    let eventsInPreviousEventsTable = previousEventsTable.getElementsByTagName("tr");
+    let eventsInUpcomingEventsTable = upcomingEventsTable.getElementsByTagName("tr");
 
-    for (let i = 0; i <eventsInPreviousEventsList.length; i++){
-        let event = eventsInPreviousEventsList[i];
+    for (let i = 0; i <eventsInPreviousEventsTable.length; i++){
+        let event = eventsInPreviousEventsTable[i];
     
         if (event) {
             
             txtValue = event.textContent || event.innerText;
         
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                eventsInPreviousEventsList[i].style.display = "";
+                eventsInPreviousEventsTable[i].style.display = "";
             } else {
-                eventsInPreviousEventsList[i].style.display = "none";
+                eventsInPreviousEventsTable[i].style.display = "none";
             }
         }
     }
 
-    for (let i = 0; i <eventsInUpcomingEventsList.length; i++){
-        let event = eventsInUpcomingEventsList[i];
+    for (let i = 0; i <eventsInUpcomingEventsTable.length; i++){
+        let event = eventsInUpcomingEventsTable[i];
         
         if (event) {
             
             txtValue = event.textContent || event.innerText;
 
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                eventsInUpcomingEventsList[i].style.display = "";
+                eventsInUpcomingEventsTable[i].style.display = "";
             } else {
-                eventsInUpcomingEventsList[i].style.display = "none";
+                eventsInUpcomingEventsTable[i].style.display = "none";
             }
         }
     }
