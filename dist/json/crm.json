@@ -1,0 +1,53 @@
+[
+    {
+        "events": [
+            {
+                "title": "Meeting",
+                "place": "Random Bar",
+                "date": "2019-10-08",
+                "startTime": "19:00",
+                "endTime": "",
+                "contact": "",
+                "id": "201910081900" 
+            },
+            {
+                "title": "Lunch",
+                "place": "chez Pino",
+                "date": "2019-10-30",
+                "startTime": "13:00",
+                "endTime": "",
+                "contact": "",
+                "id": "201910301300" 
+            },
+            {
+                "title": "Meeting",
+                "place": "Room 303",
+                "date": "2019-10-31",
+                "startTime": "09:00",
+                "endTime": "",
+                "contact": "",
+                "id": "201910310900" 
+            },
+            {
+                "title": "Phone Call",
+                "place": "Office",
+                "date": "2019-11-01",
+                "startTime": "08:30",
+                "endTime": "",
+                "contact": "",
+                "id": "201911010830" 
+            },
+            {
+                "title": "Lunch",
+                "place": "Napolyon Bistro",
+                "date": "2019-11-01",
+                "startTime": "12:00",
+                "endTime": "",
+                "contact": "",
+                "id": "201911011200" 
+            }
+        ],
+        "contacts": [],
+        "todo": []
+    }
+]

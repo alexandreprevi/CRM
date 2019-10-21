@@ -1,6 +1,8 @@
 class Calendar {
-    constructor() {
-        this.events = [];
+    constructor(events, contacts, todo) {
+        this.events = events;
+        this.contacts = contacts;
+        this.todo = todo;
     }
 
     renderDate() {
@@ -78,35 +80,28 @@ class Calendar {
     }
 
     renderHistoric(){
-        console.log("OK");
-    }
+        let date = new Date();
+        let today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
 
-    renderPreviousEvents(event){
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////
+        const previousEventsList = document.getElementById("past-events-list");
+        const upcomingEventsList = document.getElementById("upcoming-events-list");
 
-    }
+        for (let event of myCalendar.events) {
+            let row = document.createElement("row");
+            row.innerHTML = `${event.date} ${event.startTime} ${event.title} </br>`;
 
-    renderUpcomingEvents(){
-
+            event.date < today ?   previousEventsList.appendChild(row) : upcomingEventsList.appendChild(row);
+        }
     }
 
     renderThisEvent(event){
         const eventList = document.getElementById("event-list");
-        const previousEventsList = document.getElementById("past-events-list");
-        const upcomingEventsList = document.getElementById("upcoming-events-list");
+        
         const row = document.createElement("row");
         row.id = event.id;
         row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
         eventList.appendChild(row);
-
-        /////////////////////////////////////////////////////////////////////////////////////////
-        if (event.date < today) {
-            previousEventsList.appendChild(row);
-        } else {
-            upcomingEventsList.appendChild(row);
-        }
-
+    
 
     }
 
@@ -151,67 +146,54 @@ class Event {
         this.contact = contact;
         this.id = date.replace(/-/g,"")+startTime.replace(":","");
     }
-
 }
 
-let myCalendar = new Calendar();
-let date = new Date();
+// IMPORT DATA FROM JSON FILE ////////////////////////////
 
-let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-];
+let json = getJSON('http://www.mocky.io/v2/5dadc5522d00002ae1e4bcd2');
 
-let days = document.getElementById("days");
+let myCalendar = new Calendar(json[0].events, json[0].contacts, json[0].todo);
 
-// MODAL window with event list
-let modal = document.getElementById("modal-calender");
-let modalAdd = document.getElementById("modal-add");
-let closeModal = document.getElementById("close-modal");
-let addEventButton = document.getElementById("add-event-button");
+console.log(myCalendar);
 
-// MODAL window/form to add events
-let cancelButton = document.getElementById("cancel-button");
-let confirmAddEvent = document.getElementById("confirm-add-event-button");
-let title_add = document.getElementById("title-add");
-let place_add = document.getElementById("place-add");
-let date_add = document.getElementById("date-add");
-let startTime_add = document.getElementById("start-time-add");
-let endTime_add = document.getElementById("end-time-add");
-let contact_add = document.getElementById("contact-add");
+//////////////////////////////////////////////////////////
 
 
+function filter() {
+    let inputFilter = document.getElementById("inputFilter");
+    let filter = inputFilter.value.toUpperCase();
+    const previousEventsList = document.getElementById("past-events-list");
+    const upcomingEventsList = document.getElementById("upcoming-events-list");
+    let eventsInPreviousEventsList = previousEventsList.getElementsByTagName("row");
+    let eventsInUpcomingEventsList = upcomingEventsList.getElementsByTagName("row");
 
-window.addEventListener("click", function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    for (let i = 0; i <eventsInPreviousEventsList.length; i++){
+        let event = eventsInPreviousEventsList[i];
+    
+        if (event) {
+            
+            txtValue = event.textContent || event.innerText;
+        
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                eventsInPreviousEventsList[i].style.display = "";
+            } else {
+                eventsInPreviousEventsList[i].style.display = "none";
+            }
+        }
     }
-    myCalendar.renderDate();
-});
 
+    for (let i = 0; i <eventsInUpcomingEventsList.length; i++){
+        let event = eventsInUpcomingEventsList[i];
+        
+        if (event) {
+            
+            txtValue = event.textContent || event.innerText;
 
-
-
-// Move the previous or next month on the calendar
-function moveDate(para) {
-    if (para == 'prev') {
-        date.setMonth(date.getMonth() - 1);
-    } else if (para == 'next') {
-        date.setMonth(date.getMonth() + 1);
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                eventsInUpcomingEventsList[i].style.display = "";
+            } else {
+                eventsInUpcomingEventsList[i].style.display = "none";
+            }
+        }
     }
-    myCalendar.renderDate();
 }
-
-/* document.getElementById("title-add").required = true;
-document.getElementById("date-add").required = true;
-document.getElementById("start-time-add").required = true; */

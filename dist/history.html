@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
-    <title>Home</title>
+    <title>History</title>
 </head>
 
 <body onload="myCalendar.renderHistoric()">
@@ -21,9 +21,7 @@
         <div class="main history">
             <div class="history-filter">
                 <p>Filter</p>
-                <input type="radio" name="history-filter" value="all" checked><label for="all">All</label>
-                <input type="radio" name="history-filter" value="client"><label for="client">Client</label>
-                <input type="radio" name="history-filter" value="date"><label for="date">Date</label>
+                <input type="text" id="inputFilter" onkeyup="filter()" placeholder="Search by Name or Date">
             </div>
             <div class="past-events" id="past-events-list">
                 <h2>Previous events</h2>
@@ -47,6 +45,7 @@
 
 
     <script src="https://kit.fontawesome.com/b47051db3a.js" crossorigin="anonymous"></script>
+    <script src="js/readmyjson.js"></script>
     <script src="js/history.js"></script>
 </body>
 

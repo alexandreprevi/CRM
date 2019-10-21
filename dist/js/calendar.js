@@ -1,6 +1,8 @@
 class Calendar {
-    constructor() {
-        this.events = [];
+    constructor(events, contacts, todo) {
+        this.events = events;
+        this.contacts = contacts;
+        this.todo = todo;
     }
 
     renderDate() {
@@ -35,7 +37,6 @@ class Calendar {
             }
         }
 
-        console.log(myCalendar);
 
         document.getElementsByClassName("days")[0].innerHTML = cells;
 
@@ -65,11 +66,13 @@ class Calendar {
             if (myCalendar.events[i].date == event.target.classList[2]) {
 
                 eventArray.push(myCalendar.events[i]);
+
             } else {
                 eventList.innerHTML = "";
             }
 
              eventArray.forEach((event) => this.renderThisEvent(event));
+             console.log(eventArray);
 
             /* for (let i = 0; i < eventArray.length; i++) {
                 eventList.innerHTML += eventArray[i].startTime + ": " + eventArray[i].title + "</br>";
@@ -78,7 +81,7 @@ class Calendar {
     }
 
     renderHistoric(){
-        console.log("lets work from here");
+        
     }
 
     renderPreviousEvents(event){
@@ -93,20 +96,19 @@ class Calendar {
 
     renderThisEvent(event){
         const eventList = document.getElementById("event-list");
-        const previousEventsList = document.getElementById("past-events-list");
-        const upcomingEventsList = document.getElementById("upcoming-events-list");
         const row = document.createElement("row");
         row.id = event.id;
         row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
+        console.log(event);
         eventList.appendChild(row);
 
         /////////////////////////////////////////////////////////////////////////////////////////
-        if (event.date < today) {
+/*         if (event.date < today) {
             previousEventsList.appendChild(row);
         } else {
             upcomingEventsList.appendChild(row);
         }
-
+ */
 
     }
 
@@ -154,7 +156,16 @@ class Event {
 
 }
 
-let myCalendar = new Calendar();
+// IMPORT DATA FROM JSON FILES /////////////////////////////////
+
+let json = getJSON('http://www.mocky.io/v2/5dadc5522d00002ae1e4bcd2');
+
+let myCalendar = new Calendar(json[0].events, json[0].contacts, json[0].todo);
+
+
+///////////////////////////////////////////////////////////////
+
+
 let date = new Date();
 
 let months = [
