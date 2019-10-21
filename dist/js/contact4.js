@@ -23,7 +23,7 @@ class ContactList {
   }
 
   showDetails(event) {
-    console.log(event.target);
+    
         for (var i = 0; i < this.contacts.length; i++) {
       var currentContact = document.getElementById("new_contactName-" + this.contacts[i].id);
       this.contactDetails = this.contactDetails.filter(function(value, index, arr) {
@@ -108,6 +108,24 @@ class ContactList {
 
         console.log(currentContact.id);
         console.log(new_companyName.innerHTML);
+      }
+    }
+  }
+  //I made the changes below -Nicke, I think you can adjust och change it to fit your methods =D
+  document.addEventListener("click", showInfo)
+  function showInfo(){
+ 
+    let contactsarea = document.getElementById("contacts_area");
+    let paragraph = document.querySelectorAll("p");
+    paragraph.forEach(p => p.addEventListener("click", detail));
+    
+    function detail(event){ // loops through contactsarea's children, and matches event.target with p.
+
+      for(let check = 0; check < contactsarea.children.length; check++){
+
+        if(event.target == contactsarea.children[check].children[0]){ // event.target is matched with the content of the created divs(the paragraphs in divs)
+          console.log("I happen when you click the P!") // insert the code here(i think!)
+        }
       }
     }
   }
