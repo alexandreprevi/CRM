@@ -47,7 +47,35 @@
                 "id": "201911011200" 
             }
         ],
-        "contacts": [],
+        "contacts": [
+            {
+                "companyName": "Fake Company",
+                "companyWebsite": "Fakecompany.com",
+                "companyAdress": "38th Fake Street, City, Country",
+                "personName": "Mike",
+                "personPhone": "0036724598",
+                "personEmail":"mike@fakecompany.com",
+                "id": "1"
+            },
+            {
+                "companyName": "Random",
+                "companyWebsite": "random.com",
+                "companyAdress": "28 Random Street, City, Country",
+                "personName": "John",
+                "personPhone": "0045678910",
+                "personEmail":"john@random.com",
+                "id": "2"
+            },
+            {
+                "companyName": " Something",
+                "companyWebsite": "Something.org",
+                "companyAdress": "45 There Street, City, Country",
+                "personName": "Jess",
+                "personPhone": "0096578342",
+                "personEmail":"jess@something.com",
+                "id": "3"
+            }
+        ],
         "todo": []
     }
 ]

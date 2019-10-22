@@ -1,8 +1,8 @@
 class Calendar {
-    constructor(events, contacts, todo) {
-        this.events = events;
-        this.contacts = contacts;
-        this.todo = todo;
+    constructor() {
+        this.events = [];
+        this.contacts = [];
+        this.todo = [];
     }
 
     renderDate() {
@@ -86,11 +86,14 @@ class Calendar {
         const previousEventsTable = document.getElementById("past-events-table");
         const upcomingEventsTable = document.getElementById("upcoming-events-table");
 
-        for (let event of myCalendar.events) {
-            let tr = document.createElement("tr");
-            tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.contact}</td>`;
-            event.date < today ?   previousEventsTable.appendChild(tr) : upcomingEventsTable.appendChild(tr);
+        if (myCalendar.events){
+            for (let event of myCalendar.events) {
+                let tr = document.createElement("tr");
+                tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.contact}</td>`;
+                event.date < today ?   previousEventsTable.appendChild(tr) : upcomingEventsTable.appendChild(tr);
+            }
         }
+        
     }
 
     renderThisEvent(event){
@@ -147,13 +150,17 @@ class Event {
     }
 }
 
-// IMPORT DATA FROM JSON FILE ////////////////////////////
+// IMPORT DATA FROM MOCK API ////////////////////////////
 
-let json = getJSON('http://www.mocky.io/v2/5dadc5522d00002ae1e4bcd2');
+let myCalendar = new Calendar();
 
-let myCalendar = new Calendar(json[0].events, json[0].contacts, json[0].todo);
-
-console.log(myCalendar);
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function(data){
+    for (let event of data){
+        myCalendar.events.push(event);
+    } 
+    myCalendar.renderHistoric();
+});
+    
 
 //////////////////////////////////////////////////////////
 
