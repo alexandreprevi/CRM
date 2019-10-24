@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>contact page</title>
-
-  <link rel="stylesheet" href="contact4.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/contact5.css">
+    <title>Contacts</title>
 </head>
 
-
 <body>
+  <div class="wrapper">
+        <div class="header">
+                <div class="logo">
+                        <img src="logo/emmiologo.png" alt="logo">
+                  </div>
+            <h1>Contacts</h1>
+        </div>
 
-  <div class="">
+
+  <div class="main">
 
     <div class="contact_head">
       <div class="row">
@@ -47,7 +55,6 @@
        <label for="">Contact's Email: </label>
        <input id="person_email" type="email" name="" value="">
        <br>
-
        <button id="btn_addContact_confirm" type="button" name="button">Confirm</button>
        </form>
     </div>
@@ -55,12 +62,20 @@
 
     <div class="contact_area" id="contacts_area">
     </div>
-    
+
     <div class="contact_page" id="contact_page">
     </div>
 
 
-  </div>
+    <div class="navbar">
+        <a href="index.html"><i class="fas fa-home"></i></a>
+        <a href="contact.html" class="active"><i class="fas fa-address-book"></i></a>
+        <a href="calendar.html"><i class="fas fa-calendar-alt"></i></a>
+        <a href="todo.html"><i class="fas fa-sticky-note"></i></a>
+        <a href="history.html"><i class="fas fa-history"></i></a>
+    </div>
+</div>
+</div>
 
 
   <script src="contact5.js" charset="utf-8"></script>
