@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>contact page</title>
+
+  <link rel="stylesheet" href="contact4.css">
+</head>
+
+
+<body>
+
+  <div class="">
+
+    <div class="contact_head">
+      <div class="row">
+        <h2>Contacts</h2>
+        <button id="btn_addContact" type="button" name="button"><a href="#addContact"> &plus;</a></button>
+      </div>
+
+      <div class="row">
+        <input type="text" id="input_searchContact" onkeyup="myFunction()" placeholder="Search..." title="Type in a name">
+        <button id="btn_searchContact" type="button" name="button">Search</button>
+      </div>
+    </div>
+
+
+
+    <div id="addNewContact">
+     <form class="" action="index.html" method="post">
+       <label for="">Company Name:</label>
+       <input id="company_name" type="text" name="" value="">
+       <br>
+       <label for="">Company Website:</label>
+       <input id="company_web" type="url" name="" value="">
+       <br>
+       <label for="">Company Address: </label>
+       <input id="company_address" type="text" name="" value="">
+       <br>
+       <label for="">Contact's Name:</label>
+       <input id="person_name" type="text" name="" value="">
+       <br>
+       <label for="">Contact's PhoneNumber: </label>
+       <input id="person_tel" type="text" name="" value="">
+       <br>
+       <label for="">Contact's Email: </label>
+       <input id="person_email" type="email" name="" value="">
+       <br>
+
+       <button id="btn_addContact_confirm" type="button" name="button">Confirm</button>
+       </form>
+    </div>
+
+
+    <div class="contact_area" id="contacts_area">
+    </div>
+    
+    <div class="contact_page" id="contact_page">
+    </div>
+
+
+  </div>
+
+
+  <script src="contact5.js" charset="utf-8"></script>
+</body>
+
+</html>
