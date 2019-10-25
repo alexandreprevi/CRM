@@ -8,19 +8,19 @@ class ContactList {
   addContact(companyName, companyWeb, companyAddress, personName, personTel, personEmail) {
     var contact = new ContactItem(companyName, companyWeb, companyAddress, personName, personTel, personEmail, this.contact_id);
     this.contacts.push(contact);
-    this.contacts.sort(compare); //sorterar objekten i arrayen functionen compare finns längst ner
+    //sorterar objekten i arrayen functionen compare finns längst ner
     //this.contacts.sort((a, b) => a.companyName.localeCompare(b.companyName)); ///sort()here also doesn't work corretly
     this.render();
-    this.contact_id++;
+    this.contact_id++; // PROBLEM: del 1 av 3: Id används för att skilja på kontaket, vilket ärr jätte bra, men scrolla ner
   }
 
-
-  render() {
+  // fyller contactarea
+  render() {      
     var list = document.getElementById("contacts_area");
     list.innerHTML = "";
     var arr = [];
-
-    for (let currentContact of this.contacts) {
+    let sortedcontactlist = this.contacts.sort(compare);
+    for (let currentContact of sortedcontactlist) {
      console.log("Inside render with id: " + currentContact.id);
       //  var newContactDiv = document.createElement("div");
       //newContactDiv.id = "newContact-" + currentContact.id;
@@ -36,14 +36,25 @@ class ContactList {
       console.log(arr);
 
       new_contactName.addEventListener('click', function() {
-        showDetails(currentContact.id);
+
+        //såja
+        for(let index = 0; index < sortedcontactlist.length;index++){
+          for(let prop in sortedcontactlist[index]){
+
+            if(currentContact.id == sortedcontactlist[index][prop]){
+              showDetails(index); //del 1.5 / 3: id används som parameter
+            }
+
+          }
+        }
+        
        });
 
     }
   }
 
   // display details of contact
-  render2(contact_index) {
+  render2(contact_index) { //del 2 / 3: id används som index!! Här e problemet, eftrsom Id har bytt plats tyvärr! så id != index!
     console.log("Inside render2 with id: " + contact_index);
 
     var contact_page = document.getElementById("contact_page");
@@ -66,7 +77,7 @@ class ContactList {
     new_personTel.id = "new_personTel-" + contact_index;
     var new_personEmail = document.createElement("p");
     new_personEmail.id = "new_personEmail-" + contact_index;
-
+    // del 3/3: fel info matas in !
     new_companyName.innerHTML = "Company Name: " + this.contacts[contact_index].companyName;
     new_companyWeb.innerHTML = "Company Website: " + this.contacts[contact_index].companyWeb;
     new_companyAddress.innerHTML = "Company Address: " + this.contacts[contact_index].companyAddress;
@@ -125,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     addNewContact.style.display = "none";
     contact_list.addContact(company_name, company_web, company_address, person_name, person_tel, person_email);
     console.log(contact_list.contacts);
+    //contact_list.contacts.sort(compare);
    //contact_list.contacts.sort((a, b) => a.companyName.localeCompare(b.companyName));//It is wrong oder when sort() here
 
   });
