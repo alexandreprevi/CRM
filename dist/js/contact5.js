@@ -8,6 +8,7 @@ class ContactList {
   addContact(companyName, companyWeb, companyAddress, personName, personTel, personEmail) {
     var contact = new ContactItem(companyName, companyWeb, companyAddress, personName, personTel, personEmail, this.contact_id);
     this.contacts.push(contact);
+    this.contacts.sort(compare); //sorterar objekten i arrayen functionen compare finns längst ner
     //this.contacts.sort((a, b) => a.companyName.localeCompare(b.companyName)); ///sort()here also doesn't work corretly
     this.render();
     this.contact_id++;
@@ -129,3 +130,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
 });
+
+function compare(a, b) {
+  // Use toUpperCase() to ignore character casing
+  const companyA = a.companyName.toUpperCase();
+  const companyB = b.companyName.toUpperCase();
+
+  let comparison = 0;
+  if (companyA > companyB) {
+    comparison = 1;
+  } else if (companyA < companyB) {
+    comparison = -1;
+  }
+  return comparison;
+}
