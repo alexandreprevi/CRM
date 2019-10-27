@@ -33,13 +33,19 @@ display: inline;
 
 #addNewContact{
   display: none;
+  margin-left: 30%
+
 }
 
 #contacts_area{
   background-color: lightgray;
+  text-align: left;
+  margin-left: 30%
 }
 
 #contact_page{
-
+<!--  display: none; -->
   background-color: lightblue;
+  text-align: left;
+  margin-left: 30%
 }
