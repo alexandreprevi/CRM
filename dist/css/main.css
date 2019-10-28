@@ -298,10 +298,11 @@
   cursor: pointer;
 }
 
-.eventToday {
-  background-color: rgba(139, 125, 125, 0.2);
-  border: 1px solid #8b7d7d;
+.eventToday span {
+  background-color: #8b7d7d;
+  height: 0.4rem;
   border-radius: 50%;
+  width: 0.4rem;
 }
 
 .weekdays-index {
