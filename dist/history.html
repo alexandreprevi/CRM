@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
-    <title>Home</title>
+    <title>History</title>
 </head>
 
 <body onload="myCalendar.renderHistoric()">
@@ -20,16 +21,30 @@
 
         <div class="main history">
             <div class="history-filter">
-                <p>Filter</p>
-                <input type="radio" name="history-filter" value="all" checked><label for="all">All</label>
-                <input type="radio" name="history-filter" value="client"><label for="client">Client</label>
-                <input type="radio" name="history-filter" value="date"><label for="date">Date</label>
+                <i class="fas fa-search"></i>
+                <input type="text" id="inputFilter" onkeyup="filter()" placeholder="Search Contact or Date">
             </div>
-            <div class="past-events" id="past-events-list">
+            <div class="past-events" id="prev-events">
                 <h2>Previous events</h2>
+                <table id="past-events-table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Title</th>
+                        <th>Contact</th>
+                    </tr>
+                </table>
             </div>
-            <div class="upcoming-events" id="upcoming-events-list">
+            <div class="upcoming-events" id="upcoming-events">
                 <h2>Upcoming events</h2>
+                <table id="upcoming-events-table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Title</th>
+                        <th>Contact</th>
+                    </tr>
+                </table>
             </div>
         </div>
 

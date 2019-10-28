@@ -1,6 +1,8 @@
 class Calendar {
     constructor() {
         this.events = [];
+        this.contacts = [];
+        this.todo = [];
     }
 
     renderDate() {
@@ -35,7 +37,6 @@ class Calendar {
             }
         }
 
-        console.log(myCalendar);
 
         document.getElementsByClassName("days")[0].innerHTML = cells;
 
@@ -65,47 +66,22 @@ class Calendar {
             if (myCalendar.events[i].date == event.target.classList[2]) {
 
                 eventArray.push(myCalendar.events[i]);
+
             } else {
                 eventList.innerHTML = "";
             }
 
              eventArray.forEach((event) => this.renderThisEvent(event));
-
-            /* for (let i = 0; i < eventArray.length; i++) {
-                eventList.innerHTML += eventArray[i].startTime + ": " + eventArray[i].title + "</br>";
-            } */
         }
     }
 
-    renderHistoric(){
-        console.log("lets work from here");
-    }
-
-    renderPreviousEvents(event){
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    }
-
-    renderUpcomingEvents(){
-
-    }
 
     renderThisEvent(event){
         const eventList = document.getElementById("event-list");
-        const previousEventsList = document.getElementById("past-events-list");
-        const upcomingEventsList = document.getElementById("upcoming-events-list");
         const row = document.createElement("row");
         row.id = event.id;
         row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
         eventList.appendChild(row);
-
-        /////////////////////////////////////////////////////////////////////////////////////////
-        if (event.date < today) {
-            previousEventsList.appendChild(row);
-        } else {
-            upcomingEventsList.appendChild(row);
-        }
 
 
     }
@@ -127,6 +103,16 @@ class Calendar {
                         myCalendar.events.splice(eventToRemove, 1);
                     }
                 })
+
+
+                //////////////////////////// HOW TO GET TO DELETE JUST ONE SPECIFIC OBJECT ?????
+                $.ajax({
+                    method: "DELETE",
+                    url: `http://5daef5cbf2946f001481d066.mockapi.io/events/`
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                    });
             }
             
         }
@@ -134,10 +120,22 @@ class Calendar {
 
     getInputsEvent() {
 
-        let eventAdded = new Event(title_add.value, place_add.value, date_add.value, startTime_add.value, endTime_add.value, contact_add.value);
-        this.events.push(eventAdded);
+        /* let eventAdded = new Event(title_add.value, place_add.value, date_add.value, startTime_add.value, endTime_add.value, contact_add.value); */
+        $.ajax({
+            method: "POST",
+            url: "http://5daef5cbf2946f001481d066.mockapi.io/events",
+            data: { title: title_add.value, 
+                    place: place_add.value, 
+                    date: date_add.value, 
+                    startTime: startTime_add.value, 
+                    endTime: endTime_add.value, 
+                    contact: contact_add.value, 
+                    id: date_add.value + startTime_add.value}
+        })
+            .done(function (msg) {
+                console.log(msg);
+            });
     }
-
 }
 
 
@@ -154,7 +152,24 @@ class Event {
 
 }
 
+// IMPORT DATA FROM MOCK API /////////////////////////////////
+
 let myCalendar = new Calendar();
+
+
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function(data){
+    console.log(data);
+    for (let event of data){
+        myCalendar.events.push(event);
+    } 
+    myCalendar.renderDate();
+});
+
+
+    
+///////////////////////////////////////////////////////////////
+
+
 let date = new Date();
 
 let months = [
@@ -250,7 +265,3 @@ function moveDate(para) {
     }
     myCalendar.renderDate();
 }
-
-/* document.getElementById("title-add").required = true;
-document.getElementById("date-add").required = true;
-document.getElementById("start-time-add").required = true; */

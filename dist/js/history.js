@@ -1,6 +1,8 @@
 class Calendar {
     constructor() {
         this.events = [];
+        this.contacts = [];
+        this.todo = [];
     }
 
     renderDate() {
@@ -78,35 +80,30 @@ class Calendar {
     }
 
     renderHistoric(){
-        console.log("OK");
-    }
+        let date = new Date();
+        let today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
 
-    renderPreviousEvents(event){
+        const previousEventsTable = document.getElementById("past-events-table");
+        const upcomingEventsTable = document.getElementById("upcoming-events-table");
+
+        if (myCalendar.events){
+            for (let event of myCalendar.events) {
+                let tr = document.createElement("tr");
+                tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.contact}</td>`;
+                event.date < today ?   previousEventsTable.appendChild(tr) : upcomingEventsTable.appendChild(tr);
+            }
+        }
         
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    }
-
-    renderUpcomingEvents(){
-
     }
 
     renderThisEvent(event){
         const eventList = document.getElementById("event-list");
-        const previousEventsList = document.getElementById("past-events-list");
-        const upcomingEventsList = document.getElementById("upcoming-events-list");
+        
         const row = document.createElement("row");
         row.id = event.id;
         row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
         eventList.appendChild(row);
-
-        /////////////////////////////////////////////////////////////////////////////////////////
-        if (event.date < today) {
-            previousEventsList.appendChild(row);
-        } else {
-            upcomingEventsList.appendChild(row);
-        }
-
+    
 
     }
 
@@ -151,67 +148,73 @@ class Event {
         this.contact = contact;
         this.id = date.replace(/-/g,"")+startTime.replace(":","");
     }
-
 }
+
+// IMPORT DATA FROM MOCK API ////////////////////////////
 
 let myCalendar = new Calendar();
-let date = new Date();
 
-let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-];
-
-let days = document.getElementById("days");
-
-// MODAL window with event list
-let modal = document.getElementById("modal-calender");
-let modalAdd = document.getElementById("modal-add");
-let closeModal = document.getElementById("close-modal");
-let addEventButton = document.getElementById("add-event-button");
-
-// MODAL window/form to add events
-let cancelButton = document.getElementById("cancel-button");
-let confirmAddEvent = document.getElementById("confirm-add-event-button");
-let title_add = document.getElementById("title-add");
-let place_add = document.getElementById("place-add");
-let date_add = document.getElementById("date-add");
-let startTime_add = document.getElementById("start-time-add");
-let endTime_add = document.getElementById("end-time-add");
-let contact_add = document.getElementById("contact-add");
-
-
-
-window.addEventListener("click", function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-    myCalendar.renderDate();
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function(data){
+    for (let event of data){
+        myCalendar.events.push(event);
+    } 
+    myCalendar.renderHistoric();
 });
+    
+
+//////////////////////////////////////////////////////////
 
 
+function filter() {
+    let inputFilter = document.getElementById("inputFilter");
+    let filter = inputFilter.value.toUpperCase();
+    const previousEventsTable = document.getElementById("past-events-table");
+    const upcomingEventsTable = document.getElementById("upcoming-events-table");
+    let eventsInPreviousEventsTable = previousEventsTable.getElementsByTagName("tr");
+    let eventsInUpcomingEventsTable = upcomingEventsTable.getElementsByTagName("tr");
 
-
-// Move the previous or next month on the calendar
-function moveDate(para) {
-    if (para == 'prev') {
-        date.setMonth(date.getMonth() - 1);
-    } else if (para == 'next') {
-        date.setMonth(date.getMonth() + 1);
+    for (let i = 0; i <eventsInPreviousEventsTable.length; i++){
+        let event = eventsInPreviousEventsTable[i];
+    
+        if (event) {
+            
+            txtValue = event.textContent || event.innerText;
+        
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                eventsInPreviousEventsTable[i].style.display = "";
+            } else {
+                eventsInPreviousEventsTable[i].style.display = "none";
+            }
+        }
     }
-    myCalendar.renderDate();
+
+    for (let i = 0; i <eventsInUpcomingEventsTable.length; i++){
+        let event = eventsInUpcomingEventsTable[i];
+        
+        if (event) {
+            
+            txtValue = event.textContent || event.innerText;
+
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                eventsInUpcomingEventsTable[i].style.display = "";
+            } else {
+                eventsInUpcomingEventsTable[i].style.display = "none";
+            }
+        }
+    }
 }
 
-/* document.getElementById("title-add").required = true;
-document.getElementById("date-add").required = true;
-document.getElementById("start-time-add").required = true; */
+
+
+let previousEvents = document.getElementById("prev-events");
+let upcomingEvents = document.getElementById("upcoming-events");
+previousEvents.style.display = "flex";
+upcomingEvents.style.display = "flex";
+
+previousEvents.addEventListener("click", function(){
+    upcomingEvents.style.display == "flex" ? upcomingEvents.style.display = "none" : upcomingEvents.style.display = "flex";
+});
+
+upcomingEvents.addEventListener("click", function() {
+    previousEvents.style.display == "flex" ? previousEvents.style.display = "none" : previousEvents.style.display = "flex";
+})
