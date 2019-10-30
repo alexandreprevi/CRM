@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/notesAndpopup.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Home</title>
 </head>
 
@@ -21,7 +23,43 @@
         
 
         <div class="main">
+            <div class="aWeek" id="aWeek"></div>
+
+            <div id="popup">
+                <div id="dialog-overlay"></div>
+                <div id="dialog-box">
+                    <div class="dialog-content">
+                        <div id="dialog-message">
+                            <textarea id="text2todolist" cols="37" rows="2"></textarea>
+                        </div>
+                        <a class="button">add</a>
+                    </div>
+                </div>
+            </div>
         
+            <div id="eventContainer">
+                <div id="eventList">
+                    <strong>Events</strong>
+                    <textarea id="events" cols="30" rows="10" readonly></textarea>
+                </div>
+            </div>
+
+            <div id="todoContainer">
+                <div id="thetodolist">
+                    <strong>To-Do List</strong>
+                    <ul id="todolist"></ul>
+                    
+                </div>
+                <a class="button">Edit</a>
+            </div>
+
+            <div id="noteContainer">
+                    
+                <div id="theNote">
+                    <strong>Notes</strong>
+                    <textarea id="note" cols="10" rows="10"></textarea>
+                </div>
+            </div>
 
 
 
@@ -36,12 +74,9 @@
         </div>
     </div>
 
-
-
-
-
     <script src="https://kit.fontawesome.com/b47051db3a.js" crossorigin="anonymous"></script>
-
+    <script src="js/home.js"></script>
+    
 </body>
 
 </html>

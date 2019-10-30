@@ -1,6 +1,70 @@
 class Calendar {
     constructor() {
         this.events = [];
+    } 
+    renderWeek() {
+        date.setDate(1);
+
+        let day = date.getDay();
+        let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+        let nextDate = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
+        let today = new Date();
+
+        document.getElementById("month").innerHTML = months[date.getMonth()];
+        document.getElementById("date-str").innerHTML = today.toDateString();
+
+        let cells = "";
+        let woho = 1;
+        for(let hehe = 3; hehe > 0; hehe--){
+            if(today.getDate() - hehe > 0){
+                
+                let collect = String(today.getDate() - hehe);
+
+                cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
+            } else if(today.getDate() - hehe <= 0){
+                
+                let collect = String(prevDate - prevDate + woho);
+                cells += `<div class="day prev-month ${date.getFullYear()}-${date.getMonth()}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
+
+                woho++;
+            }
+
+        }
+        cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${(today.getDate()).length == 1 ? '0' + (today.getDate()) : today.getDate()}">${today.getDate()}<span class=''></span></div>`;
+        
+        for(let hehe = 1; hehe < 4; hehe++){
+            if(today.getDate() + hehe <= endDate){
+                
+                let collect = String(today.getDate()+hehe);
+                cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
+            } else if(today.getDate() + hehe > endDate){
+                
+                let collect = String(nextDate - nextDate + woho);
+                cells += `<div class="day next-month ${date.getFullYear()}-${date.getMonth() + 2}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
+                woho++;
+            }
+        }
+
+        console.log(myCalendar);
+
+        document.getElementsByClassName("days")[0].innerHTML = cells;
+
+        let currentDaysArray = Array.from(document.getElementsByClassName("current-month"));
+
+        // Check for event in myCalendar.event. print a dot.
+
+        for (let i = 0; i < myCalendar.events.length; i++) {
+
+            //  Get the date
+
+            for (let j = 0; j < currentDaysArray.length; j++) {
+
+                if (currentDaysArray[j].classList.contains(myCalendar.events[i].date)) {
+                    currentDaysArray[j].classList.add("eventToday");
+                }
+            }
+        }
     }
 
     renderDate() {
@@ -10,20 +74,21 @@ class Calendar {
         let day = date.getDay();
         let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+        let nextDate = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
         let today = new Date();
 
         document.getElementById("month").innerHTML = months[date.getMonth()];
         document.getElementById("date-str").innerHTML = today.toDateString();
 
         let cells = "";
-
+        // fyller kalender sidan med föregående månads sista dagar.
         for (let i = day; i > 0; i--) {
             cells += "<div class='prev-date day'>" + (prevDate - i + 1) + "<span class=''></span>" + "</div>";
         }
 
-        // Create one div for each day
+        // Create one div for each day, fyller kalender med 
         for (let i = 1; i <= endDate; i++) {
-
+            
             if (i == today.getDate() && date.getMonth() == today.getMonth()) {
 
                 i = i.toString();
