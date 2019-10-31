@@ -71,7 +71,7 @@ class Calendar {
                 eventList.innerHTML = "";
             }
 
-             eventArray.forEach((event) => this.renderThisEvent(event));
+            eventArray.forEach((event) => this.renderThisEvent(event));
 
             /* for (let i = 0; i < eventArray.length; i++) {
                 eventList.innerHTML += eventArray[i].startTime + ": " + eventArray[i].title + "</br>";
@@ -79,7 +79,7 @@ class Calendar {
         }
     }
 
-    renderHistoric(){
+    /* renderHistoric(){
         let date = new Date();
         let today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
 
@@ -94,38 +94,38 @@ class Calendar {
             }
         }
         
-    }
+    } */
 
-    renderThisEvent(event){
+    renderThisEvent(event) {
         const eventList = document.getElementById("event-list");
-        
+
         const row = document.createElement("row");
         row.id = event.id;
         row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
         eventList.appendChild(row);
-    
+
 
     }
 
-    deleteEvent(el){
-        if (el.classList.contains("delete-button")){
+    deleteEvent(el) {
+        if (el.classList.contains("delete-button")) {
 
             // Remove event from the list
             let confirm = window.confirm("Are you sure you want to delete this event?");
 
-            if (confirm == true){
+            if (confirm == true) {
                 el.parentElement.remove();
-                
+
                 // remove event from myCalendar.events after confirmation alert
                 myCalendar.events.forEach((event) => {
-                    if (el.parentElement.id == event.id){
+                    if (el.parentElement.id == event.id) {
                         // remove the event from the calender.event array with the id of the event
-                        let eventToRemove = myCalendar.events.map(function(item) {return item.id}).indexOf(event.id);
+                        let eventToRemove = myCalendar.events.map(function (item) { return item.id }).indexOf(event.id);
                         myCalendar.events.splice(eventToRemove, 1);
                     }
                 })
             }
-            
+
         }
     }
 
@@ -146,7 +146,7 @@ class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.contact = contact;
-        this.id = date.replace(/-/g,"")+startTime.replace(":","");
+        this.id = date.replace(/-/g, "") + startTime.replace(":", "");
     }
 }
 
@@ -154,18 +154,18 @@ class Event {
 
 let myCalendar = new Calendar();
 
-$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function(data){
-    for (let event of data){
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function (data) {
+    for (let event of data) {
         myCalendar.events.push(event);
-    } 
-    myCalendar.renderHistoric();
+    }
+
 });
-    
+
 
 //////////////////////////////////////////////////////////
 
 
-function filter() {
+/* function filter() {
     let inputFilter = document.getElementById("inputFilter");
     let filter = inputFilter.value.toUpperCase();
     const previousEventsTable = document.getElementById("past-events-table");
@@ -203,18 +203,72 @@ function filter() {
         }
     }
 }
+ */
+
+
+let contactList = document.getElementById("contact-list");
+let contactHeader = document.getElementById("contact-header");
+let contactDetails = document.getElementById("contact-details");
+
+let contacts = document.getElementsByClassName("contact-name");
+
+let contactInfoDisplay = document.getElementById("contact-details-display-info");
+let contactEventsDisplay = document.getElementById("contact-details-display-events");
+let contactNotesDisplay = document.getElementById("contact-details-display-notes");
+
+
+let backBtn = document.getElementById("contact-back-button");
+let removeBtn = document.getElementById("contact-remove-button");
+let editBtn = document.getElementById("contact-edit-button");
+let infoBtn = document.getElementById("contact-info-button");
+let eventsBtn = document.getElementById("contact-events-button");
+let notesBtn = document.getElementById("contact-notes-button");
 
 
 
-let previousEvents = document.getElementById("prev-events");
-let upcomingEvents = document.getElementById("upcoming-events");
-previousEvents.style.display = "flex";
-upcomingEvents.style.display = "flex";
 
-previousEvents.addEventListener("click", function(){
-    upcomingEvents.style.display == "flex" ? upcomingEvents.style.display = "none" : upcomingEvents.style.display = "flex";
+
+// start display (event listener on name of contact on the list)
+contactList.style.display = "flex";
+contactHeader.style.display = "flex";
+contactDetails.style.display = "none";
+
+
+
+// event listeners
+
+contactList.addEventListener("click", function (contact) {
+
+    if (contact.target.classList.contains("contact-name")) {
+        contactList.style.display = "none";
+        contactHeader.style.display = "none";
+        contactDetails.style.display = "flex";
+        contactEventsDisplay.style.display = "none";
+        contactNotesDisplay.style.display = "none";
+
+        document.getElementById("contact-display-name").innerHTML = contact.target.innerHTML;
+    }
+})
+
+
+backBtn.addEventListener("click", function () {
+    contactList.style.display = "flex";
+    contactHeader.style.display = "flex";
+    contactDetails.style.display = "none";
 });
 
-upcomingEvents.addEventListener("click", function() {
-    previousEvents.style.display == "flex" ? previousEvents.style.display = "none" : previousEvents.style.display = "flex";
-})
+infoBtn.addEventListener("click", function () {
+    contactInfoDisplay.style.display = "flex";
+    contactEventsDisplay.style.display = "none";
+    contactNotesDisplay.style.display = "none";
+});
+eventsBtn.addEventListener("click", function () {
+    contactInfoDisplay.style.display = "none";
+    contactEventsDisplay.style.display = "flex";
+    contactNotesDisplay.style.display = "none";
+});
+notesBtn.addEventListener("click", function () {
+    contactInfoDisplay.style.display = "none";
+    contactEventsDisplay.style.display = "none";
+    contactNotesDisplay.style.display = "flex";
+});
