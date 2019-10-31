@@ -88,7 +88,7 @@ class Calendar {
 
     deleteEvent(el){
         if (el.classList.contains("delete-button")){
-
+            console.log(el.parentElement.id);
             // Remove event from the list
             let confirm = window.confirm("Are you sure you want to delete this event?");
 
@@ -102,13 +102,13 @@ class Calendar {
                         let eventToRemove = myCalendar.events.map(function(item) {return item.id}).indexOf(event.id);
                         myCalendar.events.splice(eventToRemove, 1);
                     }
-                })
+                }) 
 
 
                 //////////////////////////// HOW TO GET TO DELETE JUST ONE SPECIFIC OBJECT ?????
                 $.ajax({
                     method: "DELETE",
-                    url: `http://5daef5cbf2946f001481d066.mockapi.io/events/`
+                    url: `http://5daef5cbf2946f001481d066.mockapi.io/events/${el.parentElement.id}`
                 })
                     .done(function (msg) {
                         console.log(msg);
@@ -134,6 +134,8 @@ class Calendar {
         })
             .done(function (msg) {
                 console.log(msg);
+                //////////////////////////////////////////////////////////////////////////////////////// ???????
+                window.location.reload();
             });
     }
 }

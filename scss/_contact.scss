@@ -1,0 +1,70 @@
+@import 'variables';
+
+.contact{
+    
+}
+
+.contact-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: $secondary-color;
+    height: 10%;
+    align-items: center;
+    padding: 0 1rem;
+    input {
+        margin: 0.4rem;
+    }
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    background-color: lighten($secondary-color, 49%);
+    height: 100%;
+    line-height: 1rem;
+    overflow: auto;
+    
+
+    p {
+        display: flex;
+        margin: 1rem 1rem 0 1rem;
+        border-bottom: 1px solid darken($text-color, 30%);
+        padding: 0 0 0.2rem 0;
+    }
+    p:hover{
+        font-size: 1.5rem;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+    
+}
+
+.contact-details {
+ display: flex;
+ position: relative;
+ flex-direction: column;
+ height: 100%;
+ width: 100%;
+
+ &-header {
+     display: flex;
+     justify-content: space-between;
+ }
+
+ &-name {
+     margin: 2.5rem;
+ }
+
+ &-buttons {
+    height: 3rem;
+    
+    button {
+        height: 100%;
+    }
+ }
+
+ &-display {
+     background-color: lighten($secondary-color, 35%);
+     height: 100%;
+ }
+}

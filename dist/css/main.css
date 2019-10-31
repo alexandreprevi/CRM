@@ -208,6 +208,10 @@
   padding: 1.5rem 1.5rem;
 }
 
+tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
 .weekdays {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -299,7 +303,7 @@
 }
 
 .eventToday span {
-  background-color: #8b7d7d;
+  background-color: #8c4907;
   height: 0.4rem;
   border-radius: 50%;
   width: 0.4rem;
@@ -352,6 +356,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow: auto;
 }
 
 .past-events h2 {
@@ -373,6 +378,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow: auto;
 }
 
 .upcoming-events h2 {
@@ -389,7 +395,6 @@ table {
   width: 100%;
   text-align: left;
   border-collapse: collapse;
-  overflow: scroll;
 }
 
 th, td {
@@ -419,6 +424,94 @@ td:nth-child(3) {
 td:nth-child(4) {
   width: 20%;
   font-size: 0.8rem;
+}
+
+.contact-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #f27e0c;
+  height: 10%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 1rem;
+}
+
+.contact-header input {
+  margin: 0.4rem;
+}
+
+.contact-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #fffcf9;
+  height: 100%;
+  line-height: 1rem;
+  overflow: auto;
+}
+
+.contact-list p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1rem 1rem 0 1rem;
+  border-bottom: 1px solid #b3b3b3;
+  padding: 0 0 0.2rem 0;
+}
+
+.contact-list p:hover {
+  font-size: 1.5rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.contact-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.contact-details-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.contact-details-name {
+  margin: 2.5rem;
+}
+
+.contact-details-buttons {
+  height: 3rem;
+}
+
+.contact-details-buttons button {
+  height: 100%;
+}
+
+.contact-details-display {
+  background-color: #fbd8b5;
+  height: 100%;
 }
 
 * {
