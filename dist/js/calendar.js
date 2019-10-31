@@ -12,20 +12,21 @@ class Calendar {
         let day = date.getDay();
         let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+        
         let today = new Date();
 
         document.getElementById("month").innerHTML = months[date.getMonth()];
         document.getElementById("date-str").innerHTML = today.toDateString();
 
         let cells = "";
-
+        // fyller kalender sidan med föregående månads sista dagar.
         for (let i = day; i > 0; i--) {
             cells += "<div class='prev-date day'>" + (prevDate - i + 1) + "<span class=''></span>" + "</div>";
         }
 
-        // Create one div for each day
+        // Create one div for each day, fyller kalender med 
         for (let i = 1; i <= endDate; i++) {
-
+            
             if (i == today.getDate() && date.getMonth() == today.getMonth()) {
 
                 i = i.toString();
