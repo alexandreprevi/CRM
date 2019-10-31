@@ -6,14 +6,93 @@
     justify-content: center;
 
     h2 {
-        font-size: 1.3rem;
-        font-weight: 500;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: $primary-color;
     }
 
     textarea {
         border: none;
     }
 }
+
+.date-today {
+    display: flex;
+    height: 10%;
+    background-color: $secondary-color;
+    color: $text-color;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+.aWeek{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    div {
+        width: 14.28%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+    }
+    :hover {
+        background-color: lightgray;
+        transition: all 0.4s;
+        cursor: pointer;
+    }
+}
+
+
+.eventContainer {
+    display: flex;
+    height: 30%;
+    
+    .eventList{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        textarea {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+.todoContainer {
+    display: flex;
+    justify-content: space-between;
+    height: 30%;
+
+    .thetodolist {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.notification {
+    display: flex;
+    flex-direction: column;
+    height: 20%;
+
+    textarea{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.selected{
+    background-color: $secondary-color;
+    color: #fff;
+    &:hover {
+        background-color: lighten($secondary-color, 10%);
+    }
+}
+
 
 #dialog-overlay {
 
@@ -66,52 +145,3 @@
 	font-family:arial;
 	font-size:11px; 
 }
-
-.aWeek{
-    display: flex;
-    align-items: center;
-    height: 10%;
-    div {
-        width: 14.28%;
-        text-align: center;
-    }
-}
-
-.eventContainer {
-    display: flex;
-    height: 35%;
-    
-    .eventList{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-
-        textarea {
-            height: 100%;
-            width: 100%;
-        }
-    }
-}
-
-.todoContainer {
-    display: flex;
-    justify-content: space-between;
-    height: 35%;
-
-    .thetodolist {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-.notification {
-    display: flex;
-    flex-direction: column;
-    height: 20%;
-
-    textarea{
-        width: 100%;
-        height: 100%;
-    }
-}
-

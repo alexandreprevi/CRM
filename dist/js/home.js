@@ -27,7 +27,7 @@ class Calendar {
             }
 
         }
-        cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${(today.getDate()).length == 1 ? '0' + (today.getDate()) : today.getDate()}">${today.getDate()}<span class=''></span></div>`;
+        cells += `<div class="day selected current-month ${date.getFullYear()}-${date.getMonth() + 1}-${(today.getDate()).length == 1 ? '0' + (today.getDate()) : today.getDate()}">${today.getDate()}<span class=''></span></div>`;
         
         for(let hehe = 1; hehe < 4; hehe++){
             if(today.getDate() + hehe <= endDate){
@@ -267,8 +267,19 @@ myCalendar.renderWeek();
 let todolist = document.getElementById("todolist");
 
 let days = document.getElementById("aWeek");
+let daysDisplayed = document.getElementsByClassName("day");
 
-days.addEventListener("click", function () {
-    fetchitem(event.target.classList);
-    
+days.addEventListener("click", function (e) {
+	fetchitem(event.target.classList);
+	
+	for (day of daysDisplayed) {
+		day.classList.remove("selected");
+	}
+	e.target.classList.add("selected");
 });
+
+let today_date = new Date();
+console.log(today_date.toDateString());
+
+document.getElementById("date-today").innerHTML = today_date.toDateString();
+
