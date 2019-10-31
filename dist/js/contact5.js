@@ -11,7 +11,7 @@ class ContactList {
     this.contacts.push(contact);
     this.render();
   }
-  
+
 
   // fill contact list to contact area
   render() {
@@ -49,11 +49,16 @@ class ContactList {
     buttonBack.id = "buttonBack-" + contact_index;
      var buttonEdit = document.createElement("button");
      buttonEdit.id = "buttonEdit-" + contact_index;
+     var buttonDelete = document.createElement("button");
+     buttonDelete.id = "buttonDelete-" + contact_index;
+
      buttonBack.innerHTML="&LT;Contacts"
      buttonEdit.innerHTML="Edit";
+     buttonDelete.innerHTML="Delete";
+
      buttonBack.addEventListener("click",function(){
        contact_page.style.display="none";
-       contacts_area.style.display="block";
+       contacts_area.style.display="inline-block";
      });
 
      /* =====doesn't work as I wanted
@@ -108,6 +113,8 @@ class ContactList {
 
       contactPage.appendChild(buttonBack);
       contactPage.appendChild(buttonEdit);
+      contactPage.appendChild(buttonDelete);
+
       contactPage.appendChild(contactDiv);
   }
 }
@@ -145,17 +152,47 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var email = document.getElementById("email").value;
     addNewContact.style.display = "none";
     contact_list.addContact(company_name, company_web, company_address, first_name, last_name, tel, email);
+    additem();
   });
   document.getElementById("btn_addContact_cancel").addEventListener("click", function(e) {
     addNewContact.style.display = "none";
   });
 });
 
+// MockiAPI
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data){
+   for (let contact of data){
+       contact_list.contacts.push(contact);
+   }
+   contact_list.render();
+});
+
+function additem(){
+    $.ajax({
+  method: "POST",
+  url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts",
+  data: {
+  companyName: document.getElementById("company_name").value,
+  companyWeb: document.getElementById("company_web").value,
+  companyAddress: document.getElementById("company_address").value,
+  firstName:document.getElementById("first_name").value,
+  lastName: document.getElementById("last_name").value,
+  tel:  document.getElementById("tel").value,
+  email: document.getElementById("email").value
+  }
+})
+  .done(function( msg ) {
+    console.log( msg );
+  });
+}
+
+
+
 // this function is to sort contact list alphabetically, will call this function inside render();
 function compare(a, b) {
   // Use toUpperCase() to ignore character casing
-  const companyA = a.companyName.toUpperCase();
-  const companyB = b.companyName.toUpperCase();
+  const companyA = (a.companyName.toUpperCase()+" - "+a.firstName.toUpperCase() +a.lastName.toUpperCase());
+  const companyB = (b.companyName.toUpperCase()+" - "+b.firstName.toUpperCase() +b.lastName.toUpperCase());
   let comparison = 0;
   if (companyA > companyB) {
     comparison = 1;
@@ -169,7 +206,7 @@ function compare(a, b) {
 function showDetails(contactId) {
   contact_list.render2(contactId);
   contacts_area.style.display = "none";
-  contact_page.style.display="block";
+  contact_page.style.display="inline";
 }
 
 // contact list page -search funtion
