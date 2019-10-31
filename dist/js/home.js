@@ -2,18 +2,15 @@ class Calendar {
     constructor() {
         this.events = [];
     } 
-    renderWeek() {
+    renderWeek() {	
         date.setDate(1);
 
-        let day = date.getDay();
         let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
         let nextDate = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
         let today = new Date();
 
-
-
-        let cells = `<div class="prev" onclick="moveDate("prev")"><span>&#10094</span></div>`;
+        let cells = "";
         let woho = 1;
         for(let hehe = 3; hehe > 0; hehe--){
             if(today.getDate() - hehe > 0){
@@ -46,7 +43,7 @@ class Calendar {
         }
 
         console.log(myCalendar);
-        cells += `<div class="next" onclick="moveDate("next")"><span>&#10095</span></div>`;
+        
         document.getElementsByClassName("aWeek")[0].innerHTML = cells;
 
         let currentDaysArray = Array.from(document.getElementsByClassName("current-month"));
@@ -67,29 +64,6 @@ class Calendar {
     }
 
 }
-
-
-let myCalendar = new Calendar();
-let date = new Date();
-
-let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-];
-
-
-myCalendar.renderWeek();
-let todolist = document.getElementById("todolist");
 
 document.addEventListener("click", clickrelated)
 
@@ -121,10 +95,10 @@ function clickrelated(event) {
 
 	function deletetodolistitem(event){
 
-		for(let test = 0; test < todolist.children.length; test++){
+		for(let filter = 0; filter < todolist.children.length; filter++){
 
-			if(todolist.children[test] == event.target){
-				todolist.removeChild(todolist.children[test]);
+			if(todolist.children[filter] == event.target){
+				todolist.removeChild(todolist.children[filter]);
 			}
 		}
 	}
@@ -214,22 +188,72 @@ function popup(message) {
 
 }
 
-async function fetchitem(){
-	let events = document.getElementById("events");
+async function fetchitem(filter){
+	
 	let response = await fetch('https://www.5daef5cbf2946f001481d066.mockapi.io/events');
 	let myJson = await response.json();
-	let day = new Date(2019, 9, 08);
-	console.log(day);
 	var collect = [];
+	var collectByName = [];
+	
+	let formatted = today.getFullYear()+"-";
+	let month = today.getMonth()+1;
+
+	if(month.length == 1){
+		formatted += 0 + month;
+	} else {
+		formatted += month;
+	}
+	formatted += "-"+ today.getDate();
 	
 	for(let a of myJson){
-	  
+		collectByName.push(a.contact + ": " + a.date);
+	  if(filter != null){
+		if(filter.contains(a.date))
+		collect.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
+	  } else {
+		if(formatted == a.date)
 	  collect.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
 	}
-	console.log(collect)
+}
+	collectByName.sort();
 	collect.sort();
-	console.log(collect)
+	document.getElementById("notifications").value = collectByName.join("\n");
 	events.value = collect.join("\n");
 }
 
+function contactInterval(){
+
+}
+
+let events = document.getElementById("events");
+let today = new Date();
+
 fetchitem();
+
+let myCalendar = new Calendar();
+let date = new Date();
+
+let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
+
+myCalendar.renderWeek();
+let todolist = document.getElementById("todolist");
+
+let days = document.getElementById("aWeek");
+
+days.addEventListener("click", function () {
+    fetchitem(event.target.classList);
+    
+});

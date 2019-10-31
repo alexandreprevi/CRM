@@ -74,7 +74,7 @@ class Calendar {
         let day = date.getDay();
         let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
-        let nextDate = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
+        
         let today = new Date();
 
         document.getElementById("month").innerHTML = months[date.getMonth()];
