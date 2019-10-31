@@ -1,70 +1,8 @@
 class Calendar {
     constructor() {
         this.events = [];
-    } 
-    renderWeek() {
-        date.setDate(1);
-
-        let day = date.getDay();
-        let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-        let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
-        let nextDate = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
-        let today = new Date();
-
-        document.getElementById("month").innerHTML = months[date.getMonth()];
-        document.getElementById("date-str").innerHTML = today.toDateString();
-
-        let cells = "";
-        let woho = 1;
-        for(let hehe = 3; hehe > 0; hehe--){
-            if(today.getDate() - hehe > 0){
-                
-                let collect = String(today.getDate() - hehe);
-
-                cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-            } else if(today.getDate() - hehe <= 0){
-                
-                let collect = String(prevDate - prevDate + woho);
-                cells += `<div class="day prev-month ${date.getFullYear()}-${date.getMonth()}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-
-                woho++;
-            }
-
-        }
-        cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${(today.getDate()).length == 1 ? '0' + (today.getDate()) : today.getDate()}">${today.getDate()}<span class=''></span></div>`;
-        
-        for(let hehe = 1; hehe < 4; hehe++){
-            if(today.getDate() + hehe <= endDate){
-                
-                let collect = String(today.getDate()+hehe);
-                cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-            } else if(today.getDate() + hehe > endDate){
-                
-                let collect = String(nextDate - nextDate + woho);
-                cells += `<div class="day next-month ${date.getFullYear()}-${date.getMonth() + 2}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-                woho++;
-            }
-        }
-
-        console.log(myCalendar);
-
-        document.getElementsByClassName("days")[0].innerHTML = cells;
-
-        let currentDaysArray = Array.from(document.getElementsByClassName("current-month"));
-
-        // Check for event in myCalendar.event. print a dot.
-
-        for (let i = 0; i < myCalendar.events.length; i++) {
-
-            //  Get the date
-
-            for (let j = 0; j < currentDaysArray.length; j++) {
-
-                if (currentDaysArray[j].classList.contains(myCalendar.events[i].date)) {
-                    currentDaysArray[j].classList.add("eventToday");
-                }
-            }
-        }
+        this.contacts = [];
+        this.todo = [];
     }
 
     renderDate() {
@@ -100,7 +38,6 @@ class Calendar {
             }
         }
 
-        console.log(myCalendar);
 
         document.getElementsByClassName("days")[0].innerHTML = cells;
 
@@ -130,54 +67,29 @@ class Calendar {
             if (myCalendar.events[i].date == event.target.classList[2]) {
 
                 eventArray.push(myCalendar.events[i]);
+
             } else {
                 eventList.innerHTML = "";
             }
 
              eventArray.forEach((event) => this.renderThisEvent(event));
-
-            /* for (let i = 0; i < eventArray.length; i++) {
-                eventList.innerHTML += eventArray[i].startTime + ": " + eventArray[i].title + "</br>";
-            } */
         }
     }
 
-    renderHistoric(){
-        console.log("lets work from here");
-    }
-
-    renderPreviousEvents(event){
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    }
-
-    renderUpcomingEvents(){
-
-    }
 
     renderThisEvent(event){
         const eventList = document.getElementById("event-list");
-        const previousEventsList = document.getElementById("past-events-list");
-        const upcomingEventsList = document.getElementById("upcoming-events-list");
         const row = document.createElement("row");
         row.id = event.id;
         row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
         eventList.appendChild(row);
-
-        /////////////////////////////////////////////////////////////////////////////////////////
-        if (event.date < today) {
-            previousEventsList.appendChild(row);
-        } else {
-            upcomingEventsList.appendChild(row);
-        }
 
 
     }
 
     deleteEvent(el){
         if (el.classList.contains("delete-button")){
-
+            console.log(el.parentElement.id);
             // Remove event from the list
             let confirm = window.confirm("Are you sure you want to delete this event?");
 
@@ -191,7 +103,17 @@ class Calendar {
                         let eventToRemove = myCalendar.events.map(function(item) {return item.id}).indexOf(event.id);
                         myCalendar.events.splice(eventToRemove, 1);
                     }
+                }) 
+
+
+                //////////////////////////// HOW TO GET TO DELETE JUST ONE SPECIFIC OBJECT ?????
+                $.ajax({
+                    method: "DELETE",
+                    url: `http://5daef5cbf2946f001481d066.mockapi.io/events/${el.parentElement.id}`
                 })
+                    .done(function (msg) {
+                        console.log(msg);
+                    });
             }
             
         }
@@ -199,10 +121,24 @@ class Calendar {
 
     getInputsEvent() {
 
-        let eventAdded = new Event(title_add.value, place_add.value, date_add.value, startTime_add.value, endTime_add.value, contact_add.value);
-        this.events.push(eventAdded);
+        /* let eventAdded = new Event(title_add.value, place_add.value, date_add.value, startTime_add.value, endTime_add.value, contact_add.value); */
+        $.ajax({
+            method: "POST",
+            url: "http://5daef5cbf2946f001481d066.mockapi.io/events",
+            data: { title: title_add.value, 
+                    place: place_add.value, 
+                    date: date_add.value, 
+                    startTime: startTime_add.value, 
+                    endTime: endTime_add.value, 
+                    contact: contact_add.value, 
+                    id: date_add.value + startTime_add.value}
+        })
+            .done(function (msg) {
+                console.log(msg);
+                //////////////////////////////////////////////////////////////////////////////////////// ???????
+                window.location.reload();
+            });
     }
-
 }
 
 
@@ -219,7 +155,24 @@ class Event {
 
 }
 
+// IMPORT DATA FROM MOCK API /////////////////////////////////
+
 let myCalendar = new Calendar();
+
+
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function(data){
+    console.log(data);
+    for (let event of data){
+        myCalendar.events.push(event);
+    } 
+    myCalendar.renderDate();
+});
+
+
+    
+///////////////////////////////////////////////////////////////
+
+
 let date = new Date();
 
 let months = [
@@ -315,7 +268,3 @@ function moveDate(para) {
     }
     myCalendar.renderDate();
 }
-
-/* document.getElementById("title-add").required = true;
-document.getElementById("date-add").required = true;
-document.getElementById("start-time-add").required = true; */

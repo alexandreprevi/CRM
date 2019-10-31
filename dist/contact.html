@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/contact4.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+
     <title>Contacts</title>
 </head>
 
@@ -19,7 +23,58 @@
         </div>
 
 
-        <div class="main">
+        <div class="main contact">
+            <div class="contact-header" id="contact-header">
+                <div class="contact-search">
+                    <i class="fas fa-search"></i><input type="text" placeholder="Search...">
+                </div> 
+                <div class="contact-add">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+            <div class="contact-list" id="contact-list">
+                <p class="contact-name">A</p>
+                <p class="contact-name">B</p>
+                <p class="contact-name">C</p>
+                <p class="contact-name">D</p>
+                <p class="contact-name">E</p>
+                <p class="contact-name">A</p>
+                <p class="contact-name">B</p>
+                <p class="contact-name">C</p>
+                <p class="contact-name">D</p>
+                <p class="contact-name">E</p>
+                <p class="contact-name">A</p>
+                <p class="contact-name">B</p>
+                <p class="contact-name">C</p>
+                <p class="contact-name">D</p>
+                <p class="contact-name">E</p>
+            </div>
+            <div class="contact-details" id="contact-details">
+                    <div class="contact-details-header">
+                        <button id="contact-back-button">Back</button>
+                        <button id="contact-remove-button">Remove</button>
+                        <button id="contact-edit-button">Edit</button>
+                    </div>
+                    <div class="contact-details-name">
+                        <p id="contact-display-name">Name here</p>
+                    </div>
+                    <div class="contact-details-buttons">
+                        <button id="contact-info-button">INFO</button>
+                        <button id="contact-events-button">EVENTS</button>
+                        <button id="contact-notes-button">NOTES</button>
+                    </div>
+                    <div class="contact-details-display">
+                        <div class="contact-details-display-info" id="contact-details-display-info">
+                            <p>Info goes here</p>
+                        </div>
+                        <div class="contact-details-display-events" id="contact-details-display-events">
+                            <p>Events goes here</p>
+                        </div>
+                        <div class="contact-details-display-notes" id="contact-details-display-notes">
+                            <p>Notes goes here</p>
+                        </div>
+                    </div>
+            </div>
 
         </div>
 
@@ -35,10 +90,11 @@
 
 
 
-
-
     <script src="https://kit.fontawesome.com/b47051db3a.js" crossorigin="anonymous"></script>
-    <script src="js/contact4.js" charset="utf-8"></script>
+
+    <script src="js/contact.js"></script>
+    
+
 </body>
 
 </html>
