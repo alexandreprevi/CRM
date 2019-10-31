@@ -15,34 +15,34 @@ class Calendar {
         document.getElementById("date-str").innerHTML = today.toDateString();
 
         let cells = "";
-        let woho = 1;
-        for(let hehe = 3; hehe > 0; hehe--){
-            if(today.getDate() - hehe > 0){
+        let dayforward = 1;
+        for(let aDay = 3; aDay > 0; aDay--){
+            if(today.getDate() - aDay > 0){
                 
-                let collect = String(today.getDate() - hehe);
+                let collect = String(today.getDate() - aDay);
 
                 cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-            } else if(today.getDate() - hehe <= 0){
+            } else if(today.getDate() - aDay <= 0){
                 
-                let collect = String(prevDate - prevDate + woho);
+                let collect = String(prevDate - prevDate + dayforward);
                 cells += `<div class="day prev-month ${date.getFullYear()}-${date.getMonth()}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
 
-                woho++;
+                dayforward++;
             }
 
         }
         cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${(today.getDate()).length == 1 ? '0' + (today.getDate()) : today.getDate()}">${today.getDate()}<span class=''></span></div>`;
         
-        for(let hehe = 1; hehe < 4; hehe++){
-            if(today.getDate() + hehe <= endDate){
+        for(let aDay = 1; aDay < 4; aDay++){
+            if(today.getDate() + aDay <= endDate){
                 
-                let collect = String(today.getDate()+hehe);
+                let collect = String(today.getDate()+aDay);
                 cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-            } else if(today.getDate() + hehe > endDate){
+            } else if(today.getDate() + aDay > endDate){
                 
-                let collect = String(nextDate - nextDate + woho);
+                let collect = String(nextDate - nextDate + dayforward);
                 cells += `<div class="day next-month ${date.getFullYear()}-${date.getMonth() + 2}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-                woho++;
+                dayforward++;
             }
         }
 

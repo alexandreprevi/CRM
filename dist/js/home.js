@@ -193,8 +193,8 @@ async function fetchitem(filter){
 	let response = await fetch('https://www.5daef5cbf2946f001481d066.mockapi.io/events');
 	let myJson = await response.json();
 	var collect = [];
-	var collectByName = [];
-	
+
+	var longintervals = [];
 	let formatted = today.getFullYear()+"-";
 	let month = today.getMonth()+1;
 
@@ -206,7 +206,11 @@ async function fetchitem(filter){
 	formatted += "-"+ today.getDate();
 	
 	for(let a of myJson){
-		collectByName.push(a.contact + ": " + a.date);
+
+		let collectdays = contactInterval(a.date);
+		if(collectdays >= 20 || collectdays <= -20){
+			longintervals.push("You have not been in touch with " + a.contact + " for " + collectdays + " days!");
+		}
 	  if(filter != null){
 		if(filter.contains(a.date))
 		collect.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
@@ -215,18 +219,29 @@ async function fetchitem(filter){
 	  collect.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
 	}
 }
-	collectByName.sort();
+	
 	collect.sort();
-	document.getElementById("notifications").value = collectByName.join("\n");
+	document.getElementById("notifications").value = longintervals.join("\n");
 	events.value = collect.join("\n");
 }
 
-function contactInterval(){
-
+function contactInterval(datecontacted){
+	let year = datecontacted.substring(0,4);
+	let month = datecontacted.substring(5, 7);
+	let date = datecontacted.substring(8, 10);
+	
+	let testdate = new Date(year, month-1, date);
+	let time = today - testdate;
+	let time2days = time /(1000 * 60 * 60 * 24);
+	if (time2days < 0){
+		time2days/-1;
+	}
+	return Math.round(time2days);
 }
 
 let events = document.getElementById("events");
 let today = new Date();
+
 
 fetchitem();
 
