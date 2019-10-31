@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/notesAndpopup.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Home</title>
 </head>
@@ -14,15 +13,15 @@
 <body>
     <div class="wrapper">
         <div class="header">
-                <div class="logo">
-                        <img src="logo/emmiologo.png" alt="logo">
-                    </div>
+            <div class="logo">
+                <img src="logo/emmiologo.png" alt="logo">
+            </div>
             <h1>Home</h1>
         </div>
 
-        
 
-        <div class="main">
+
+        <div class="main home-page">
             <div class="aWeek" id="aWeek"></div>
 
             <div id="popup">
@@ -36,31 +35,27 @@
                     </div>
                 </div>
             </div>
-        
-            <div id="eventContainer">
-                <div id="eventList">
-                    <strong>Events</strong>
-                    <textarea id="events" cols="30" rows="10" readonly></textarea>
+
+            <div class="eventContainer" id="eventContainer">
+                <div class="eventList" id="eventList">
+                    <h2>Events</h2>
+                    <textarea id="events" readonly></textarea>
                 </div>
             </div>
 
-            <div id="todoContainer">
-                <div id="thetodolist">
-                    <strong>To-Do List</strong>
+            <div class="todoContainer" id="todoContainer">
+                <div class="thetodolist" id="thetodolist">
+                    <h2>To-Do List</h2>
                     <ul id="todolist"></ul>
-                    
                 </div>
                 <a class="button">Edit</a>
             </div>
 
-            <div id="">
-               <div id="notification">
-                   <textarea  id="notifications" cols="30" rows="10"></textarea>
-               </div>     
-               
+
+            <div class="notification" id="notification">
+                    <h2>Notifications</h2>
+                <textarea id="notifications"></textarea>
             </div>
-
-
 
         </div>
 
@@ -75,7 +70,7 @@
 
     <script src="https://kit.fontawesome.com/b47051db3a.js" crossorigin="anonymous"></script>
     <script src="js/home.js"></script>
-    
+
 </body>
 
 </html>
