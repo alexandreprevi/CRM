@@ -24,14 +24,49 @@
 
 
         <div class="main contact">
+
             <div class="contact-header" id="contact-header">
                 <div class="contact-search">
-                    <i class="fas fa-search"></i><input type="text" placeholder="Search...">
-                </div> 
+                    <i class="fas fa-search"></i><input type="text" id="searchbar" placeholder="Search...">
+                </div>
                 <div class="contact-add">
-                    <i class="fas fa-plus"></i>
+                <i id="btn_addContact" class="fas fa-plus"></i>
                 </div>
             </div>
+
+
+          <!-- contact adding form, taking input here-->
+                <div id="addNewContact">
+                 <form class="" action="index.html" method="post">
+                   <label for="">Company Name:</label>
+                   <input id="company_name" type="text" name="" value="">
+                   <br>
+                   <label for="">Company Website:</label>
+                   <input id="company_web" type="url" name="" value="">
+                   <br>
+                   <label for="">Company Address: </label>
+                   <input id="company_address" type="text" name="" value="">
+                   <br>
+                   <label for="">First Name:</label>
+                   <input id="first_name" type="text" name="" value="">
+                   <br>
+                   <label for="">Last Name:</label>
+                   <input id="last_name" type="text" name="" value="">
+                   <br>
+                   <label for="">PhoneNumber: </label>
+                   <input id="tel" type="text" name="" value="">
+                   <br>
+                   <label for="">Email: </label>
+                   <input id="email" type="email" name="" value="">
+                   <br>
+                   <button id="btn_addContact_confirm" type="button" name="button">Confirm</button>
+                   <button id="btn_addContact_cancel" type="button" name="button">Concel</button>
+                   </form>
+                </div>
+
+
+
+
             <div class="contact-list" id="contact-list">
                 <p class="contact-name">A</p>
                 <p class="contact-name">B</p>
@@ -40,15 +75,9 @@
                 <p class="contact-name">E</p>
                 <p class="contact-name">A</p>
                 <p class="contact-name">B</p>
-                <p class="contact-name">C</p>
-                <p class="contact-name">D</p>
-                <p class="contact-name">E</p>
-                <p class="contact-name">A</p>
-                <p class="contact-name">B</p>
-                <p class="contact-name">C</p>
-                <p class="contact-name">D</p>
-                <p class="contact-name">E</p>
             </div>
+
+
             <div class="contact-details" id="contact-details">
                     <div class="contact-details-header">
                         <button id="contact-back-button">Back</button>
@@ -93,7 +122,7 @@
     <script src="https://kit.fontawesome.com/b47051db3a.js" crossorigin="anonymous"></script>
 
     <script src="js/contact.js"></script>
-    
+
 
 </body>
 
