@@ -305,6 +305,7 @@ class ContactList {
       contactName.innerHTML = currentContact.companyName + " - " + currentContact.firstName +" " +currentContact.lastName;
       contactList.appendChild(contactName);
     }
+
   }
 
   // fill details of contact to contact-details area
@@ -349,6 +350,14 @@ class ContactList {
       contactDiv.appendChild(email);
 
       contactDetailsDisplayInfo.appendChild(contactDiv);
+
+      // PRINT EVENTS FOR THIS CONTACT
+      for (let i = 0; i < myCalendar.events.length; i++){
+        if (myCalendar.events[i].contact == this.contacts[contact_index].firstName + " " + this.contacts[contact_index].lastName ){
+            // Print here
+            contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title + "</br>";
+        }
+      }
   }
 }
 
