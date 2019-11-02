@@ -23,6 +23,7 @@
     height: 100%;
     line-height: 1rem;
     overflow: auto;
+    transition: all 0.4s;
     
 
     p {
@@ -30,11 +31,13 @@
         margin: 1rem 1rem 0 1rem;
         border-bottom: 1px solid darken($text-color, 30%);
         padding: 0 0 0.2rem 0;
+        color:  darken($text-color, 90%);
     }
     p:hover{
-        font-size: 1.5rem;
+        font-size: 1.1rem;
         transition: all 0.2s;
         cursor: pointer;
+        transition: all 0.4s;
     }
     
 }

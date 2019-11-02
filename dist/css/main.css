@@ -522,6 +522,7 @@ tr:nth-child(even) {
       -ms-flex-direction: column;
           flex-direction: column;
   overflow: auto;
+  cursor: pointer;
 }
 
 .past-events h2 {
@@ -544,6 +545,7 @@ tr:nth-child(even) {
       -ms-flex-direction: column;
           flex-direction: column;
   overflow: auto;
+  cursor: pointer;
 }
 
 .upcoming-events h2 {
@@ -622,6 +624,8 @@ td:nth-child(4) {
   height: 100%;
   line-height: 1rem;
   overflow: auto;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
 }
 
 .contact-list p {
@@ -631,13 +635,16 @@ td:nth-child(4) {
   margin: 1rem 1rem 0 1rem;
   border-bottom: 1px solid #b3b3b3;
   padding: 0 0 0.2rem 0;
+  color: #1a1a1a;
 }
 
 .contact-list p:hover {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   cursor: pointer;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
 }
 
 .contact-details {
