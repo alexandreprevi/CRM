@@ -81,7 +81,7 @@ class Calendar {
         const eventList = document.getElementById("event-list");
         const row = document.createElement("row");
         row.id = event.id;
-        row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
+        row.innerHTML = `${event.startTime} ${event.title} ${event.place} ${event.contact} <a class="delete-button">X</a></br>`;
         eventList.appendChild(row);
 
 
@@ -160,24 +160,13 @@ class ContactList {
       this.contacts = [];
       this.contactDetails = [];
       this.contact_id = 0;
-    }
-  
-    addContact(companyName, companyWeb, companyAddress, firstName,lastName, tel, email) {
-      this.contact_id++;
-      var contact = new ContactItem(companyName, companyWeb, companyAddress, firstName,lastName, tel, email,this.contact_id);
-      this.contacts.push(contact);
-      this.render();
-    }
-  
+    }  
   
     // fill contact list to contact area
-    render() {
+    renderDropDown() {
       let selectContactDropDown = document.getElementById("contact-add");
       let sortedcontactlist = this.contacts.sort(compare);
-      let sortedContactByName;
-      
-      
-  
+    
       for (let contact of sortedcontactlist) {
           let currentContact = contact.firstName+" "+contact.lastName;
           selectContactDropDown.add(new Option(currentContact));
@@ -207,7 +196,7 @@ $.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data){
    for (let contact of data){
        contact_list.contacts.push(contact);
    }
-   contact_list.render();
+   contact_list.renderDropDown();
 });
 
 // IMPORT DATA FROM MOCK API /////////////////////////////////
