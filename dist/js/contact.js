@@ -120,7 +120,7 @@ class Calendar {
         myCalendar.events.forEach((event) => {
           if (el.parentElement.id == event.id) {
             // remove the event from the calender.event array with the id of the event
-            let eventToRemove = myCalendar.events.map(function(item) {
+            let eventToRemove = myCalendar.events.map(function (item) {
               return item.id
             }).indexOf(event.id);
             myCalendar.events.splice(eventToRemove, 1);
@@ -194,75 +194,75 @@ class ContactList {
 
     }
   */
-    // fill details of contact to contact-details area
-    //chaneg all contact_index to contactId
-    render2(contactId) {
+  // fill details of contact to contact-details area
+  //chaneg all contact_index to contactId
+  render2(contactId) {
     //  var contactDetails = document.getElementById("contact-details");
     //  contactDetails.innerHTML = "";
-      //var contactDetailsDisplayInfo=document.getElementById("contact-details-display-info");
-      contactDetailsDisplayInfo.innerHTML="";
-      var y= contact_list.find(x => x.id === contactId);
+    //var contactDetailsDisplayInfo=document.getElementById("contact-details-display-info");
+    contactDetailsDisplayInfo.innerHTML = "";
+    var y = contact_list.find(x => x.id === contactId);
 
-        var contactDiv = document.createElement("div");
-        contactDiv.id = "contact-" + contactId;
+    var contactDiv = document.createElement("div");
+    contactDiv.id = "contact-" + contactId;
 
-        var companyName = document.createElement("p");
-        companyName.id = "companyName-" + contactId;
-        var companyWeb = document.createElement("p");
-        companyWeb.id = "companyWeb-" + contactId;
-        var companyAddress = document.createElement("p");
-        companyAddress.id = "companyAddress-" + contactIdx;
-        var firstName = document.createElement("p");
-        firstName.id = "firstName-" + contactId;
-        var lastName = document.createElement("p");
-        lastName.id = "lastName-" + contactId;
-        var tel = document.createElement("p");
-        tel.id = "tel-" + contactId;
-        var email = document.createElement("p");
-        email.id = "email-" + contactId;
+    var companyName = document.createElement("p");
+    companyName.id = "companyName-" + contactId;
+    var companyWeb = document.createElement("p");
+    companyWeb.id = "companyWeb-" + contactId;
+    var companyAddress = document.createElement("p");
+    companyAddress.id = "companyAddress-" + contactIdx;
+    var firstName = document.createElement("p");
+    firstName.id = "firstName-" + contactId;
+    var lastName = document.createElement("p");
+    lastName.id = "lastName-" + contactId;
+    var tel = document.createElement("p");
+    tel.id = "tel-" + contactId;
+    var email = document.createElement("p");
+    email.id = "email-" + contactId;
 
 
-       companyName.innerHTML = "<span>Company Name: </span>" + y.companyName;
-       companyWeb.innerHTML = "<span>Company Website: </span>" + y.companyWeb;
-       companyAddress.innerHTML = "<span>Company Address: </span>" + y.companyAddress;
-       firstName.innerHTML = "<span>First name: </span>" + y.firstName;
-       lastName.innerHTML = "<span>Last name: </span>" + y.lastName;
-       tel.innerHTML = "<span>PhoneNumber: </span>" + y.tel;
-       email.innerHTML = "<span>Email: </span>" + y.email;
-        /*
-        companyName.innerHTML = "<span>Company Name: </span>" + this.contacts[contact_index].companyName;
-        companyWeb.innerHTML = "<span>Company Website: </span>" + this.contacts[contact_index].companyWeb;
-        companyAddress.innerHTML = "<span>Company Address: </span>" + this.contacts[contact_index].companyAddress;
-        firstName.innerHTML = "<span>First name: </span>" + this.contacts[contact_index].firstName;
-        lastName.innerHTML = "<span>Last name: </span>" + this.contacts[contact_index].lastName;
-        tel.innerHTML = "<span>PhoneNumber: </span>" + this.contacts[contact_index].tel;
-        email.innerHTML = "<span>Email: </span>" + this.contacts[contact_index].email;
-      */
-        contactDiv.appendChild(companyName);
-        contactDiv.appendChild(companyWeb);
-        contactDiv.appendChild(companyAddress);
-        contactDiv.appendChild(firstName);
-        contactDiv.appendChild(lastName);
-        contactDiv.appendChild(tel);
-        contactDiv.appendChild(email);
+    companyName.innerHTML = "<span>Company Name: </span>" + y.companyName;
+    companyWeb.innerHTML = "<span>Company Website: </span>" + y.companyWeb;
+    companyAddress.innerHTML = "<span>Company Address: </span>" + y.companyAddress;
+    firstName.innerHTML = "<span>First name: </span>" + y.firstName;
+    lastName.innerHTML = "<span>Last name: </span>" + y.lastName;
+    tel.innerHTML = "<span>PhoneNumber: </span>" + y.tel;
+    email.innerHTML = "<span>Email: </span>" + y.email;
+    /*
+    companyName.innerHTML = "<span>Company Name: </span>" + this.contacts[contact_index].companyName;
+    companyWeb.innerHTML = "<span>Company Website: </span>" + this.contacts[contact_index].companyWeb;
+    companyAddress.innerHTML = "<span>Company Address: </span>" + this.contacts[contact_index].companyAddress;
+    firstName.innerHTML = "<span>First name: </span>" + this.contacts[contact_index].firstName;
+    lastName.innerHTML = "<span>Last name: </span>" + this.contacts[contact_index].lastName;
+    tel.innerHTML = "<span>PhoneNumber: </span>" + this.contacts[contact_index].tel;
+    email.innerHTML = "<span>Email: </span>" + this.contacts[contact_index].email;
+  */
+    contactDiv.appendChild(companyName);
+    contactDiv.appendChild(companyWeb);
+    contactDiv.appendChild(companyAddress);
+    contactDiv.appendChild(firstName);
+    contactDiv.appendChild(lastName);
+    contactDiv.appendChild(tel);
+    contactDiv.appendChild(email);
 
-        contactDetailsDisplayInfo.appendChild(contactDiv);
+    contactDetailsDisplayInfo.appendChild(contactDiv);
 
-        // PRINT EVENTS FOR THIS CONTACT
-  /*      for (let i = 0; i < myCalendar.events.length; i++){
-          if (myCalendar.events[i].contact == this.contacts[contact_index].firstName + " " + this.contacts[contact_index].lastName ){
-              // Print here
-              contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title+ " " + myCalendar.events[i].place + "</br>";
+    // PRINT EVENTS FOR THIS CONTACT
+    /*      for (let i = 0; i < myCalendar.events.length; i++){
+            if (myCalendar.events[i].contact == this.contacts[contact_index].firstName + " " + this.contacts[contact_index].lastName ){
+                // Print here
+                contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title+ " " + myCalendar.events[i].place + "</br>";
+            }
           }
-        }
-  */         //changed contact_index to contactId, therefore this.contacts[contact_index] becomes y now. see line 204;
-           for (let i = 0; i < myCalendar.events.length; i++){
-             if (myCalendar.events[i].contact == y.firstName + " " + y.lastName ){
-             // Print here
-             contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title+ " " + myCalendar.events[i].place + "</br>";
-             }
-           }
+    */         //changed contact_index to contactId, therefore this.contacts[contact_index] becomes y now. see line 204;
+    for (let i = 0; i < myCalendar.events.length; i++) {
+      if (myCalendar.events[i].contact == y.firstName + " " + y.lastName) {
+        // Print here
+        contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title + " " + myCalendar.events[i].place + "</br>";
+      }
     }
+  }
 
 }
 
@@ -284,14 +284,14 @@ class ContactItem {
 let myCalendar = new Calendar();
 var contact_list = new ContactList();
 
-$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function(data) {
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function (data) {
   for (let event of data) {
     myCalendar.events.push(event);
   }
 });
 
 
-$.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data) {
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function (data) {
   for (let contact of data) {
     contact_list.contacts.push(contact);
   }
@@ -301,29 +301,29 @@ $.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data) {
 
 function additem() {
   $.ajax({
-      method: "POST",
-      url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts",
-      data: {
-        companyName: document.getElementById("company_name").value,
-        companyWeb: document.getElementById("company_web").value,
-        companyAddress: document.getElementById("company_address").value,
-        firstName: document.getElementById("first_name").value,
-        lastName: document.getElementById("last_name").value,
-        tel: document.getElementById("tel").value,
-        email: document.getElementById("email").value
-      }
-    })
-    .done(function(msg) {
+    method: "POST",
+    url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts",
+    data: {
+      companyName: document.getElementById("company_name").value,
+      companyWeb: document.getElementById("company_web").value,
+      companyAddress: document.getElementById("company_address").value,
+      firstName: document.getElementById("first_name").value,
+      lastName: document.getElementById("last_name").value,
+      tel: document.getElementById("tel").value,
+      email: document.getElementById("email").value
+    }
+  })
+    .done(function (msg) {
       console.log(msg);
-    }); 
+    });
 }
 
 function deleteitem(id) {
   $.ajax({
-      method: "DELETE",
-      url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts/" + id
-    })
-    .done(function(msg) {
+    method: "DELETE",
+    url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts/" + id
+  })
+    .done(function (msg) {
       console.log(msg);
     });
 }
@@ -331,7 +331,7 @@ function deleteitem(id) {
 ///// = correct========
 function edititem(id) {
   $.ajax({
-    
+
     method: "PUT",
     url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts/" + id,
     data: {
@@ -346,10 +346,10 @@ function edititem(id) {
     }
     //  data: JSON.stringify(dataObject),
     //  dataType: 'json',
-     //success: function(result) {
+    //success: function(result) {
     //  alert("success?");
-      //}
-  }).done(function(msg) {
+    //}
+  }).done(function (msg) {
     console.log(msg);
   });
 }
@@ -455,32 +455,32 @@ function displayDetails(contact) {
     //showDetails2(idNumber);showDetails(idNumber);
     showDetails2(idNumber);
 
-    removeBtn.addEventListener("click", function() {
+    removeBtn.addEventListener("click", function () {
       contactList.style.display = "flex";
       contactHeader.style.display = "flex";
       contactDetails.style.display = "none";
 
       let confirm = window.confirm("Are you sure you want to delete this contact?");
 
-            if (confirm == true){
-              ref.remove();
-              deleteitem(idNumber);
-            }
+      if (confirm == true) {
+        ref.remove();
+        deleteitem(idNumber);
+      }
 
     });
     var y = contact_list.contacts.find(x => x.id === idNumber);
 
-    editBtn.addEventListener("click", function() {
-        console.log("edit")
+    editBtn.addEventListener("click", function () {
+      console.log("edit")
       addNewContact.style.display = "flex";
       updateBtn.style.display = "inline";
       confirmBtn.style.display = "none";
       backBtn.style.display = "none";
       removeBtn.style.display = "none";
       editBtn.style.display = "none";
-        document.getElementById("contact-display-name").style.display = "none";
-        document.getElementById("contact-details").style.display= "none";
-     
+      document.getElementById("contact-display-name").style.display = "none";
+      document.getElementById("contact-details").style.display = "none";
+
       console.log(contact_list.contacts);
       console.log(y);
 
@@ -494,69 +494,69 @@ function displayDetails(contact) {
 
     });
 
-    concelBtn.addEventListener("click", function() {
-        console.log("cancel")
-        addNewContact.style.display = "none";
-        backBtn.style.display = "flex";
-        removeBtn.style.display = "flex";
-        editBtn.style.display = "flex";
-      });
+    concelBtn.addEventListener("click", function () {
+      console.log("cancel")
+      addNewContact.style.display = "none";
+      backBtn.style.display = "flex";
+      removeBtn.style.display = "flex";
+      editBtn.style.display = "flex";
+    });
 
-      updateBtn.addEventListener("click", function() {
-          console.log("update")
-        y.companyName = document.getElementById("company_name").value;
-        y.companyWeb = document.getElementById("company_web").value;
-        y.companyAddress = document.getElementById("company_address").value;
-        y.firstName = document.getElementById("first_name").value;
-        y.lastName = document.getElementById("last_name").value;
-        y.tel = document.getElementById("tel").value;
-        y.email = document.getElementById("email").value;
-        
-        editContact(y.id);
-        showDetails2(idNumber);
-        edititem(idNumber);  //does not update
-        addNewContact.style.display = "none";
-        backBtn.style.display = "flex";
-        removeBtn.style.display = "flex";
-        editBtn.style.display = "flex";
-        document.getElementById("contact-display-name").innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
-        ref.innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
-        //window.location.reload();   /// not sure is good here with reload
-      }); 
+    updateBtn.addEventListener("click", function () {
+      console.log("update")
+      y.companyName = document.getElementById("company_name").value;
+      y.companyWeb = document.getElementById("company_web").value;
+      y.companyAddress = document.getElementById("company_address").value;
+      y.firstName = document.getElementById("first_name").value;
+      y.lastName = document.getElementById("last_name").value;
+      y.tel = document.getElementById("tel").value;
+      y.email = document.getElementById("email").value;
+
+      editContact(y.id);
+      showDetails2(idNumber);
+      edititem(idNumber);  //does not update
+      addNewContact.style.display = "none";
+      backBtn.style.display = "flex";
+      removeBtn.style.display = "flex";
+      editBtn.style.display = "flex";
+      document.getElementById("contact-display-name").innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
+      ref.innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
+      //window.location.reload();   /// not sure is good here with reload
+    });
   }
- 
+
 }
 
 
 
 //======================
 backBtn.addEventListener("click", function () {
-    contactDetails.style.display="none";
-    contactList.style.display="flex";
-    contactHeader.style.display="flex";
+  contactDetails.style.display = "none";
+  contactList.style.display = "flex";
+  contactHeader.style.display = "flex";
 });
 
 eventsBtn.addEventListener("click", function () {
-    contactInfoDisplay.style.display = "none";
-    contactEventsDisplay.style.display = "flex";
-    contactNotesDisplay.style.display = "none";
+  contactInfoDisplay.style.display = "none";
+  contactEventsDisplay.style.display = "flex";
+  contactNotesDisplay.style.display = "none";
 
-    eventsBtn.classList.add("active");
-    infoBtn.classList.remove("active");
-    notesBtn.classList.remove("active");
+  eventsBtn.classList.add("active");
+  infoBtn.classList.remove("active");
+  notesBtn.classList.remove("active");
 });
 notesBtn.addEventListener("click", function () {
-    contactInfoDisplay.style.display = "none";
-    contactEventsDisplay.style.display = "none";
-    contactNotesDisplay.style.display = "flex";
+  contactInfoDisplay.style.display = "none";
+  contactEventsDisplay.style.display = "none";
+  contactNotesDisplay.style.display = "flex";
 
-    notesBtn.classList.add("active");
-    infoBtn.classList.remove("active");
-    eventsBtn.classList.remove("active");
+  notesBtn.classList.add("active");
+  infoBtn.classList.remove("active");
+  eventsBtn.classList.remove("active");
 });
 
 
-infoBtn.addEventListener("click", function(contact) {
+infoBtn.addEventListener("click", function (contact) {
 
   contactInfoDisplay.style.display = "flex";
   contactEventsDisplay.style.display = "none";
@@ -570,42 +570,42 @@ infoBtn.addEventListener("click", function(contact) {
 });
 
 
-document.addEventListener("DOMContentLoaded", function(event) {
-addBtn.addEventListener("click", function(e) {
-  addNewContact.style.display = "inline";
-  updateBtn.style.display = "none";
-  confirmBtn.style.display = "inline";
-  contactList.style.display = "none";
+document.addEventListener("DOMContentLoaded", function (event) {
+  addBtn.addEventListener("click", function (e) {
+    addNewContact.style.display = "inline";
+    updateBtn.style.display = "none";
+    confirmBtn.style.display = "inline";
+    contactList.style.display = "none";
 
-  document.getElementById("company_name").value = "";
-  document.getElementById("company_web").value = "";
-  document.getElementById("company_address").value = "";
-  document.getElementById("first_name").value = "";
-  document.getElementById("last_name").value = "";
-  document.getElementById("tel").value = "";
-  document.getElementById("email").value = "";
+    document.getElementById("company_name").value = "";
+    document.getElementById("company_web").value = "";
+    document.getElementById("company_address").value = "";
+    document.getElementById("first_name").value = "";
+    document.getElementById("last_name").value = "";
+    document.getElementById("tel").value = "";
+    document.getElementById("email").value = "";
 
-});
+  });
 
-confirmBtn.addEventListener("click", function(e) {
-  var company_name = document.getElementById("company_name").value;
-  var company_web = document.getElementById("company_web").value;
-  var company_address = document.getElementById("company_address").value;
-  var first_name = document.getElementById("first_name").value;
-  var last_name = document.getElementById("last_name").value;
-  var tel = document.getElementById("tel").value;
-  var email = document.getElementById("email").value;
-  addNewContact.style.display = "none";
-  contactList.style.display = "flex";
-  contact_list.addContact(company_name, company_web, company_address, first_name, last_name, tel, email);
-  additem();
-  //location.reload(true);
-  window.location.reload();
-});
-concelBtn.addEventListener("click", function(e) {
-  addNewContact.style.display = "none";
-  contactList.style.display = "flex";
-});
+  confirmBtn.addEventListener("click", function (e) {
+    var company_name = document.getElementById("company_name").value;
+    var company_web = document.getElementById("company_web").value;
+    var company_address = document.getElementById("company_address").value;
+    var first_name = document.getElementById("first_name").value;
+    var last_name = document.getElementById("last_name").value;
+    var tel = document.getElementById("tel").value;
+    var email = document.getElementById("email").value;
+    addNewContact.style.display = "none";
+    contactList.style.display = "flex";
+    contact_list.addContact(company_name, company_web, company_address, first_name, last_name, tel, email);
+    additem();
+    //location.reload(true);
+    window.location.reload();
+  });
+  concelBtn.addEventListener("click", function (e) {
+    addNewContact.style.display = "none";
+    contactList.style.display = "flex";
+  });
 
 });
 
@@ -669,10 +669,10 @@ function showDetails2(contactId) {
   contactInfoDisplay.appendChild(contactDiv);
 
   // PRINT EVENTS FOR THIS CONTACT
-  for (let i = 0; i < myCalendar.events.length; i++){
-    if (myCalendar.events[i].contact == y.firstName + " " + y.lastName ){
-    // Print here
-    contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title+ " " + myCalendar.events[i].place + "</br>";
+  for (let i = 0; i < myCalendar.events.length; i++) {
+    if (myCalendar.events[i].contact == y.firstName + " " + y.lastName) {
+      // Print here
+      contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title + " " + myCalendar.events[i].place + "</br>";
     }
   }
 
@@ -693,24 +693,24 @@ function search_contact() {
     } else {
       x.children[i].style.display = "inline";
     }
-}
+  }
 }
 
-function editContact(id){   
-    $.ajax({
-  method: "POST",
-  url: "https://www.5daef5cbf2946f001481d066.mockapi.io/contacts/"+id,
-  data: {
-    companyName: document.getElementById("company_name").value,
-    companyWeb: document.getElementById("company_web").value,
-    companyAddress: document.getElementById("company_address").value,
-    firstName:document.getElementById("first_name").value,
-    lastName: document.getElementById("last_name").value,
-    tel:  document.getElementById("tel").value,
-    email: document.getElementById("email").value
-  }
-})
-  .done(function( msg ) {
-    console.log( msg );
-  });
+function editContact(id) {
+  $.ajax({
+    method: "POST",
+    url: "https://www.5daef5cbf2946f001481d066.mockapi.io/contacts/" + id,
+    data: {
+      companyName: document.getElementById("company_name").value,
+      companyWeb: document.getElementById("company_web").value,
+      companyAddress: document.getElementById("company_address").value,
+      firstName: document.getElementById("first_name").value,
+      lastName: document.getElementById("last_name").value,
+      tel: document.getElementById("tel").value,
+      email: document.getElementById("email").value
+    }
+  })
+    .done(function (msg) {
+      console.log(msg);
+    });
 }

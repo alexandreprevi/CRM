@@ -435,6 +435,7 @@ tr:nth-child(even) {
       -ms-flex-pack: center;
           justify-content: center;
   height: 10%;
+  margin-bottom: 0.6rem;
 }
 
 .aWeek div {
@@ -464,6 +465,8 @@ tr:nth-child(even) {
   display: -ms-flexbox;
   display: flex;
   height: 30%;
+  margin-bottom: 0.6rem;
+  padding: 0 1rem;
 }
 
 .eventContainer .eventList {
@@ -490,6 +493,7 @@ tr:nth-child(even) {
       -ms-flex-pack: justify;
           justify-content: space-between;
   height: 30%;
+  padding: 0 1rem;
 }
 
 .todoContainer .thetodolist {
@@ -500,6 +504,9 @@ tr:nth-child(even) {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 0.2rem;
 }
 
 .notification {
@@ -511,6 +518,7 @@ tr:nth-child(even) {
       -ms-flex-direction: column;
           flex-direction: column;
   height: 20%;
+  padding: 0 1rem;
 }
 
 .notification textarea {
@@ -525,6 +533,18 @@ tr:nth-child(even) {
 
 .selected:hover {
   background-color: #84f3d4;
+}
+
+#addBtnTodo {
+  color: #00b894;
+  height: 1.6rem;
+  font-weight: 550;
+  font-size: 1.2rem;
+}
+
+#addBtnTodo:hover {
+  color: #00856b;
+  cursor: pointer;
 }
 
 #dialog-overlay {
@@ -550,9 +570,20 @@ tr:nth-child(even) {
   background: #eee;
   /* styling of the dialog box, i have a fixed dimension for this demo */
   width: 328px;
-  position: absolute;
+  position: relative;
+  margin: auto;
   z-index: 5000;
   display: none;
+}
+
+#dialog-box a {
+  color: #00b894;
+}
+
+#dialog-box a:hover {
+  font-weight: 550;
+  color: #00ebbd;
+  cursor: pointer;
 }
 
 #dialog-box .dialog-content {
