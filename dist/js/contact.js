@@ -263,17 +263,29 @@ infoBtn.addEventListener("click", function(contact) {
     contactEventsDisplay.style.display = "none";
     contactNotesDisplay.style.display = "none";
     displayDetails(contact)
+
+    infoBtn.classList.add("active");
+    eventsBtn.classList.remove("active");
+    notesBtn.classList.remove("active");
 });
 
 eventsBtn.addEventListener("click", function () {
     contactInfoDisplay.style.display = "none";
     contactEventsDisplay.style.display = "flex";
     contactNotesDisplay.style.display = "none";
+
+    eventsBtn.classList.add("active");
+    infoBtn.classList.remove("active");
+    notesBtn.classList.remove("active");
 });
 notesBtn.addEventListener("click", function () {
     contactInfoDisplay.style.display = "none";
     contactEventsDisplay.style.display = "none";
     contactNotesDisplay.style.display = "flex";
+
+    notesBtn.classList.add("active");
+    infoBtn.classList.remove("active");
+    eventsBtn.classList.remove("active");
 });
 
 // ======code from branch LI -contact===========
@@ -302,7 +314,7 @@ class ContactList {
       var contactName = document.createElement("p");
       contactName.id = "contact-name-" + currentContact.id;
       contactName.className = "contact-name";
-      contactName.innerHTML = currentContact.companyName + " - " + currentContact.firstName +" " +currentContact.lastName;
+      contactName.innerHTML = currentContact.companyName + " - " + "<span>"+ currentContact.firstName +" " +currentContact.lastName + "</span>";
       contactList.appendChild(contactName);
     }
 
@@ -333,13 +345,13 @@ class ContactList {
       var email = document.createElement("p");
       email.id = "email-" + contact_index;
 
-      companyName.innerHTML = "Company Name: " + this.contacts[contact_index].companyName;
-      companyWeb.innerHTML = "Company Website: " + this.contacts[contact_index].companyWeb;
-      companyAddress.innerHTML = "Company Address: " + this.contacts[contact_index].companyAddress;
-      firstName.innerHTML = "First name: " + this.contacts[contact_index].firstName;
-      lastName.innerHTML = "Last name: " + this.contacts[contact_index].lastName;
-      tel.innerHTML = "PhoneNumber: " + this.contacts[contact_index].tel;
-      email.innerHTML = " Email: " + this.contacts[contact_index].email;
+      companyName.innerHTML = "<span>Company Name: </span>" + this.contacts[contact_index].companyName;
+      companyWeb.innerHTML = "<span>Company Website: </span>" + this.contacts[contact_index].companyWeb;
+      companyAddress.innerHTML = "<span>Company Address: </span>" + this.contacts[contact_index].companyAddress;
+      firstName.innerHTML = "<span>First name: </span>" + this.contacts[contact_index].firstName;
+      lastName.innerHTML = "<span>Last name: </span>" + this.contacts[contact_index].lastName;
+      tel.innerHTML = "<span>PhoneNumber: </span>" + this.contacts[contact_index].tel;
+      email.innerHTML = "<span>Email: </span>" + this.contacts[contact_index].email;
 
       contactDiv.appendChild(companyName);
       contactDiv.appendChild(companyWeb);
@@ -355,7 +367,7 @@ class ContactList {
       for (let i = 0; i < myCalendar.events.length; i++){
         if (myCalendar.events[i].contact == this.contacts[contact_index].firstName + " " + this.contacts[contact_index].lastName ){
             // Print here
-            contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title + "</br>";
+            contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title+ " " + myCalendar.events[i].place + "</br>";
         }
       }
   }

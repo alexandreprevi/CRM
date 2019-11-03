@@ -1,8 +1,6 @@
 @import 'variables';
 
-.contact{
-    
-}
+
 
 .contact-header {
     display: flex;
@@ -19,7 +17,7 @@
 .contact-list {
     display: flex;
     flex-direction: column;
-    background-color: lighten($secondary-color, 49%);
+    background-color: darken($text-color, 1%);
     height: 100%;
     line-height: 1rem;
     overflow: auto;
@@ -28,13 +26,20 @@
 
     p {
         display: flex;
+        font-size: 0.8rem;
         margin: 1rem 1rem 0 1rem;
         border-bottom: 1px solid darken($text-color, 30%);
         padding: 0 0 0.2rem 0;
         color:  darken($text-color, 90%);
+        span {
+            color: lighten($primary-color, 15%);
+            font-style: italic;
+            font-size: 0.8rem;
+            margin-left: 0.2rem;
+        }
     }
     p:hover{
-        font-size: 1.1rem;
+        font-size: 0.9rem;
         transition: all 0.2s;
         cursor: pointer;
         transition: all 0.4s;
@@ -56,19 +61,50 @@
 
  &-name {
      margin: 2.5rem;
+     color: $primary-color;
+     font-size: 1.2rem;
+     font-weight: 600;
  }
 
  &-buttons {
     height: 3rem;
+    margin-left: 1rem;
+    
+    
+    .active {
+        background-color:  $secondary-color;
+
+        &:hover {
+            background-color:  lighten($secondary-color, 10%)
+        }
+    }
     
     button {
-        height: 100%;
+        height: 100%;   
+        border: none;
+        width: 4rem;
+        border-radius: 5%;
+        background-color: lighten($secondary-color, 35%); 
+
+        &:hover {
+            cursor: pointer;
+            background-color:  lighten($secondary-color, 15%)
+        }
     }
+
  }
 
  &-display {
-     background-color: lighten($secondary-color, 35%);
+     background-color: $secondary-color;
      height: 100%;
+     line-height: 2rem;
+     font-size: 0.9rem;
+
+     span {
+         color: $text-color;
+         font-size: 0.8rem;
+         font-weight: 550;
+     }
  }
 }
 

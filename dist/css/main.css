@@ -620,7 +620,7 @@ td:nth-child(4) {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: #fffcf9;
+  background-color: #fcfcfc;
   height: 100%;
   line-height: 1rem;
   overflow: auto;
@@ -632,14 +632,22 @@ td:nth-child(4) {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  font-size: 0.8rem;
   margin: 1rem 1rem 0 1rem;
   border-bottom: 1px solid #b3b3b3;
   padding: 0 0 0.2rem 0;
   color: #1a1a1a;
 }
 
+.contact-list p span {
+  color: #d56f0b;
+  font-style: italic;
+  font-size: 0.8rem;
+  margin-left: 0.2rem;
+}
+
 .contact-list p:hover {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   cursor: pointer;
@@ -671,19 +679,48 @@ td:nth-child(4) {
 
 .contact-details-name {
   margin: 2.5rem;
+  color: #8c4907;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .contact-details-buttons {
   height: 3rem;
+  margin-left: 1rem;
+}
+
+.contact-details-buttons .active {
+  background-color: #f27e0c;
+}
+
+.contact-details-buttons .active:hover {
+  background-color: #f5983c;
 }
 
 .contact-details-buttons button {
   height: 100%;
+  border: none;
+  width: 4rem;
+  border-radius: 5%;
+  background-color: #fbd8b5;
+}
+
+.contact-details-buttons button:hover {
+  cursor: pointer;
+  background-color: #f7a554;
 }
 
 .contact-details-display {
-  background-color: #fbd8b5;
+  background-color: #f27e0c;
   height: 100%;
+  line-height: 2rem;
+  font-size: 0.9rem;
+}
+
+.contact-details-display span {
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 550;
 }
 
 #addNewContact {
