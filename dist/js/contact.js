@@ -182,54 +182,6 @@ class ContactList {
       contactList.appendChild(contactName);
     }
   }
-
-  // fill details of contact to contact-details area
-  // change all contact_index to contactId========
-  render2(contactId) {
-    //var contactInfoDisplay=document.getElementById("contact-details-display-info");
-    contactInfoDisplay.innerHTML = "";
-
-    var y = this.contacts.find(x => x.id === contactId);
-    console.log(this.contacts);
-    console.log(y);
-
-    var contactDiv = document.createElement("div");
-    contactDiv.id = "contact-" + contactId;
-
-    var companyName = document.createElement("p");
-    companyName.id = "companyName-" + contactId;
-    var companyWeb = document.createElement("p");
-    companyWeb.id = "companyWeb-" + contactId;
-    var companyAddress = document.createElement("p");
-    companyAddress.id = "companyAddress-" + contactId;
-    var firstName = document.createElement("p");
-    firstName.id = "firstName-" + contactId;
-    var lastName = document.createElement("p");
-    lastName.id = "lastName-" + contactId;
-    var tel = document.createElement("p");
-    tel.id = "tel-" + contactId;
-    var email = document.createElement("p");
-    email.id = "email-" + contactId;
-
-    // HERE CHANGDE this.contacts[contact_index] TO y ==========
-    companyName.innerHTML = "Company Name: " + y.companyName;
-    companyWeb.innerHTML = "Company Website: " + y.companyWeb;
-    companyAddress.innerHTML = "Company Address: " + y.companyAddress;
-    firstName.innerHTML = "First name: " + y.firstName;
-    lastName.innerHTML = "Last name: " + y.lastName;
-    tel.innerHTML = "PhoneNumber: " + y.tel;
-    email.innerHTML = " Email: " + y.email;
-
-    contactDiv.appendChild(companyName);
-    contactDiv.appendChild(companyWeb);
-    contactDiv.appendChild(companyAddress);
-    contactDiv.appendChild(firstName);
-    contactDiv.appendChild(lastName);
-    contactDiv.appendChild(tel);
-    contactDiv.appendChild(email);
-
-    contactInfoDisplay.appendChild(contactDiv);
-  }
 }
 
 class ContactItem {
@@ -294,7 +246,7 @@ function deleteitem(id) {
     });
 }
 
-/////maybe not correct?????==========
+///// not correct?????==========
 function edititem(id) {
   $.ajax({
     method: "PUT",
@@ -307,6 +259,7 @@ function edititem(id) {
       lastName: document.getElementById("last_name").value,
       tel: document.getElementById("tel").value,
       email: document.getElementById("email").value
+
     }
     //  data: JSON.stringify(dataObject),
     //  dataType: 'json',
@@ -440,6 +393,7 @@ function displayDetails(contact) {
       var y = contact_list.contacts.find(x => x.id === idNumber);
       console.log(contact_list.contacts);
       console.log(y);
+
       document.getElementById("company_name").value = y.companyName;
       document.getElementById("company_web").value = y.companyWeb;
       document.getElementById("company_address").value = y.companyAddress;
@@ -457,23 +411,15 @@ function displayDetails(contact) {
         y.tel = document.getElementById("tel").value;
         y.email = document.getElementById("email").value;
 
-        document.getElementById("company_name").value = "";
-        document.getElementById("company_web").value = "";
-        document.getElementById("company_address").value = "";
-        document.getElementById("first_name").value = "";
-        document.getElementById("last_name").value = "";
-        document.getElementById("tel").value = "";
-        document.getElementById("email").value = "";
-        //showDetails2(idNumber);
-        //displayDetails(contact);
         showDetails2(idNumber);
-        //edititem(idNumber);
+        edititem(idNumber);  //does not update
         addNewContact.style.display = "none";
         backBtn.style.display = "flex";
         removeBtn.style.display = "flex";
         editBtn.style.display = "flex";
         document.getElementById("contact-display-name").innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
         ref.innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
+        window.location.reload();   /// not sure is good here with reload
       });
       concelBtn.addEventListener("click", function(e) {
         addNewContact.style.display = "none";
@@ -481,6 +427,8 @@ function displayDetails(contact) {
         removeBtn.style.display = "flex";
         editBtn.style.display = "flex";
       });
+
+
     });
   }
 }
@@ -527,6 +475,15 @@ addBtn.addEventListener("click", function(e) {
   addNewContact.style.display = "inline";
   updateBtn.style.display = "none";
   confirmBtn.style.display = "inline";
+
+  document.getElementById("company_name").value = "";
+  document.getElementById("company_web").value = "";
+  document.getElementById("company_address").value = "";
+  document.getElementById("first_name").value = "";
+  document.getElementById("last_name").value = "";
+  document.getElementById("tel").value = "";
+  document.getElementById("email").value = "";
+
 });
 
 confirmBtn.addEventListener("click", function(e) {
@@ -540,7 +497,8 @@ confirmBtn.addEventListener("click", function(e) {
   addNewContact.style.display = "none";
   contact_list.addContact(company_name, company_web, company_address, first_name, last_name, tel, email);
   additem();
-
+  //location.reload(true);
+  window.location.reload();
 });
 concelBtn.addEventListener("click", function(e) {
   addNewContact.style.display = "none";
@@ -563,12 +521,7 @@ function compare(a, b) {
   return comparison;
 }
 
-// this function is to show details of contact on the contact-list, will call this function inside render()
-function showDetails(contactId) {
-  contact_list.render2(contactId);
-}
-
-///TRY NEW SHOWDETAILS here
+// this function is to show details of contact on the contact-list
 function showDetails2(contactId) {
   //  var contactInfoDisplay=document.getElementById("contact-details-display-info");
   contactInfoDisplay.innerHTML = "";
