@@ -149,3 +149,39 @@ $max-width: 500px;
     }
 }
 
+#addNewContact {
+    display: flex;
+    position: relative;
+    top: 5rem;
+    align-self: center;
+    flex-direction: column;
+    padding-left: 0.2rem;
+    padding-right: 0.5rem;
+    height: 60%;
+    width: 80%;
+    max-width: 300px;
+    max-height: 300px;
+    line-height: 2rem;
+    text-align: right;
+    background-color: $secondary-color;
+    border-radius: 3%;
+    label, input {
+        font-size: 0.8rem;
+    }
+    input {
+        width: 9rem;
+    }
+
+    button {
+        height: 2rem;   
+        border: none;
+        width: 4rem;
+        border-radius: 5%;
+        &:hover {
+            cursor: pointer;
+            background-color:  $primary-color;
+            color: $text-color;
+        }
+    }
+}
+

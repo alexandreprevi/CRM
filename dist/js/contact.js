@@ -567,6 +567,7 @@ addBtn.addEventListener("click", function(e) {
   addNewContact.style.display = "inline";
   updateBtn.style.display = "none";
   confirmBtn.style.display = "inline";
+  contactList.style.display = "none";
 
   document.getElementById("company_name").value = "";
   document.getElementById("company_web").value = "";
@@ -587,6 +588,7 @@ confirmBtn.addEventListener("click", function(e) {
   var tel = document.getElementById("tel").value;
   var email = document.getElementById("email").value;
   addNewContact.style.display = "none";
+  contactList.style.display = "flex";
   contact_list.addContact(company_name, company_web, company_address, first_name, last_name, tel, email);
   additem();
   //location.reload(true);
@@ -594,6 +596,7 @@ confirmBtn.addEventListener("click", function(e) {
 });
 concelBtn.addEventListener("click", function(e) {
   addNewContact.style.display = "none";
+  contactList.style.display = "flex";
 });
 
 });
