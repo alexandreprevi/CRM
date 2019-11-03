@@ -81,7 +81,7 @@ class Calendar {
         const eventList = document.getElementById("event-list");
         const row = document.createElement("row");
         row.id = event.id;
-        row.innerHTML = `${event.startTime} ${event.title} ${event.place} ${event.contact} <a class="delete-button">X</a></br>`;
+        row.innerHTML = `${event.startTime} ${event.title} ${event.place} ${event.contact} <i class="fas fa-edit edit-button"></i><i class="fas fa-trash-alt delete-button"></i></br>`;
         eventList.appendChild(row);
 
 
@@ -300,6 +300,7 @@ confirmAddEvent.addEventListener("click", function () {
 
 // Remove an event from the event-list
 document.getElementById("event-list").addEventListener("click", (e) => {
+    console.log(e.target);
     myCalendar.deleteEvent(e.target);
 });
 

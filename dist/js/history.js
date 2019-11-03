@@ -81,16 +81,25 @@ class Calendar {
 
     renderHistoric(){
         let date = new Date();
-        let today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+        let day = date.getDate().toString();
+        if (day.length == 1){
+            day = '0'+day;
+        }
+        console.log(day);
+
+        let today = `${date.getFullYear()}-${date.getMonth()+1}-${day}`;
 
         const previousEventsTable = document.getElementById("past-events-table");
         const upcomingEventsTable = document.getElementById("upcoming-events-table");
 
         if (myCalendar.events){
+            // SORT THE EVENTS BY DATE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             for (let event of myCalendar.events) {
                 let tr = document.createElement("tr");
-                tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.contact}</td>`;
+                tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.place}</td><td>${event.contact}</td>`;
                 event.date < today ?   previousEventsTable.appendChild(tr) : upcomingEventsTable.appendChild(tr);
+                console.log(today);
+                console.log(event.date);
             }
         }
         

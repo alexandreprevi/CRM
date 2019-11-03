@@ -45,6 +45,7 @@ $max-width: 500px;
         &-events {
             display: flex;
             flex-direction: column;
+            
 
             h3 {
                 padding-top: 0.5rem;
@@ -53,6 +54,7 @@ $max-width: 500px;
 
             p {
                 padding: 0.2rem;
+                font-size: 0.8rem;
             }
         }
     }
@@ -126,10 +128,19 @@ $max-width: 500px;
 }
 
 
-.delete-button{
-    color: red;
+.edit-button {
+    color: rgb(13, 150, 68);
     float: right;
-    margin-right: 20px;
+    margin-right: 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+.delete-button{
+    color: rgb(204, 22, 22);
+    float: right;
+    margin-right: 15px;
     text-decoration: none;
     font-weight: bold;
 
@@ -137,3 +148,4 @@ $max-width: 500px;
         cursor: pointer;
     }
 }
+

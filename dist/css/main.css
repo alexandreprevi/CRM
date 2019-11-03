@@ -71,6 +71,7 @@
 
 .modal-content-events p {
   padding: 0.2rem;
+  font-size: 0.8rem;
 }
 
 .modal-add {
@@ -163,10 +164,20 @@
   padding: 1rem 0;
 }
 
-.delete-button {
-  color: red;
+.edit-button {
+  color: #0d9644;
   float: right;
-  margin-right: 20px;
+  margin-right: 5px;
+}
+
+.edit-button:hover {
+  cursor: pointer;
+}
+
+.delete-button {
+  color: #cc1616;
+  float: right;
+  margin-right: 15px;
   text-decoration: none;
   font-weight: bold;
 }
@@ -574,23 +585,28 @@ tr:hover {
 }
 
 td:nth-child(1) {
-  width: 22%;
-  font-size: 0.8rem;
+  width: 18%;
+  font-size: 0.6rem;
 }
 
 td:nth-child(2) {
-  width: 8%;
-  font-size: 0.8rem;
+  width: 6%;
+  font-size: 0.6rem;
 }
 
 td:nth-child(3) {
-  width: 40%;
-  font-size: 0.8rem;
+  width: 28%;
+  font-size: 0.7rem;
 }
 
 td:nth-child(4) {
+  width: 28%;
+  font-size: 0.7rem;
+}
+
+td:nth-child(5) {
   width: 20%;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .contact-header {
@@ -675,6 +691,23 @@ td:nth-child(4) {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  height: 4.5rem;
+}
+
+.contact-details-header button {
+  margin-top: 0.2rem;
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
+  font-size: 0.7rem;
+  width: 5rem;
+  border: 1px solid #00b894;
+  border-radius: 5%;
+  background-color: #b2f8e4;
+  cursor: pointer;
+}
+
+.contact-details-header button:hover {
+  background-color: #6cf1cc;
 }
 
 .contact-details-name {
