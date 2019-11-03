@@ -471,6 +471,7 @@ function displayDetails(contact) {
 
 
     editBtn.addEventListener("click", function() {
+        console.log("edit")
       addNewContact.style.display = "flex";
       updateBtn.style.display = "inline";
       confirmBtn.style.display = "none";
@@ -490,6 +491,16 @@ function displayDetails(contact) {
       document.getElementById("tel").value = y.tel;
       document.getElementById("email").value = y.email;
 
+    });
+
+    concelBtn.addEventListener("click", function() {
+        console.log("cancel")
+        addNewContact.style.display = "none";
+        backBtn.style.display = "flex";
+        removeBtn.style.display = "flex";
+        editBtn.style.display = "flex";
+      });
+
       updateBtn.addEventListener("click", function() {
         y.companyName = document.getElementById("company_name").value;
         y.companyWeb = document.getElementById("company_web").value;
@@ -498,7 +509,8 @@ function displayDetails(contact) {
         y.lastName = document.getElementById("last_name").value;
         y.tel = document.getElementById("tel").value;
         y.email = document.getElementById("email").value;
-
+        console.log("update")
+        editContact(y.id);
         showDetails2(idNumber);
         edititem(idNumber);  //does not update
         addNewContact.style.display = "none";
@@ -508,18 +520,11 @@ function displayDetails(contact) {
         document.getElementById("contact-display-name").innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
         ref.innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
         //window.location.reload();   /// not sure is good here with reload
-      });
-      concelBtn.addEventListener("click", function(e) {
-        addNewContact.style.display = "none";
-        backBtn.style.display = "flex";
-        removeBtn.style.display = "flex";
-        editBtn.style.display = "flex";
-      });
-
-
-    });
+      }); 
   }
+ 
 }
+
 
 //======================
 backBtn.addEventListener("click", function () {
@@ -686,4 +691,23 @@ function search_contact() {
       x.children[i].style.display = "inline";
     }
 }
+}
+
+function editContact(id){   
+    $.ajax({
+  method: "POST",
+  url: "https://www.5daef5cbf2946f001481d066.mockapi.io/contacts/"+id,
+  data: {
+    companyName: document.getElementById("company_name").value,
+    companyWeb: document.getElementById("company_web").value,
+    companyAddress: document.getElementById("company_address").value,
+    firstName:document.getElementById("first_name").value,
+    lastName: document.getElementById("last_name").value,
+    tel:  document.getElementById("tel").value,
+    email: document.getElementById("email").value
+  }
+})
+  .done(function( msg ) {
+    console.log( msg );
+  });
 }
