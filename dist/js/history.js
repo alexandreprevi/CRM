@@ -71,7 +71,7 @@ class Calendar {
                 eventList.innerHTML = "";
             }
 
-             eventArray.forEach((event) => this.renderThisEvent(event));
+            eventArray.forEach((event) => this.renderThisEvent(event));
 
             /* for (let i = 0; i < eventArray.length; i++) {
                 eventList.innerHTML += eventArray[i].startTime + ": " + eventArray[i].title + "</br>";
@@ -79,53 +79,76 @@ class Calendar {
         }
     }
 
-    renderHistoric(){
+    renderHistoric() {
+        //
+        let sortedEvents = this.events.sort(this.sortHistoric);
+        //
         let date = new Date();
-        let today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+        let day = date.getDate().toString();
+        if (day.length == 1) {
+            day = '0' + day;
+        }
+
+        let today = `${date.getFullYear()}-${date.getMonth() + 1}-${day}`;
 
         const previousEventsTable = document.getElementById("past-events-table");
         const upcomingEventsTable = document.getElementById("upcoming-events-table");
 
-        if (myCalendar.events){
-            for (let event of myCalendar.events) {
+        if (myCalendar.events) {
+            // SORT THE EVENTS BY DATE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            for (let event of sortedEvents) {
                 let tr = document.createElement("tr");
-                tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.contact}</td>`;
-                event.date < today ?   previousEventsTable.appendChild(tr) : upcomingEventsTable.appendChild(tr);
+                tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.place}</td><td>${event.contact}</td>`;
+                event.date < today ? previousEventsTable.appendChild(tr) : upcomingEventsTable.appendChild(tr);
+
             }
         }
-        
+
+    }
+    sortHistoric(a, b) {
+        // Use toUpperCase() to ignore character casing
+        let eventA = (a.date);
+        let eventB = (b.date);
+        let comparison = 0;
+        if (eventA > eventB) {
+            comparison = 1;
+        } else if (eventA < eventB) {
+            comparison = -1;
+        }
+        return comparison;
     }
 
-    renderThisEvent(event){
+
+    renderThisEvent(event) {
         const eventList = document.getElementById("event-list");
-        
+
         const row = document.createElement("row");
         row.id = event.id;
         row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
         eventList.appendChild(row);
-    
+
 
     }
 
-    deleteEvent(el){
-        if (el.classList.contains("delete-button")){
+    deleteEvent(el) {
+        if (el.classList.contains("delete-button")) {
 
             // Remove event from the list
             let confirm = window.confirm("Are you sure you want to delete this event?");
 
-            if (confirm == true){
+            if (confirm == true) {
                 el.parentElement.remove();
-                
+
                 // remove event from myCalendar.events after confirmation alert
                 myCalendar.events.forEach((event) => {
-                    if (el.parentElement.id == event.id){
+                    if (el.parentElement.id == event.id) {
                         // remove the event from the calender.event array with the id of the event
-                        let eventToRemove = myCalendar.events.map(function(item) {return item.id}).indexOf(event.id);
+                        let eventToRemove = myCalendar.events.map(function (item) { return item.id }).indexOf(event.id);
                         myCalendar.events.splice(eventToRemove, 1);
                     }
                 })
             }
-            
+
         }
     }
 
@@ -146,7 +169,7 @@ class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.contact = contact;
-        this.id = date.replace(/-/g,"")+startTime.replace(":","");
+        this.id = date.replace(/-/g, "") + startTime.replace(":", "");
     }
 }
 
@@ -154,13 +177,13 @@ class Event {
 
 let myCalendar = new Calendar();
 
-$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function(data){
-    for (let event of data){
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function (data) {
+    for (let event of data) {
         myCalendar.events.push(event);
-    } 
+    }
     myCalendar.renderHistoric();
 });
-    
+
 
 //////////////////////////////////////////////////////////
 
@@ -173,13 +196,13 @@ function filter() {
     let eventsInPreviousEventsTable = previousEventsTable.getElementsByTagName("tr");
     let eventsInUpcomingEventsTable = upcomingEventsTable.getElementsByTagName("tr");
 
-    for (let i = 0; i <eventsInPreviousEventsTable.length; i++){
+    for (let i = 0; i < eventsInPreviousEventsTable.length; i++) {
         let event = eventsInPreviousEventsTable[i];
-    
+
         if (event) {
-            
+
             txtValue = event.textContent || event.innerText;
-        
+
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 eventsInPreviousEventsTable[i].style.display = "";
             } else {
@@ -188,11 +211,11 @@ function filter() {
         }
     }
 
-    for (let i = 0; i <eventsInUpcomingEventsTable.length; i++){
+    for (let i = 0; i < eventsInUpcomingEventsTable.length; i++) {
         let event = eventsInUpcomingEventsTable[i];
-        
+
         if (event) {
-            
+
             txtValue = event.textContent || event.innerText;
 
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -211,8 +234,8 @@ let upcomingEvents = document.getElementById("upcoming-events");
 previousEvents.style.display = "flex";
 upcomingEvents.style.display = "flex";
 
-previousEvents.addEventListener("click", function(){
-  /*   upcomingEvents.style.display == "flex" ? upcomingEvents.style.display = "none" : upcomingEvents.style.display = "flex"; */
+previousEvents.addEventListener("click", function () {
+    /*   upcomingEvents.style.display == "flex" ? upcomingEvents.style.display = "none" : upcomingEvents.style.display = "flex"; */
     if (upcomingEvents.style.display == "flex") {
         upcomingEvents.style.display = "none";
         previousEvents.style.height = "90%";
@@ -226,13 +249,13 @@ previousEvents.addEventListener("click", function(){
     previousEvents.style.display == "flex" ? previousEvents.style.display = "none" : previousEvents.style.display = "flex";
 }) */
 
-upcomingEvents.addEventListener("click", function(){
+upcomingEvents.addEventListener("click", function () {
     /*   upcomingEvents.style.display == "flex" ? upcomingEvents.style.display = "none" : upcomingEvents.style.display = "flex"; */
-      if (previousEvents.style.display == "flex") {
-          previousEvents.style.display = "none";
-          upcomingEvents.style.height = "90%";
-      } else {
-          previousEvents.style.display = "flex";
-          upcomingEvents.style.height = "45%";
-      }
-  });
+    if (previousEvents.style.display == "flex") {
+        previousEvents.style.display = "none";
+        upcomingEvents.style.height = "90%";
+    } else {
+        previousEvents.style.display = "flex";
+        upcomingEvents.style.height = "45%";
+    }
+});

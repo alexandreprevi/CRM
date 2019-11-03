@@ -134,9 +134,6 @@ function content( ) {
 			listitem.appendChild(checkbox);
 			todolist.appendChild(listitem);
 
-			additem(document.getElementById("text2todolist").value);
-
-			
 			localStorage.setItem(todolist.children.length, inputfromhtml.value)
 			inputfromhtml.value = "";
 		} else if (inputfromhtml.value == "" && event.target.textContent == "add") {

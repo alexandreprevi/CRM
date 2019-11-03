@@ -39,28 +39,29 @@
                 <div id="addNewContact">
                  <form class="" action="index.html" method="post">
                    <label for="">Company Name:</label>
-                   <input id="company_name" type="text" name="" value="">
+                   <input id="company_name" type="text" name="Company Name" value="">
                    <br>
                    <label for="">Company Website:</label>
-                   <input id="company_web" type="url" name="" value="">
+                   <input id="company_web" type="url" name="Company Website" value="">
                    <br>
                    <label for="">Company Address: </label>
-                   <input id="company_address" type="text" name="" value="">
+                   <input id="company_address" type="text" name="Company Address" value="">
                    <br>
                    <label for="">First Name:</label>
-                   <input id="first_name" type="text" name="" value="">
+                   <input id="first_name" type="text" name="First Name" value="">
                    <br>
                    <label for="">Last Name:</label>
-                   <input id="last_name" type="text" name="" value="">
+                   <input id="last_name" type="text" name="Last Name" value="">
                    <br>
                    <label for="">PhoneNumber: </label>
-                   <input id="tel" type="text" name="" value="">
+                   <input id="tel" type="text" name="PhoneNumber" value="">
                    <br>
                    <label for="">Email: </label>
-                   <input id="email" type="email" name="" value="">
+                   <input id="email" type="email" name="Email" value="">
                    <br>
                    <button id="btn_addContact_confirm" type="button" name="button">Confirm</button>
-                   <button id="btn_addContact_cancel" type="button" name="button">Concel</button>
+                    <button id="btn_addContact_update" type="button" name="button">Update</button>
+                   <button id="btn_addContact_cancel" type="button" name="button">Cancel</button>
                    </form>
                 </div>
 
@@ -68,27 +69,21 @@
 
 
             <div class="contact-list" id="contact-list">
-                <p class="contact-name">A</p>
-                <p class="contact-name">B</p>
-                <p class="contact-name">C</p>
-                <p class="contact-name">D</p>
-                <p class="contact-name">E</p>
-                <p class="contact-name">A</p>
-                <p class="contact-name">B</p>
+
             </div>
 
 
             <div class="contact-details" id="contact-details">
                     <div class="contact-details-header">
-                        <button id="contact-back-button">Back</button>
-                        <button id="contact-remove-button">Remove</button>
+                        <button id="contact-back-button"><i class="fas fa-chevron-left"></i>Contacts</button>
+                        <button id="contact-remove-button"><i class="fas fa-trash-alt"></i></button>
                         <button id="contact-edit-button">Edit</button>
                     </div>
                     <div class="contact-details-name">
                         <p id="contact-display-name">Name here</p>
                     </div>
                     <div class="contact-details-buttons">
-                        <button id="contact-info-button">INFO</button>
+                        <button id="contact-info-button" class="active">INFO</button>
                         <button id="contact-events-button">EVENTS</button>
                         <button id="contact-notes-button">NOTES</button>
                     </div>
@@ -111,7 +106,6 @@
             <a href="index.html"><i class="fas fa-home"></i></a>
             <a href="contact.html" class="active"><i class="fas fa-address-book"></i></a>
             <a href="calendar.html"><i class="fas fa-calendar-alt"></i></a>
-            <a href="todo.html"><i class="fas fa-sticky-note"></i></a>
             <a href="history.html"><i class="fas fa-history"></i></a>
         </div>
     </div>

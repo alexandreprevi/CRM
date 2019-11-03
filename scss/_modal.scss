@@ -1,7 +1,5 @@
-$primary-color: #8c4907;
-$secondary-color: #f27e0c;
-$text-color: #fff;
-$max-width: 500px;
+@import 'variables';
+
 
 .modal{
     display: none;
@@ -11,7 +9,7 @@ $max-width: 500px;
     z-index: 1;
     width: 100%;
     height: 100%;
-    max-width: 500px;
+    max-width: $max-width;
     overflow: scroll;
     background-color: rgba(0, 0, 0, 0.5);
     
@@ -23,7 +21,7 @@ $max-width: 500px;
         justify-content: space-between;
         background-color: #fff;
         border: 1px solid $primary-color;
-        width: 250px;
+        width: 350px;
         height: 300px;
         border-radius: 5px;
         padding: 0.3rem 0.5rem;
@@ -47,6 +45,7 @@ $max-width: 500px;
         &-events {
             display: flex;
             flex-direction: column;
+            
 
             h3 {
                 padding-top: 0.5rem;
@@ -55,6 +54,7 @@ $max-width: 500px;
 
             p {
                 padding: 0.2rem;
+                font-size: 0.8rem;
             }
         }
     }
@@ -128,10 +128,19 @@ $max-width: 500px;
 }
 
 
-.delete-button{
-    color: red;
+.edit-button {
+    color: rgb(13, 150, 68);
     float: right;
-    margin-right: 20px;
+    margin-right: 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+.delete-button{
+    color: rgb(204, 22, 22);
+    float: right;
+    margin-right: 15px;
     text-decoration: none;
     font-weight: bold;
 
@@ -139,3 +148,40 @@ $max-width: 500px;
         cursor: pointer;
     }
 }
+
+#addNewContact {
+    display: flex;
+    position: relative;
+    top: 5rem;
+    align-self: center;
+    flex-direction: column;
+    padding-left: 0.2rem;
+    padding-right: 0.5rem;
+    height: 60%;
+    width: 80%;
+    max-width: 300px;
+    max-height: 300px;
+    line-height: 2rem;
+    text-align: right;
+    background-color: $secondary-color;
+    border-radius: 3%;
+    label, input {
+        font-size: 0.8rem;
+    }
+    input {
+        width: 9rem;
+    }
+
+    button {
+        height: 2rem;   
+        border: none;
+        width: 4rem;
+        border-radius: 5%;
+        &:hover {
+            cursor: pointer;
+            background-color:  $primary-color;
+            color: $text-color;
+        }
+    }
+}
+
