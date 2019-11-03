@@ -1,5 +1,5 @@
 @import 'variables';
-$max-width: 500px;
+
 
 .modal{
     display: none;
@@ -9,7 +9,7 @@ $max-width: 500px;
     z-index: 1;
     width: 100%;
     height: 100%;
-    max-width: 500px;
+    max-width: $max-width;
     overflow: scroll;
     background-color: rgba(0, 0, 0, 0.5);
     

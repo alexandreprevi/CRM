@@ -6,7 +6,7 @@
     flex-direction: column;
     margin: 0;
     width: 100%;
-    max-width: 500px;
+    max-width: $max-width;
     height: 70%;
     background-color: #fff;
 }
@@ -36,6 +36,7 @@ tr:nth-child(even) {
     flex-wrap: wrap;
     font-weight: 300;
     padding: 0.3rem 0;
+    height: 100%;
 }
 
 .days div{
