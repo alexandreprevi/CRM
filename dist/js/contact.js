@@ -315,7 +315,7 @@ function additem() {
     })
     .done(function(msg) {
       console.log(msg);
-    });
+    }); 
 }
 
 function deleteitem(id) {

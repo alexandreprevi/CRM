@@ -12,7 +12,7 @@ class Calendar {
         let day = date.getDay();
         let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
-        
+
         let today = new Date();
 
         document.getElementById("month").innerHTML = months[date.getMonth()];
@@ -26,7 +26,7 @@ class Calendar {
 
         // Create one div for each day, fyller kalender med 
         for (let i = 1; i <= endDate; i++) {
-            
+
             if (i == today.getDate() && date.getMonth() == today.getMonth()) {
 
                 i = i.toString();
@@ -72,12 +72,12 @@ class Calendar {
                 eventList.innerHTML = "";
             }
 
-             eventArray.forEach((event) => this.renderThisEvent(event));
+            eventArray.forEach((event) => this.renderThisEvent(event));
         }
     }
 
 
-    renderThisEvent(event){
+    renderThisEvent(event) {
         const eventList = document.getElementById("event-list");
         const row = document.createElement("row");
         row.id = event.id;
@@ -87,23 +87,23 @@ class Calendar {
 
     }
 
-    deleteEvent(el){
-        if (el.classList.contains("delete-button")){
+    deleteEvent(el) {
+        if (el.classList.contains("delete-button")) {
             console.log(el.parentElement.id);
             // Remove event from the list
             let confirm = window.confirm("Are you sure you want to delete this event?");
 
-            if (confirm == true){
+            if (confirm == true) {
                 el.parentElement.remove();
-                
+
                 // remove event from myCalendar.events after confirmation alert
                 myCalendar.events.forEach((event) => {
-                    if (el.parentElement.id == event.id){
+                    if (el.parentElement.id == event.id) {
                         // remove the event from the calender.event array with the id of the event
-                        let eventToRemove = myCalendar.events.map(function(item) {return item.id}).indexOf(event.id);
+                        let eventToRemove = myCalendar.events.map(function (item) { return item.id }).indexOf(event.id);
                         myCalendar.events.splice(eventToRemove, 1);
                     }
-                }) 
+                })
 
 
                 //////////////////////////// HOW TO GET TO DELETE JUST ONE SPECIFIC OBJECT ?????
@@ -115,7 +115,7 @@ class Calendar {
                         console.log(msg);
                     });
             }
-            
+
         }
     }
 
@@ -125,19 +125,60 @@ class Calendar {
         $.ajax({
             method: "POST",
             url: "http://5daef5cbf2946f001481d066.mockapi.io/events",
-            data: { title: title_add.value, 
-                    place: place_add.value, 
-                    date: date_add.value, 
-                    startTime: startTime_add.value, 
-                    endTime: endTime_add.value, 
-                    contact: contact_add.value, 
-                    id: date_add.value + startTime_add.value}
+            data: {
+                title: title_add.value,
+                place: place_add.value,
+                date: date_add.value,
+                startTime: startTime_add.value,
+                endTime: endTime_add.value,
+                contact: contact_add.value,
+                id: date_add.value + startTime_add.value
+            }
         })
             .done(function (msg) {
                 console.log(msg);
                 //////////////////////////////////////////////////////////////////////////////////////// ???????
                 window.location.reload();
             });
+    }
+
+    editEvent(el) {
+
+        if (el.classList.contains("edit-button")) {
+
+            modalAdd.style.display = "flex";
+            modalAdd.classList.add('open');
+            editContact.style.display = "flex";
+            confirmAddEvent.style.display = "none";
+            
+            editContact.addEventListener("click", function () {
+                modalAdd.style.display = "none";
+                modalAdd.classList.remove('open');
+
+                $.ajax({
+                    method: "PUT",
+                    url: `http://5daef5cbf2946f001481d066.mockapi.io/events/${el.parentElement.id}`,
+                    data: {
+                        title: title_add.value,
+                        place: place_add.value,
+                        date: date_add.value,
+                        startTime: startTime_add.value,
+                        endTime: endTime_add.value,
+                        contact: contact_add.value,
+                        id: date_add.value + startTime_add.value
+                    }
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                        //////////////////////////////////////////////////////////////////////////////////////// ???????
+                        window.location.reload();
+                    });
+
+
+            });
+
+
+        }
     }
 }
 
@@ -150,53 +191,53 @@ class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.contact = contact;
-        this.id = date.replace(/-/g,"")+startTime.replace(":","");
+        this.id = date.replace(/-/g, "") + startTime.replace(":", "");
     }
 
 }
 
 class ContactList {
     constructor() {
-      this.contacts = [];
-      this.contactDetails = [];
-      this.contact_id = 0;
-    }  
-  
+        this.contacts = [];
+        this.contactDetails = [];
+        this.contact_id = 0;
+    }
+
     // fill contact list to contact area
     renderDropDown() {
-      let selectContactDropDown = document.getElementById("contact-add");
-      let sortedcontactlist = this.contacts.sort(compare);
-    
-      for (let contact of sortedcontactlist) {
-          let currentContact = contact.firstName+" "+contact.lastName;
-          selectContactDropDown.add(new Option(currentContact));
-      }
-  
+        let selectContactDropDown = document.getElementById("contact-add");
+        let sortedcontactlist = this.contacts.sort(compare);
+
+        for (let contact of sortedcontactlist) {
+            let currentContact = contact.firstName + " " + contact.lastName;
+            selectContactDropDown.add(new Option(currentContact));
+        }
+
     }
 }
 
 // this function is to sort contact list alphabetically, will call this function inside render();
 function compare(a, b) {
     // Use toUpperCase() to ignore character casing
-    const companyA = (a.companyName.toUpperCase()+" - "+a.firstName.toUpperCase() +a.lastName.toUpperCase());
-    const companyB = (b.companyName.toUpperCase()+" - "+b.firstName.toUpperCase() +b.lastName.toUpperCase());
+    const companyA = (a.companyName.toUpperCase() + " - " + a.firstName.toUpperCase() + a.lastName.toUpperCase());
+    const companyB = (b.companyName.toUpperCase() + " - " + b.firstName.toUpperCase() + b.lastName.toUpperCase());
     let comparison = 0;
     if (companyA > companyB) {
-      comparison = 1;
+        comparison = 1;
     } else if (companyA < companyB) {
-      comparison = -1;
+        comparison = -1;
     }
     return comparison;
-  }
+}
 
 // IMPORT CLIENT LIST FROM MOCK API //////////////////////////
 let contact_list = new ContactList();
 
-$.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data){
-   for (let contact of data){
-       contact_list.contacts.push(contact);
-   }
-   contact_list.renderDropDown();
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function (data) {
+    for (let contact of data) {
+        contact_list.contacts.push(contact);
+    }
+    contact_list.renderDropDown();
 });
 
 // IMPORT DATA FROM MOCK API /////////////////////////////////
@@ -204,16 +245,16 @@ $.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data){
 let myCalendar = new Calendar();
 
 
-$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function(data){
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function (data) {
     console.log(data);
-    for (let event of data){
+    for (let event of data) {
         myCalendar.events.push(event);
-    } 
+    }
     myCalendar.renderDate();
 });
 
 
-    
+
 ///////////////////////////////////////////////////////////////
 
 
@@ -251,12 +292,15 @@ let date_add = document.getElementById("date-add");
 let startTime_add = document.getElementById("start-time-add");
 let endTime_add = document.getElementById("end-time-add");
 let contact_add = document.getElementById("contact-add");
+let editContact = document.getElementById("edit-add-event-button");
+
+editContact.style.display = "none";
 
 // Event listener on days
 days.addEventListener("click", function (dayPressed) {
-    
+
     // display modal if clicked on day div
-     dayPressed.target.classList.contains("days") ? modal.style.display = "none" : modal.style.display = "flex";
+    dayPressed.target.classList.contains("days") ? modal.style.display = "none" : modal.style.display = "flex";
 
     // get date clicked
     let dateModal = document.getElementById("modal-date");
@@ -268,7 +312,7 @@ days.addEventListener("click", function (dayPressed) {
     dateModal.innerHTML = dayPressed.target.innerHTML + " " + currentMonth.substring(0, 3);
 
     // display the events of this day
-    myCalendar.renderEventList(); 
+    myCalendar.renderEventList();
 });
 
 window.addEventListener("click", function (event) {
@@ -294,7 +338,7 @@ cancelButton.addEventListener("click", function () {
 confirmAddEvent.addEventListener("click", function () {
     modalAdd.style.display = "none";
     modalAdd.classList.remove('open');
-    
+
     myCalendar.getInputsEvent();
 });
 
@@ -302,7 +346,10 @@ confirmAddEvent.addEventListener("click", function () {
 document.getElementById("event-list").addEventListener("click", (e) => {
     console.log(e.target);
     myCalendar.deleteEvent(e.target);
+    myCalendar.editEvent(e.target);
 });
+
+
 
 // Move the previous or next month on the calendar
 function moveDate(para) {

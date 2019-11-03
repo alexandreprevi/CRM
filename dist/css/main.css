@@ -136,6 +136,15 @@
   cursor: pointer;
 }
 
+.modal-add-header p:nth-child(3) {
+  color: rgba(7, 204, 7, 0.7);
+}
+
+.modal-add-header p:nth-child(3):hover {
+  color: #07cc07;
+  cursor: pointer;
+}
+
 .modal-add-form {
   display: -webkit-box;
   display: -ms-flexbox;

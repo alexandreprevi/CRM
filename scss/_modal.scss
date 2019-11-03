@@ -108,6 +108,14 @@
                     cursor: pointer;
                 }
             }
+            &:nth-child(3) {
+                color: rgba(7, 204, 7, 0.7); 
+    
+                &:hover {
+                    color: rgba(7, 204, 7, 1);
+                    cursor: pointer;
+                }
+            }
         }
     }
 
