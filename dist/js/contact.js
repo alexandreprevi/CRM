@@ -178,7 +178,7 @@ class ContactList {
       var contactName = document.createElement("p");
       contactName.id = "contact-name-" + currentContact.id;
       contactName.className = "contact-name";
-      contactName.innerHTML = currentContact.companyName + " - " + currentContact.firstName + " " + currentContact.lastName;
+      contactName.innerHTML = currentContact.companyName + " - " + "<span>" + currentContact.firstName + " " + currentContact.lastName + "</span>";
       contactList.appendChild(contactName);
     }
   }
@@ -460,8 +460,13 @@ function displayDetails(contact) {
       contactHeader.style.display = "flex";
       contactDetails.style.display = "none";
 
-      ref.remove();
-      deleteitem(idNumber);
+      let confirm = window.confirm("Are you sure you want to delete this contact?");
+
+            if (confirm == true){
+              ref.remove();
+              deleteitem(idNumber);
+            }
+
     });
 
 

@@ -640,7 +640,7 @@ td:nth-child(4) {
 }
 
 .contact-list p span {
-  color: #06ffce;
+  color: #00b894;
   font-style: italic;
   font-size: 0.8rem;
   margin-left: 0.2rem;
@@ -702,7 +702,7 @@ td:nth-child(4) {
   border: none;
   width: 4rem;
   border-radius: 5%;
-  background-color: #f8fefd;
+  background-color: #cafaec;
 }
 
 .contact-details-buttons button:hover {
@@ -715,11 +715,12 @@ td:nth-child(4) {
   height: 100%;
   line-height: 2rem;
   font-size: 0.9rem;
+  padding-left: 0.3rem;
 }
 
 .contact-details-display span {
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 550;
 }
 
