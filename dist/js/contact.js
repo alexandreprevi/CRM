@@ -328,7 +328,7 @@ function deleteitem(id) {
     });
 }
 
-///// not correct?????==========
+///// = correct========
 function edititem(id) {
   $.ajax({
     
