@@ -150,10 +150,22 @@ class Calendar {
             modalAdd.classList.add('open');
             editContact.style.display = "flex";
             confirmAddEvent.style.display = "none";
-            
+/*             console.log(el.parentElement);
+             // GET INPUTS
+             document.getElementById("title-add").value;
+             document.getElementById("place-add").value;
+             document.getElementById("date-add").value;
+             document.getElementById("start-time-add").value;
+             document.getElementById("end-time-add").value;
+             document.getElementById("contact-add").value;
+             document.getElementById("edit-add-event-button").value;
+ */
             editContact.addEventListener("click", function () {
                 modalAdd.style.display = "none";
                 modalAdd.classList.remove('open');
+
+
+               
 
                 $.ajax({
                     method: "PUT",
