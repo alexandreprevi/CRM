@@ -348,7 +348,7 @@ class ContactList {
       contactDiv.appendChild(lastName);
       contactDiv.appendChild(tel);
       contactDiv.appendChild(email);
-
+      
       contactDetailsDisplayInfo.appendChild(contactDiv);
 
       // PRINT EVENTS FOR THIS CONTACT
@@ -394,7 +394,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var email = document.getElementById("email").value;
     addNewContact.style.display = "none";
     contact_list.addContact(company_name, company_web, company_address, first_name, last_name, tel, email);
+    $.get("https://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data){
+   for (let contact of data){
+       if(company_name == contact.companyName && first_name == contact.firstName ){
+        editContact(contact.id)
+       } else {
     additem();
+    }
+    }
   });
   document.getElementById("btn_addContact_cancel").addEventListener("click", function(e) {
     addNewContact.style.display = "none";
@@ -402,7 +409,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 // MockiAPI
-$.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data){
+$.get("https://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data){
    for (let contact of data){
        contact_list.contacts.push(contact);
    }
@@ -412,7 +419,7 @@ $.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data){
 function additem(){
     $.ajax({
   method: "POST",
-  url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts",
+  url: "https://5daef5cbf2946f001481d066.mockapi.io/contacts",
   data: {
   companyName: document.getElementById("company_name").value,
   companyWeb: document.getElementById("company_web").value,
@@ -465,3 +472,4 @@ function search_contact() {
         }
     }
 }
+

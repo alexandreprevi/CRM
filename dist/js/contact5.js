@@ -62,7 +62,6 @@ class ContactList {
 
     var newContactDiv = document.createElement("div");
     newContactDiv.id = "newContact-" + contact_index;
-
     var contactPageDiv = document.createElement("div");
     contactPageDiv.id = "contactPage-" + contact_index;
     var new_companyName = document.createElement("p");
@@ -77,7 +76,7 @@ class ContactList {
     new_personTel.id = "new_personTel-" + contact_index;
     var new_personEmail = document.createElement("p");
     new_personEmail.id = "new_personEmail-" + contact_index;
-    // del 3/3: fel info matas in !
+
     new_companyName.innerHTML = "Company Name: " + this.contacts[contact_index].companyName;
     new_companyWeb.innerHTML = "Company Website: " + this.contacts[contact_index].companyWeb;
     new_companyAddress.innerHTML = "Company Address: " + this.contacts[contact_index].companyAddress;
@@ -92,6 +91,7 @@ class ContactList {
     newContactDiv.appendChild(new_personTel);
     newContactDiv.appendChild(new_companyAddress);
     newContactDiv.appendChild(new_personEmail);
+    
 
     contact_page.appendChild(newContactDiv);
   }
@@ -111,6 +111,7 @@ class ContactItem {
 
 function showDetails(contactId) {
   console.log("in it: " + contactId);
+  
   contact_list.render2(contactId);
 }
 

@@ -8,37 +8,38 @@ class Calendar {
         let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         let prevDate = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
         let nextDate = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
-        let today = new Date();
 
+		
+		
         let cells = "";
-        let woho = 1;
-        for(let hehe = 3; hehe > 0; hehe--){
-            if(today.getDate() - hehe > 0){
+        let beyondthismonth = 0;
+        for(let helper = 3; helper > 0; helper--){
+            if(today.getDate() - helper > 0){
                 
-                let collect = String(today.getDate() - hehe);
+                let collect = String(today.getDate() - helper);
 
                 cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-            } else if(today.getDate() - hehe <= 0){
+            } else if(today.getDate() - helper <= 0){
                 
-                let collect = String(prevDate - prevDate + woho);
+                let collect = String( prevDate- beyondthismonth);
                 cells += `<div class="day prev-month ${date.getFullYear()}-${date.getMonth()}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
 
-                woho++;
+                beyondthismonth++;
             }
 
         }
-        cells += `<div class="day selected current-month ${date.getFullYear()}-${date.getMonth() + 1}-${(today.getDate()).length == 1 ? '0' + (today.getDate()) : today.getDate()}">${today.getDate()}<span class=''></span></div>`;
+        cells += `<div class="day current-month selected ${date.getFullYear()}-${date.getMonth() + 1}-${todaysdate}">${today.getDate()}<span class=''></span></div>`;
         
-        for(let hehe = 1; hehe < 4; hehe++){
-            if(today.getDate() + hehe <= endDate){
+        for(let helper = 1; helper < 4; helper++){
+            if(today.getDate() + helper <= endDate){
                 
-                let collect = String(today.getDate()+hehe);
+                let collect = String(today.getDate()+helper);
                 cells += `<div class="day current-month ${date.getFullYear()}-${date.getMonth() + 1}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-            } else if(today.getDate() + hehe > endDate){
+            } else if(today.getDate() + helper > endDate){
                 
-                let collect = String(nextDate - nextDate + woho);
+                let collect = String(nextDate - nextDate + beyondthismonth);
                 cells += `<div class="day next-month ${date.getFullYear()}-${date.getMonth() + 2}-${collect.length == 1 ? '0' + collect : collect}">${collect}<span class=''></span></div>`;
-                woho++;
+                beyondthismonth++;
             }
         }
 
@@ -66,7 +67,7 @@ class Calendar {
 }
 
 document.addEventListener("click", clickrelated)
-
+// handles to-do list, striike and delete
 function clickrelated(event) {
 
 	if (event.target.value != null) {
@@ -82,11 +83,11 @@ function clickrelated(event) {
 			
 			if (todolist.children[li].children[0].checked) {
 
-				let thetarget = document.getElementById("item" + li);
+				let thetarget = document.getElementById(li+1);
 				thetarget.style.setProperty("text-decoration", "line-through");
 
 			} else {
-				let thetarget = document.getElementById("item" + li);
+				let thetarget = document.getElementById(li+1);
 				thetarget.style.setProperty("text-decoration", "none"); 
 			}
 		}
@@ -99,13 +100,15 @@ function clickrelated(event) {
 
 			if(todolist.children[filter] == event.target){
 				todolist.removeChild(todolist.children[filter]);
+				
+				localStorage.removeItem(event.target.id);
 			}
 		}
 	}
 }
 
 document.addEventListener("DOMContentLoaded", content)
-
+// adds content to list
 function content( ) {
 		
 		let button = document.querySelectorAll("a");
@@ -121,16 +124,20 @@ function content( ) {
 
 			let inputfromhtml = document.getElementById("text2todolist");
 
-
 			let checkbox = document.createElement("input");
 			checkbox.setAttribute("type", "checkbox");
-			checkbox.setAttribute("value", "item" + todolist.children.length);
+			checkbox.setAttribute("value", Number(todolist.children.length)+1);
 			let listitem = document.createElement("li");
-			listitem.setAttribute("id", "item" + todolist.children.length);
+			listitem.setAttribute("id", Number(todolist.children.length)+1);
 
 			listitem.textContent = inputfromhtml.value + " [X]";
 			listitem.appendChild(checkbox);
 			todolist.appendChild(listitem);
+
+			additem(document.getElementById("text2todolist").value);
+
+			
+			localStorage.setItem(todolist.children.length, inputfromhtml.value)
 			inputfromhtml.value = "";
 		} else if (inputfromhtml.value == "" && event.target.textContent == "add") {
 			alert("Add a comment, por favor");
@@ -187,44 +194,77 @@ function popup(message) {
 	$('#dialog-message').html(message);
 
 }
+// handles events, notifications and to-dolist
+async function fetchitems(filter){
 
-async function fetchitem(filter){
+	let eventresponse = await fetch('https://www.5daef5cbf2946f001481d066.mockapi.io/events');
+	let eventJson = await eventresponse.json();
+ 	
+	var myevents = [];
 	
-	let response = await fetch('https://www.5daef5cbf2946f001481d066.mockapi.io/events');
-	let myJson = await response.json();
-	var collect = [];
+	var savedata = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+    while ( i-- ) {
+        savedata.push( localStorage.getItem(keys[i]) );
+	}
+	localStorage.clear();
 
 	var longintervals = [];
 	let formatted = today.getFullYear()+"-";
 	let month = today.getMonth()+1;
-
+	
 	if(month.length == 1){
 		formatted += 0 + month;
 	} else {
 		formatted += month;
 	}
-	formatted += "-"+ today.getDate();
-	
-	for(let a of myJson){
-
-		let collectdays = contactInterval(a.date);
-		if(collectdays >= 20 || collectdays <= -20){
-			longintervals.push("You have not been in touch with " + a.contact + " for " + collectdays + " days!");
+	formatted += "-"+ todaysdate;
+	let peeps = {};
+	// Filters events shown and fills an object for notfications
+	for(let a of eventJson){
+		if(contactInterval(a.date)<peeps[a.contact] || peeps[a.contact] == null){
+		peeps[a.contact] = contactInterval(a.date);
 		}
+		let collectdays = contactInterval(a.date);
+		
 	  if(filter != null){
 		if(filter.contains(a.date))
-		collect.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
+		myevents.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
 	  } else {
 		if(formatted == a.date)
-	  collect.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
+	  		myevents.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
 	}
-}
-	
-	collect.sort();
-	document.getElementById("notifications").value = longintervals.join("\n");
-	events.value = collect.join("\n");
-}
+	}
+	// Filters what to show in notifications
+	for(let prop in peeps){
+		
+		if(peeps[prop] >= 20){
+			longintervals.push("You have not contacted " + prop + " for " + peeps[prop] +" days!");
+		}
+	}
 
+	for(let add = 0; add<savedata.length; add++){
+		
+			let checkbox = document.createElement("input");
+			checkbox.setAttribute("type", "checkbox");
+			checkbox.setAttribute("value", Number(todolist.children.length)+1);
+			let listitem = document.createElement("li");
+			listitem.setAttribute("id", Number(todolist.children.length)+1);
+
+			listitem.textContent = savedata[add] + " [X]";
+			listitem.appendChild(checkbox);
+			todolist.appendChild(listitem);
+
+			localStorage.setItem(add+1, savedata[add])
+	}
+	
+	myevents.sort();
+	document.getElementById("notifications").value = longintervals.join("\n");
+	events.value = myevents.join("\n");
+}
+// Function to show how many days are left or passed since contact
 function contactInterval(datecontacted){
 	let year = datecontacted.substring(0,4);
 	let month = datecontacted.substring(5, 7);
@@ -234,16 +274,18 @@ function contactInterval(datecontacted){
 	let time = today - testdate;
 	let time2days = time /(1000 * 60 * 60 * 24);
 	if (time2days < 0){
-		time2days/-1;
+		time2days = time2days/-1;
 	}
 	return Math.round(time2days);
 }
 
 let events = document.getElementById("events");
 let today = new Date();
-
-
-fetchitem();
+let todaysdate = String(today.getDate()); 
+		if(todaysdate.length==1){
+			todaysdate = "0"+ String(today.getDate()); 
+		}
+let todolist = document.getElementById("todolist");
 
 let myCalendar = new Calendar();
 let date = new Date();
@@ -264,13 +306,13 @@ let months = [
 ];
 
 myCalendar.renderWeek();
-let todolist = document.getElementById("todolist");
+fetchitems();
 
 let days = document.getElementById("aWeek");
 let daysDisplayed = document.getElementsByClassName("day");
 
 days.addEventListener("click", function (e) {
-	fetchitem(event.target.classList);
+	fetchitems(event.target.classList);
 	
 	for (day of daysDisplayed) {
 		day.classList.remove("selected");
