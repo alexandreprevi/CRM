@@ -331,8 +331,8 @@ function deleteitem(id) {
 ///// not correct?????==========
 function edititem(id) {
   $.ajax({
-    //method: "PUT",
-    method: "POST",
+    
+    method: "PUT",
     url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts/" + id,
     data: {
       companyName: document.getElementById("company_name").value,
@@ -468,7 +468,7 @@ function displayDetails(contact) {
             }
 
     });
-
+    var y = contact_list.contacts.find(x => x.id === idNumber);
 
     editBtn.addEventListener("click", function() {
         console.log("edit")
@@ -478,8 +478,9 @@ function displayDetails(contact) {
       backBtn.style.display = "none";
       removeBtn.style.display = "none";
       editBtn.style.display = "none";
-
-      var y = contact_list.contacts.find(x => x.id === idNumber);
+        document.getElementById("contact-display-name").style.display = "none";
+        document.getElementById("contact-details").style.display= "none";
+     
       console.log(contact_list.contacts);
       console.log(y);
 
@@ -502,6 +503,7 @@ function displayDetails(contact) {
       });
 
       updateBtn.addEventListener("click", function() {
+          console.log("update")
         y.companyName = document.getElementById("company_name").value;
         y.companyWeb = document.getElementById("company_web").value;
         y.companyAddress = document.getElementById("company_address").value;
@@ -509,7 +511,7 @@ function displayDetails(contact) {
         y.lastName = document.getElementById("last_name").value;
         y.tel = document.getElementById("tel").value;
         y.email = document.getElementById("email").value;
-        console.log("update")
+        
         editContact(y.id);
         showDetails2(idNumber);
         edititem(idNumber);  //does not update
@@ -524,6 +526,7 @@ function displayDetails(contact) {
   }
  
 }
+
 
 
 //======================

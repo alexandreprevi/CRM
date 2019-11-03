@@ -202,11 +202,13 @@ async function fetchitems(filter){
 	var savedata = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-
+		if(filter == null){
     while ( i-- ) {
         savedata.push( localStorage.getItem(keys[i]) );
 	}
 	localStorage.clear();
+}
+	
 
 	var longintervals = [];
 	let formatted = today.getFullYear()+"-";
@@ -243,7 +245,7 @@ async function fetchitems(filter){
 	}
 
 	for(let add = 0; add<savedata.length; add++){
-		
+			console.log("i happen")
 			let checkbox = document.createElement("input");
 			checkbox.setAttribute("type", "checkbox");
 			checkbox.setAttribute("value", Number(todolist.children.length)+1);
