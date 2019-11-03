@@ -81,7 +81,7 @@ class Calendar {
         const eventList = document.getElementById("event-list");
         const row = document.createElement("row");
         row.id = event.id;
-        row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
+        row.innerHTML = `${event.startTime} ${event.title} ${event.place} ${event.contact} <a class="delete-button">X</a></br>`;
         eventList.appendChild(row);
 
 
@@ -154,6 +154,50 @@ class Event {
     }
 
 }
+
+class ContactList {
+    constructor() {
+      this.contacts = [];
+      this.contactDetails = [];
+      this.contact_id = 0;
+    }  
+  
+    // fill contact list to contact area
+    renderDropDown() {
+      let selectContactDropDown = document.getElementById("contact-add");
+      let sortedcontactlist = this.contacts.sort(compare);
+    
+      for (let contact of sortedcontactlist) {
+          let currentContact = contact.firstName+" "+contact.lastName;
+          selectContactDropDown.add(new Option(currentContact));
+      }
+  
+    }
+}
+
+// this function is to sort contact list alphabetically, will call this function inside render();
+function compare(a, b) {
+    // Use toUpperCase() to ignore character casing
+    const companyA = (a.companyName.toUpperCase()+" - "+a.firstName.toUpperCase() +a.lastName.toUpperCase());
+    const companyB = (b.companyName.toUpperCase()+" - "+b.firstName.toUpperCase() +b.lastName.toUpperCase());
+    let comparison = 0;
+    if (companyA > companyB) {
+      comparison = 1;
+    } else if (companyA < companyB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
+// IMPORT CLIENT LIST FROM MOCK API //////////////////////////
+let contact_list = new ContactList();
+
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function(data){
+   for (let contact of data){
+       contact_list.contacts.push(contact);
+   }
+   contact_list.renderDropDown();
+});
 
 // IMPORT DATA FROM MOCK API /////////////////////////////////
 

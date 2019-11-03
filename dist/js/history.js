@@ -212,9 +212,27 @@ previousEvents.style.display = "flex";
 upcomingEvents.style.display = "flex";
 
 previousEvents.addEventListener("click", function(){
-    upcomingEvents.style.display == "flex" ? upcomingEvents.style.display = "none" : upcomingEvents.style.display = "flex";
+  /*   upcomingEvents.style.display == "flex" ? upcomingEvents.style.display = "none" : upcomingEvents.style.display = "flex"; */
+    if (upcomingEvents.style.display == "flex") {
+        upcomingEvents.style.display = "none";
+        previousEvents.style.height = "90%";
+    } else {
+        upcomingEvents.style.display = "flex";
+        previousEvents.style.height = "45%";
+    }
 });
 
-upcomingEvents.addEventListener("click", function() {
+/* upcomingEvents.addEventListener("click", function() {
     previousEvents.style.display == "flex" ? previousEvents.style.display = "none" : previousEvents.style.display = "flex";
-})
+}) */
+
+upcomingEvents.addEventListener("click", function(){
+    /*   upcomingEvents.style.display == "flex" ? upcomingEvents.style.display = "none" : upcomingEvents.style.display = "flex"; */
+      if (previousEvents.style.display == "flex") {
+          previousEvents.style.display = "none";
+          upcomingEvents.style.height = "90%";
+      } else {
+          previousEvents.style.display = "flex";
+          upcomingEvents.style.height = "45%";
+      }
+  });
