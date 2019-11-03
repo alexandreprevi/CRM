@@ -12,6 +12,23 @@
 
 <body onload="myCalendar.renderHistoric()">
     <div class="wrapper">
+            <div id="modal-add" class="modal-add">
+                    <div class="modal-add-header">
+                        <p id="cancel-button">Cancel</p>
+                        <p id="confirm-add-event-button">Add</p>
+                        <p id="edit-add-event-button">Edit</p>
+                    </div>
+                    <div class="modal-add-form">
+                        <h3>New Event</h3>
+                        <input type="text" id="title-add" placeholder="Title">
+                        <input type="text" id="place-add" placeholder="Place">
+                        <label for="date-add">Date:</label><input type="date" id="date-add">
+                        <label for="start-time-add">Begin:</label><input type="time" id="start-time-add">
+                        <label for="end-time-add">End:</label><input type="time" id="end-time-add">
+                        <label for="contact-add">Link to contact</label><select id="contact-add"></select>
+                       <!-- <input type="text" id="contact-add"> -->
+                    </div>
+                </div>
         <div class="header">
                 <div class="logo">
                         <img src="logo/emmiologo.png" alt="logo">

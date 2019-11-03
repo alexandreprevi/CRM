@@ -95,10 +95,11 @@ class Calendar {
         const upcomingEventsTable = document.getElementById("upcoming-events-table");
 
         if (myCalendar.events) {
-            // SORT THE EVENTS BY DATE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
             for (let event of sortedEvents) {
                 let tr = document.createElement("tr");
-                tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.place}</td><td>${event.contact}</td>`;
+                tr.id = `${event.id}`;
+                tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.place}</td><td>${event.contact}</td><td><i class="fas fa-edit edit-button"></i><i class="fas fa-trash-alt delete-button"></i></td>`;
                 event.date < today ? previousEventsTable.appendChild(tr) : upcomingEventsTable.appendChild(tr);
 
             }
@@ -132,22 +133,69 @@ class Calendar {
 
     deleteEvent(el) {
         if (el.classList.contains("delete-button")) {
-
+    
             // Remove event from the list
             let confirm = window.confirm("Are you sure you want to delete this event?");
 
             if (confirm == true) {
-                el.parentElement.remove();
+                el.parentElement.parentElement.remove();
 
                 // remove event from myCalendar.events after confirmation alert
                 myCalendar.events.forEach((event) => {
-                    if (el.parentElement.id == event.id) {
+                    if (el.parentElement.parentElement.id == event.id) {
                         // remove the event from the calender.event array with the id of the event
                         let eventToRemove = myCalendar.events.map(function (item) { return item.id }).indexOf(event.id);
                         myCalendar.events.splice(eventToRemove, 1);
                     }
                 })
+
+    
+                $.ajax({
+                    method: "DELETE",
+                    url: `http://5daef5cbf2946f001481d066.mockapi.io/events/${el.parentElement.parentElement.id}`
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                    });
             }
+
+        }
+    }
+    editEvent(el) {
+
+        if (el.classList.contains("edit-button")) {
+
+            modalAdd.style.display = "flex";
+            modalAdd.classList.add('open');
+            editContact.style.display = "flex";
+            confirmAddEvent.style.display = "none";
+
+            editContact.addEventListener("click", function () {
+                modalAdd.style.display = "none";
+                modalAdd.classList.remove('open');
+
+                $.ajax({
+                    method: "PUT",
+                    url: `http://5daef5cbf2946f001481d066.mockapi.io/events/${el.parentElement.parentElement.id}`,
+                    data: {
+                        title: title_add.value,
+                        place: place_add.value,
+                        date: date_add.value,
+                        startTime: startTime_add.value,
+                        endTime: endTime_add.value,
+                        contact: contact_add.value,
+                        id: date_add.value + startTime_add.value
+                    }
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                        //////////////////////////////////////////////////////////////////////////////////////// ???????
+                        window.location.reload();
+                    });
+
+
+            });
+
 
         }
     }
@@ -173,6 +221,40 @@ class Event {
     }
 }
 
+class ContactList {
+    constructor() {
+        this.contacts = [];
+        this.contactDetails = [];
+        this.contact_id = 0;
+    }
+
+    // fill contact list to contact area
+    renderDropDown() {
+        let selectContactDropDown = document.getElementById("contact-add");
+        let sortedcontactlist = this.contacts.sort(compare);
+
+        for (let contact of sortedcontactlist) {
+            let currentContact = contact.firstName + " " + contact.lastName;
+            selectContactDropDown.add(new Option(currentContact));
+        }
+
+    }
+}
+
+// this function is to sort contact list alphabetically, will call this function inside render();
+function compare(a, b) {
+    // Use toUpperCase() to ignore character casing
+    const companyA = (a.companyName.toUpperCase() + " - " + a.firstName.toUpperCase() + a.lastName.toUpperCase());
+    const companyB = (b.companyName.toUpperCase() + " - " + b.firstName.toUpperCase() + b.lastName.toUpperCase());
+    let comparison = 0;
+    if (companyA > companyB) {
+        comparison = 1;
+    } else if (companyA < companyB) {
+        comparison = -1;
+    }
+    return comparison;
+}
+
 // IMPORT DATA FROM MOCK API ////////////////////////////
 
 let myCalendar = new Calendar();
@@ -184,8 +266,55 @@ $.get("http://5daef5cbf2946f001481d066.mockapi.io/events", function (data) {
     myCalendar.renderHistoric();
 });
 
+let contact_list = new ContactList();
+
+$.get("http://5daef5cbf2946f001481d066.mockapi.io/contacts", function (data) {
+    for (let contact of data) {
+        contact_list.contacts.push(contact);
+    }
+    contact_list.renderDropDown();
+});
 
 //////////////////////////////////////////////////////////
+
+// MODAL window with event list
+let modal = document.getElementById("modal-calender");
+let modalAdd = document.getElementById("modal-add");
+let closeModal = document.getElementById("close-modal");
+let addEventButton = document.getElementById("add-event-button");
+
+// MODAL window/form to add events
+let cancelButton = document.getElementById("cancel-button");
+let confirmAddEvent = document.getElementById("confirm-add-event-button");
+let title_add = document.getElementById("title-add");
+let place_add = document.getElementById("place-add");
+let date_add = document.getElementById("date-add");
+let startTime_add = document.getElementById("start-time-add");
+let endTime_add = document.getElementById("end-time-add");
+let contact_add = document.getElementById("contact-add");
+let editContact = document.getElementById("edit-add-event-button");
+
+editContact.style.display = "none";
+
+
+
+
+// Cancel adding an event to the calendar
+cancelButton.addEventListener("click", function () {
+    modalAdd.classList.remove('open');
+    modalAdd.style.display = "none";
+});
+
+// Adding an event to the calendar
+confirmAddEvent.addEventListener("click", function () {
+    modalAdd.style.display = "none";
+    modalAdd.classList.remove('open');
+
+    myCalendar.getInputsEvent();
+});
+
+
+
 
 
 function filter() {
@@ -258,4 +387,24 @@ upcomingEvents.addEventListener("click", function () {
         previousEvents.style.display = "flex";
         upcomingEvents.style.height = "45%";
     }
+});
+
+document.getElementById("prev-events").addEventListener("click", (e) => {
+    if (e.target.classList.contains("edit-button")) {
+        myCalendar.editEvent(e.target);
+    }
+    if (e.target.classList.contains("delete-button")) {
+        myCalendar.deleteEvent(e.target);
+    }
+
+});
+
+document.getElementById("upcoming-events").addEventListener("click", (e) => {
+    if (e.target.classList.contains("edit-button")) {
+        myCalendar.editEvent(e.target);
+    }
+    if (e.target.classList.contains("delete-button")) {
+        myCalendar.deleteEvent(e.target);
+    }
+
 });
