@@ -82,7 +82,9 @@
         justify-content: space-between;
         align-items: center;
         background-color: lighten($secondary-color, 30%);
-        border: $secondary-color 1px solid;
+        border-bottom: 1px solid $secondary-color;
+        
+        
     
         p{
             font-size: 20px;
@@ -115,7 +117,7 @@
         justify-content: space-evenly;
         height: 100%;
         padding: 1rem 2rem;
-        background-color: darken($text-color, 10%);
+        background-color: darken($text-color, 3%);
         border: $secondary-color solid 1px;
         border-top: none;
     
@@ -123,10 +125,20 @@
             display: flex;
             justify-content: center;
             padding: 1rem 0;
+            color: darken($primary-color, 20%);
         }
     }
 }
 
+.modal-content-add{
+    i, p{
+        color: $primary-color;
+    }
+    i:hover, p:hover{
+        cursor: pointer;
+        color: darken($primary-color, 5%);
+    }
+}
 
 .edit-button {
     color: rgb(13, 150, 68);

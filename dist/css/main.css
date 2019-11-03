@@ -109,7 +109,7 @@
       -ms-flex-align: center;
           align-items: center;
   background-color: #e1fcf5;
-  border: #55efc4 1px solid;
+  border-bottom: 1px solid #55efc4;
 }
 
 .modal-add-header p {
@@ -149,7 +149,7 @@
           justify-content: space-evenly;
   height: 100%;
   padding: 1rem 2rem;
-  background-color: #e6e6e6;
+  background-color: #f7f7f7;
   border: #55efc4 solid 1px;
   border-top: none;
 }
@@ -162,6 +162,16 @@
       -ms-flex-pack: center;
           justify-content: center;
   padding: 1rem 0;
+  color: #005242;
+}
+
+.modal-content-add i, .modal-content-add p {
+  color: #00b894;
+}
+
+.modal-content-add i:hover, .modal-content-add p:hover {
+  cursor: pointer;
+  color: #009f7f;
 }
 
 .edit-button {
