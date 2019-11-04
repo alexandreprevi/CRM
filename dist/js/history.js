@@ -162,7 +162,7 @@ class Calendar {
         }
     }
     editEvent(el) {
-
+        
         if (el.classList.contains("edit-button")) {
 
             modalAdd.style.display = "flex";
@@ -173,7 +173,11 @@ class Calendar {
             editContact.addEventListener("click", function () {
                 modalAdd.style.display = "none";
                 modalAdd.classList.remove('open');
+                console.log(el.parentElement.parentElement.id);
+            console.log(myCalendar.events);
 
+                // GET INPUTS
+             
                 $.ajax({
                     method: "PUT",
                     url: `http://5daef5cbf2946f001481d066.mockapi.io/events/${el.parentElement.parentElement.id}`,
@@ -195,7 +199,18 @@ class Calendar {
 
 
             });
+            for (let i = 0; i < myCalendar.events.length; i++){
+                if (myCalendar.events[i].id == el.parentElement.parentElement.id){
 
+                    document.getElementById("title-add").value = myCalendar.events[i].title;
+                    document.getElementById("place-add").value = myCalendar.events[i].place;
+                    document.getElementById("date-add").value = myCalendar.events[i].date;
+                    document.getElementById("start-time-add").value = myCalendar.events[i].startTime;
+                    document.getElementById("end-time-add").value = myCalendar.events[i].endTime;
+                    document.getElementById("contact-add").value = myCalendar.events[i].contact;
+
+                }
+             }
 
         }
     }

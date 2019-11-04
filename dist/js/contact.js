@@ -429,6 +429,8 @@ function displayDetails(contact) {
     });
   }
 
+  
+
 }
 
 

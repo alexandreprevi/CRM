@@ -106,7 +106,6 @@ class Calendar {
                 })
 
 
-                //////////////////////////// HOW TO GET TO DELETE JUST ONE SPECIFIC OBJECT ?????
                 $.ajax({
                     method: "DELETE",
                     url: `http://5daef5cbf2946f001481d066.mockapi.io/events/${el.parentElement.id}`
@@ -137,7 +136,7 @@ class Calendar {
         })
             .done(function (msg) {
                 console.log(msg);
-                //////////////////////////////////////////////////////////////////////////////////////// ???????
+                
                 window.location.reload();
             });
     }
@@ -145,21 +144,30 @@ class Calendar {
     editEvent(el) {
 
         if (el.classList.contains("edit-button")) {
-
+            
             modalAdd.style.display = "flex";
             modalAdd.classList.add('open');
             editContact.style.display = "flex";
             confirmAddEvent.style.display = "none";
-/*             console.log(el.parentElement);
+
              // GET INPUTS
-             document.getElementById("title-add").value;
-             document.getElementById("place-add").value;
-             document.getElementById("date-add").value;
-             document.getElementById("start-time-add").value;
-             document.getElementById("end-time-add").value;
-             document.getElementById("contact-add").value;
-             document.getElementById("edit-add-event-button").value;
- */
+            
+
+             for (let i = 0; i < myCalendar.events.length; i++){
+                if (myCalendar.events[i].id == el.parentElement.id){
+
+                    document.getElementById("title-add").value = myCalendar.events[i].title;
+                    document.getElementById("place-add").value = myCalendar.events[i].place;
+                    document.getElementById("date-add").value = myCalendar.events[i].date;
+                    document.getElementById("start-time-add").value = myCalendar.events[i].startTime;
+                    document.getElementById("end-time-add").value = myCalendar.events[i].endTime;
+                    document.getElementById("contact-add").value = myCalendar.events[i].contact;
+
+                }
+             }
+
+             
+ 
             editContact.addEventListener("click", function () {
                 modalAdd.style.display = "none";
                 modalAdd.classList.remove('open');
