@@ -230,17 +230,17 @@ async function fetchitems(filter){
 		
 	  if(filter != null){
 		if(filter.contains(a.date))
-		myevents.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
+		myevents.push(a.startTime + ": " + a.title + " with " + a.contact/* +  " in " + a.place */);
 	  } else {
 		if(formatted == a.date)
-	  		myevents.push(a.startTime + ": " + a.title + " with " + a.contact + " in " + a.place);
+	  		myevents.push(a.startTime + ": " + a.title + " with " + a.contact /*+  " in " + a.place */);
 	}
 	}
 	// Filters what to show in notifications
 	for(let prop in peeps){
 		
 		if(peeps[prop] >= 20){
-			longintervals.push("You have not contacted " + prop + " for " + peeps[prop] +" days!");
+			longintervals.push("You have not been in touch with " + prop + " for " + peeps[prop] +" days!");
 		}
 	}
 

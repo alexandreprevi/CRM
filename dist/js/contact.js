@@ -79,57 +79,6 @@ class Calendar {
     }
   }
 
-  /* renderHistoric(){
-      let date = new Date();
-      let today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
-
-      const previousEventsTable = document.getElementById("past-events-table");
-      const upcomingEventsTable = document.getElementById("upcoming-events-table");
-
-      if (myCalendar.events){
-          for (let event of myCalendar.events) {
-              let tr = document.createElement("tr");
-              tr.innerHTML = `<td>${event.date}</td><td>${event.startTime}</td><td>${event.title}</td><td>${event.contact}</td>`;
-              event.date < today ?   previousEventsTable.appendChild(tr) : upcomingEventsTable.appendChild(tr);
-          }
-      }
-
-  } */
-
-  renderThisEvent(event) {
-    const eventList = document.getElementById("event-list");
-
-    const row = document.createElement("row");
-    row.id = event.id;
-    row.innerHTML = `${event.startTime} ${event.title} <a class="delete-button">X</a></br>`;
-    eventList.appendChild(row);
-
-
-  }
-
-  deleteEvent(el) {
-    if (el.classList.contains("delete-button")) {
-
-      // Remove event from the list
-      let confirm = window.confirm("Are you sure you want to delete this event?");
-
-      if (confirm == true) {
-        el.parentElement.remove();
-
-        // remove event from myCalendar.events after confirmation alert
-        myCalendar.events.forEach((event) => {
-          if (el.parentElement.id == event.id) {
-            // remove the event from the calender.event array with the id of the event
-            let eventToRemove = myCalendar.events.map(function (item) {
-              return item.id
-            }).indexOf(event.id);
-            myCalendar.events.splice(eventToRemove, 1);
-          }
-        })
-      }
-
-    }
-  }
 
   getInputsEvent() {
 
@@ -183,17 +132,6 @@ class ContactList {
     }
   }
 
-  /*
-      for (let currentContact of sortedcontactlist) {
-        var contactName = document.createElement("p");
-        contactName.id = "contact-name-" + currentContact.id;
-        contactName.className = "contact-name";
-        contactName.innerHTML = currentContact.companyName + " - " + "<span>"+ currentContact.firstName +" " +currentContact.lastName + "</span>";
-        contactList.appendChild(contactName);
-      }
-
-    }
-  */
   // fill details of contact to contact-details area
   //chaneg all contact_index to contactId
   render2(contactId) {
@@ -201,6 +139,7 @@ class ContactList {
     //  contactDetails.innerHTML = "";
     //var contactDetailsDisplayInfo=document.getElementById("contact-details-display-info");
     contactDetailsDisplayInfo.innerHTML = "";
+    
     var y = contact_list.find(x => x.id === contactId);
 
     var contactDiv = document.createElement("div");
@@ -220,7 +159,7 @@ class ContactList {
     tel.id = "tel-" + contactId;
     var email = document.createElement("p");
     email.id = "email-" + contactId;
-
+    
 
     companyName.innerHTML = "<span>Company Name: </span>" + y.companyName;
     companyWeb.innerHTML = "<span>Company Website: </span>" + y.companyWeb;
@@ -247,6 +186,8 @@ class ContactList {
     contactDiv.appendChild(email);
 
     contactDetailsDisplayInfo.appendChild(contactDiv);
+    
+    
 
     // PRINT EVENTS FOR THIS CONTACT
     /*      for (let i = 0; i < myCalendar.events.length; i++){
@@ -257,8 +198,10 @@ class ContactList {
           }
     */         //changed contact_index to contactId, therefore this.contacts[contact_index] becomes y now. see line 204;
     for (let i = 0; i < myCalendar.events.length; i++) {
+      
       if (myCalendar.events[i].contact == y.firstName + " " + y.lastName) {
         // Print here
+        
         contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title + " " + myCalendar.events[i].place + "</br>";
       }
     }
@@ -356,46 +299,6 @@ function edititem(id) {
 //=======================================================================
 
 
-/* function filter() {
-    let inputFilter = document.getElementById("inputFilter");
-    let filter = inputFilter.value.toUpperCase();
-    const previousEventsTable = document.getElementById("past-events-table");
-    const upcomingEventsTable = document.getElementById("upcoming-events-table");
-    let eventsInPreviousEventsTable = previousEventsTable.getElementsByTagName("tr");
-    let eventsInUpcomingEventsTable = upcomingEventsTable.getElementsByTagName("tr");
-
-    for (let i = 0; i <eventsInPreviousEventsTable.length; i++){
-        let event = eventsInPreviousEventsTable[i];
-
-        if (event) {
-
-            txtValue = event.textContent || event.innerText;
-
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                eventsInPreviousEventsTable[i].style.display = "";
-            } else {
-                eventsInPreviousEventsTable[i].style.display = "none";
-            }
-        }
-    }
-
-    for (let i = 0; i <eventsInUpcomingEventsTable.length; i++){
-        let event = eventsInUpcomingEventsTable[i];
-
-        if (event) {
-
-            txtValue = event.textContent || event.innerText;
-
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                eventsInUpcomingEventsTable[i].style.display = "";
-            } else {
-                eventsInUpcomingEventsTable[i].style.display = "none";
-            }
-        }
-    }
-}
- */
-
 
 
 
@@ -438,6 +341,7 @@ contactList.addEventListener("click", displayDetails);
 function displayDetails(contact) {
 
   if (contact.target.classList.contains("contact-name")) {
+    contactEventsDisplay.innerHTML = "";
     contactList.style.display = "none";
     contactHeader.style.display = "none";
     contactDetails.style.display = "flex";
@@ -540,6 +444,7 @@ eventsBtn.addEventListener("click", function () {
   contactInfoDisplay.style.display = "none";
   contactEventsDisplay.style.display = "flex";
   contactNotesDisplay.style.display = "none";
+  
 
   eventsBtn.classList.add("active");
   infoBtn.classList.remove("active");
