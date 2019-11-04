@@ -264,7 +264,7 @@ function additem() {
 function deleteitem(id) {
   $.ajax({
     method: "DELETE",
-    url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts/" + id
+    url: "https://www.5daef5cbf2946f001481d066.mockapi.io/contacts/" + id
   })
     .done(function (msg) {
       console.log(msg);
@@ -276,7 +276,7 @@ function edititem(id) {
   $.ajax({
 
     method: "PUT",
-    url: "http://5daef5cbf2946f001481d066.mockapi.io/contacts/" + id,
+    url: "https://www.5daef5cbf2946f001481d066.mockapi.io/contacts/" + id,
     data: {
       companyName: document.getElementById("company_name").value,
       companyWeb: document.getElementById("company_web").value,
@@ -333,7 +333,10 @@ contactList.style.display = "flex";
 contactHeader.style.display = "flex";
 contactDetails.style.display = "none";
 
-
+document.addEventListener("click", hehe)
+function hehe(event){
+  console.log(event.target)
+}
 // event listeners move to DOMContentLoaded===============
 //=============================================================
 contactList.addEventListener("click", displayDetails);
@@ -416,9 +419,14 @@ function displayDetails(contact) {
       y.tel = document.getElementById("tel").value;
       y.email = document.getElementById("email").value;
 
-      editContact(y.id);
-      showDetails2(idNumber);
+      
+      
       edititem(idNumber);  //does not update
+      showDetails2(idNumber);
+      console.log("I happen")
+      document.getElementById("contact-display-name").style.display = "flex";
+      document.getElementById("contact-details").style.display = "flex";
+      contactInfoDisplay.style.display = "flex";
       addNewContact.style.display = "none";
       backBtn.style.display = "flex";
       removeBtn.style.display = "flex";
@@ -601,23 +609,4 @@ function search_contact() {
       x.children[i].style.display = "inline";
     }
   }
-}
-
-function editContact(id) {
-  $.ajax({
-    method: "POST",
-    url: "https://www.5daef5cbf2946f001481d066.mockapi.io/contacts/" + id,
-    data: {
-      companyName: document.getElementById("company_name").value,
-      companyWeb: document.getElementById("company_web").value,
-      companyAddress: document.getElementById("company_address").value,
-      firstName: document.getElementById("first_name").value,
-      lastName: document.getElementById("last_name").value,
-      tel: document.getElementById("tel").value,
-      email: document.getElementById("email").value
-    }
-  })
-    .done(function (msg) {
-      console.log(msg);
-    });
 }
