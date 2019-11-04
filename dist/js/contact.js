@@ -379,8 +379,8 @@ function displayDetails(contact) {
       contactList.style.display = "flex";
       contactHeader.style.display = "flex";
     });*/
-    var y = contact_list.contacts.find(x => x.id === idNumber);
-
+    
+    console.log(y)
     editBtn.addEventListener("click", function () {
       console.log("edit")
       addNewContact.style.display = "flex";
@@ -391,7 +391,7 @@ function displayDetails(contact) {
       editBtn.style.display = "none";
       document.getElementById("contact-display-name").style.display = "none";
       document.getElementById("contact-details").style.display = "none";
-
+      var y = contact_list.contacts.find(x => x.id === idNumber);
       console.log(contact_list.contacts);
       console.log(y);
 
