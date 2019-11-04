@@ -226,7 +226,7 @@ class ContactItem {
 
 //////////////////////////////////////////////////////////////////////////
 // TRY TO ADD COMMENTS //
-
+/* 
 
 let comments = [];
 
@@ -237,22 +237,33 @@ class Comment {
   }
 }
 
-let commentInputComment = "This guy is crazy";
-let contactInputComment = "Mark";
-let newComment = new Comment(commentInputComment, contactInputComment);
-comments.push(newComment);
+
+
 
 console.log(comments);
 
-// Save to local Storage
-localStorage.setItem("commentsArray", JSON.stringify(comments));
+// Add comment
+let addCommentBtn = document.getElementById("addCommentContact");
+addCommentBtn.addEventListener("click", function(){
+
+  let commentInputComment = document.getElementById("addCommentInput").value;
+  let contactInputComment = "Get the contact";
+
+  let newComment = new Comment(commentInputComment, contactInputComment);
+  comments.push(newComment);
+
+  // Save to local Storage
+  localStorage.setItem("commentsArray", JSON.stringify(comments));
+  document.getElementById("addCommentInput").value = "";
+
+})
+
 
 
 // Get info from local Storage
 comments = JSON.parse(localStorage.getItem("commentsArray"));
 
-console.log(comments);
-
+ */
 
 //////////////////////////////////////////////////////////////////////////
 

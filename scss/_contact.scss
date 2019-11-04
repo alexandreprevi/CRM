@@ -131,7 +131,25 @@
  }
 }
 
+.contact-details-display-notes{
+display: flex;
+flex-direction: column;
+height: 100%;
+width: 100%;
+
+.inputComment {
+    display: flex;
+    margin-top: 0.2rem;
+    button {
+        margin-left: 0.3rem;
+    }
+    
+}
+}
+
+
 #addNewContact{
     display: none;
 }
+
 
