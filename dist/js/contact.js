@@ -109,6 +109,7 @@ class ContactList {
     this.contact_id = 0;
   }
 
+
   addContact(companyName, companyWeb, companyAddress, firstName, lastName, tel, email) {
     this.contact_id++;
     var contact = new ContactItem(companyName, companyWeb, companyAddress, firstName, lastName, tel, email, this.contact_id);
@@ -221,6 +222,39 @@ class ContactItem {
     this.id = id;
   }
 }
+
+
+//////////////////////////////////////////////////////////////////////////
+// TRY TO ADD COMMENTS //
+
+
+let comments = [];
+
+class Comment {
+  constructor(comment, contact){
+    this.comment = comment;
+    this.contact = contact
+  }
+}
+
+let commentInputComment = "This guy is crazy";
+let contactInputComment = "Mark";
+let newComment = new Comment(commentInputComment, contactInputComment);
+comments.push(newComment);
+
+console.log(comments);
+
+// Save to local Storage
+localStorage.setItem("commentsArray", JSON.stringify(comments));
+
+
+// Get info from local Storage
+comments = JSON.parse(localStorage.getItem("commentsArray"));
+
+console.log(comments);
+
+
+//////////////////////////////////////////////////////////////////////////
 
 
 // IMPORT DATA FROM MOCK API ////////////////////////////
