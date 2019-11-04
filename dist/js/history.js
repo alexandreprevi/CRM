@@ -252,7 +252,8 @@ class ContactList {
             let currentContact = contact.firstName + " " + contact.lastName;
             selectContactDropDown.add(new Option(currentContact));
         }
-
+        selectContactDropDown.add(new Option(" - "));
+        
     }
 }
 
