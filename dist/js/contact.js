@@ -268,6 +268,7 @@ function deleteitem(id) {
   })
     .done(function (msg) {
       console.log(msg);
+      location.reload();
     });
 }
 
@@ -628,7 +629,7 @@ removeBtn.addEventListener("click", function () {
         
         if (confirm == true) {
     //ref.remove();
-    console.log(contact.id)
+    
     deleteitem(contact.id);
    
       }
