@@ -509,6 +509,14 @@ tr:nth-child(even) {
   margin-bottom: 0.2rem;
 }
 
+.todoContainer .thetodolist ul {
+  list-style: none;
+}
+
+.todoContainer .thetodolist span {
+  color: red;
+}
+
 .notification {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -629,7 +637,6 @@ tr:nth-child(even) {
       -ms-flex-direction: column;
           flex-direction: column;
   overflow: auto;
-  cursor: pointer;
 }
 
 .past-events h2 {
@@ -652,7 +659,6 @@ tr:nth-child(even) {
       -ms-flex-direction: column;
           flex-direction: column;
   overflow: auto;
-  cursor: pointer;
 }
 
 .upcoming-events h2 {

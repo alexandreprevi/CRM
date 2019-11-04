@@ -81,6 +81,12 @@
         width: 100%;
         border-bottom: 1px solid lightgray;
         margin-bottom: 0.2rem;
+        ul {
+            list-style: none;
+        }
+        span {
+            color: red;
+        }
     }
 }
 

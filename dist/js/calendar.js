@@ -227,11 +227,13 @@ class ContactList {
     renderDropDown() {
         let selectContactDropDown = document.getElementById("contact-add");
         let sortedcontactlist = this.contacts.sort(compare);
+        
 
         for (let contact of sortedcontactlist) {
             let currentContact = contact.firstName + " " + contact.lastName;
             selectContactDropDown.add(new Option(currentContact));
         }
+        selectContactDropDown.add(new Option(" - "));
 
     }
 }

@@ -130,7 +130,7 @@ function content( ) {
 			let listitem = document.createElement("li");
 			listitem.setAttribute("id", Number(todolist.children.length)+1);
 
-			listitem.textContent = inputfromhtml.value + " [X]";
+			listitem.textContent = inputfromhtml.value + " [X] ";
 			listitem.appendChild(checkbox);
 			todolist.appendChild(listitem);
 
@@ -252,7 +252,7 @@ async function fetchitems(filter){
 			let listitem = document.createElement("li");
 			listitem.setAttribute("id", Number(todolist.children.length)+1);
 
-			listitem.textContent = savedata[add] + " [X]";
+			listitem.textContent = savedata[add] + ` [X] ` ;
 			listitem.appendChild(checkbox);
 			todolist.appendChild(listitem);
 
