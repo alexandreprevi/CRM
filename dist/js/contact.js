@@ -340,6 +340,8 @@ contactList.addEventListener("click", displayDetails);
 
 function displayDetails(contact) {
 
+  ///////// PROBLEM HERE /////////////////////////////////////////////////////////////////////
+
   if (contact.target.classList.contains("contact-name")) {
     contactEventsDisplay.innerHTML = "";
     contactList.style.display = "none";
@@ -429,7 +431,7 @@ function displayDetails(contact) {
     });
   }
 
-  
+
 
 }
 
