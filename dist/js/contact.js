@@ -385,10 +385,8 @@ function hehe(event){
 // event listeners move to DOMContentLoaded===============
 //=============================================================
 contactList.addEventListener("click", displayDetails);
-
+var ref;
 function displayDetails(contact) {
-
-  ///////// PROBLEM HERE /////////////////////////////////////////////////////////////////////
 
   if (contact.target.classList.contains("contact-name")) {
     contactEventsDisplay.innerHTML = "";
@@ -401,13 +399,13 @@ function displayDetails(contact) {
     document.getElementById("contact-display-name").innerHTML = contact.target.innerHTML;
     var nodes = Array.prototype.slice.call(document.getElementById('contact-list').children),
       ref = contact.target;
-      console.log("ref= " +ref)
+      
     //console.log(nodes.indexOf(contact.target).toString());
     //  console.log( nodes.indexOf( ref ));
 
     console.log(contact.target.id.slice(13));
     var idNumber = contact.target.id.slice(13);
-    
+    var y = contact_list.contacts.find(x => x.id === idNumber);
     //showDetails2(idNumber);showDetails(idNumber);
     showDetails2(idNumber);
 
@@ -426,8 +424,8 @@ function displayDetails(contact) {
       contactList.style.display = "flex";
       contactHeader.style.display = "flex";
     });*/
-    var y = contact_list.contacts.find(x => x.id === idNumber);
-
+    console.log("ref info: " + ref + " | " + ref.innerHTML)
+    console.log(y)
     editBtn.addEventListener("click", function () {
       console.log("edit")
       addNewContact.style.display = "flex";
@@ -436,7 +434,7 @@ function displayDetails(contact) {
       backBtn.style.display = "none";
       removeBtn.style.display = "none";
       editBtn.style.display = "none";
-      document.getElementById("contact-display-name").style.display = "none";
+      
       document.getElementById("contact-details").style.display = "none";
 
       console.log(contact_list.contacts);
@@ -460,7 +458,7 @@ function displayDetails(contact) {
       editBtn.style.display = "flex";
     });
 
-    updateBtn.addEventListener("click", function () {
+    /*updateBtn.addEventListener("click", function () {
       console.log("update")
       y.companyName = document.getElementById("company_name").value;
       y.companyWeb = document.getElementById("company_web").value;
@@ -485,10 +483,10 @@ function displayDetails(contact) {
       document.getElementById("contact-display-name").innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
       ref.innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
       //window.location.reload();   /// not sure is good here with reload
-    });
+    });*/
   }
 
-
+  
 
 }
 
@@ -664,7 +662,6 @@ function search_contact() {
 
 removeBtn.addEventListener("click", function () {
       
-  
   let company = document.getElementById("contact-display-name").innerHTML;
   console.log(company)
   $.get("https://www.5daef5cbf2946f001481d066.mockapi.io/contacts", function (data) {
@@ -678,36 +675,53 @@ removeBtn.addEventListener("click", function () {
     //ref.remove();
     console.log()
     deleteitem(contact.id);
-    
+   
       }
       document.getElementById("contact-details").style.display = "none";
+      location.reload();
     }
      } 
   });
-  
-
-  
-    
-  
   
   contactList.style.display = "flex";
   contactHeader.style.display = "flex";
 });
 
 
+updateBtn.addEventListener("click", function () {
+  console.log("update")
+  let company = document.getElementById("contact-display-name").innerHTML;
+  $.get("https://www.5daef5cbf2946f001481d066.mockapi.io/contacts", function (data) {
+    for (let y of data) {
+      let string = y.companyName + " - <span>" + y.firstName + " " + y.lastName+"</span>";
+      if(string == company){
+        console.log("Edit happens")
+  y.companyName = document.getElementById("company_name").value;
+  y.companyWeb = document.getElementById("company_web").value;
+  y.companyAddress = document.getElementById("company_address").value;
+  y.firstName = document.getElementById("first_name").value;
+  y.lastName = document.getElementById("last_name").value;
+  y.tel = document.getElementById("tel").value;
+  y.email = document.getElementById("email").value;
+  edititem(y.id);
+  location.reload();
+  showDetails2(y.id);
+  document.getElementById("contact-display-name").innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
+  //ref.innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
+    }
+  }
+  });
 
-    /*removeBtn.addEventListener("click", function () {
-      
-      contactDetails.style.display = "none";
-
-      let confirm = window.confirm("Are you sure you want to delete this contact?");
-      console.log("ref= " + ref)
-      if (confirm == true) {
-        ref.remove();
-        deleteitem(idNumber);
-        
-      }
-      
-      contactList.style.display = "flex";
-      contactHeader.style.display = "flex";
-    });*/
+    //does not update
+  
+  
+  document.getElementById("contact-display-name").style.display = "flex";
+  document.getElementById("contact-details").style.display = "flex";
+  contactInfoDisplay.style.display = "flex";  
+  addNewContact.style.display = "none";
+  backBtn.style.display = "flex";
+  removeBtn.style.display = "flex";
+  editBtn.style.display = "flex";
+  
+  //window.location.reload();   /// not sure is good here with reload
+});
