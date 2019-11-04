@@ -140,7 +140,7 @@ class ContactList {
     //  contactDetails.innerHTML = "";
     //var contactDetailsDisplayInfo=document.getElementById("contact-details-display-info");
     contactDetailsDisplayInfo.innerHTML = "";
-    
+
     var y = contact_list.find(x => x.id === contactId);
 
     var contactDiv = document.createElement("div");
@@ -160,7 +160,7 @@ class ContactList {
     tel.id = "tel-" + contactId;
     var email = document.createElement("p");
     email.id = "email-" + contactId;
-    
+
 
     companyName.innerHTML = "<span>Company Name: </span>" + y.companyName;
     companyWeb.innerHTML = "<span>Company Website: </span>" + y.companyWeb;
@@ -187,8 +187,8 @@ class ContactList {
     contactDiv.appendChild(email);
 
     contactDetailsDisplayInfo.appendChild(contactDiv);
-    
-    
+
+
 
     // PRINT EVENTS FOR THIS CONTACT
     /*      for (let i = 0; i < myCalendar.events.length; i++){
@@ -199,10 +199,10 @@ class ContactList {
           }
     */         //changed contact_index to contactId, therefore this.contacts[contact_index] becomes y now. see line 204;
     for (let i = 0; i < myCalendar.events.length; i++) {
-      
+
       if (myCalendar.events[i].contact == y.firstName + " " + y.lastName) {
         // Print here
-        
+
         contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title + " " + myCalendar.events[i].place + "</br>";
       }
     }
@@ -339,7 +339,7 @@ contactHeader.style.display = "flex";
 contactDetails.style.display = "none";
 
 document.addEventListener("click", hehe)
-function hehe(event){
+function hehe(event) {
   console.log(event.target)
 }
 // event listeners move to DOMContentLoaded===============
@@ -359,7 +359,7 @@ function displayDetails(contact) {
     document.getElementById("contact-display-name").innerHTML = contact.target.innerHTML;
     var nodes = Array.prototype.slice.call(document.getElementById('contact-list').children),
       ref = contact.target;
-      
+
     //console.log(nodes.indexOf(contact.target).toString());
     //  console.log( nodes.indexOf( ref ));
 
@@ -394,7 +394,7 @@ function displayDetails(contact) {
       backBtn.style.display = "none";
       removeBtn.style.display = "none";
       editBtn.style.display = "none";
-      
+
       document.getElementById("contact-details").style.display = "none";
 
       console.log(contact_list.contacts);
@@ -446,7 +446,7 @@ function displayDetails(contact) {
     });*/
   }
 
-  
+
 
 }
 
@@ -463,14 +463,14 @@ eventsBtn.addEventListener("click", function () {
   contactInfoDisplay.style.display = "none";
   contactEventsDisplay.style.display = "flex";
   contactNotesDisplay.style.display = "none";
-  
+
 
   eventsBtn.classList.add("active");
   infoBtn.classList.remove("active");
   notesBtn.classList.remove("active");
 });
 notesBtn.addEventListener("click", function () {
-  
+
   contactInfoDisplay.style.display = "none";
   contactEventsDisplay.style.display = "none";
   contactNotesDisplay.style.display = "flex";
@@ -550,7 +550,7 @@ function compare(a, b) {
 }
 
 class Comment {
-  constructor(comment, contact){
+  constructor(comment, contact) {
     this.comment = comment;
     this.contact = contact
   }
@@ -609,61 +609,63 @@ function showDetails2(contactId) {
   }
 
 
-  
-//////////////////////////////////////////////////////////////////////////
-// TRY TO ADD COMMENTS //
- 
 
-let comments = [];
+  //////////////////////////////////////////////////////////////////////////
+  // TRY TO ADD COMMENTS //
 
 
+  let comments = [];
 
+  console.log(comments);
 
+  // Add comment
+  let addCommentBtn = document.getElementById("addCommentContact");
+    addCommentBtn.addEventListener("click", function (e) {
+    console.log(comments);
 
-console.log(comments);
+    let commentInputComment = document.getElementById("addCommentInput").value;
+    let contactInputComment = y.firstName + " " + y.lastName;
 
-// Add comment
-let addCommentBtn = document.getElementById("addCommentContact");
-addCommentBtn.addEventListener("click", function(e){
+    let newComment = new Comment(commentInputComment, contactInputComment);
+    /* comments.push(newComment); */
+    
 
-  let commentInputComment = document.getElementById("addCommentInput").value;
-  let contactInputComment = y.firstName + " " + y.lastName;
-
-  let newComment = new Comment(commentInputComment, contactInputComment);
-  comments.push(newComment);
-
-  let newCommentShow = document.createElement("p");
-  let newCommentNode = document.createTextNode(commentInputComment);
+    let newCommentShow = document.createElement("p");
+    let newCommentNode = document.createTextNode(commentInputComment);
     newCommentShow.appendChild(newCommentNode);
     document.getElementById("contact-details-display-notes-container").appendChild(newCommentShow);
 
-  // Save to local Storage
-  localStorage.setItem("commentsArray", JSON.stringify(comments));
-  document.getElementById("addCommentInput").value = "";
-  
-
-})
-
-
-
-// Get info from local Storage
-comments = JSON.parse(localStorage.getItem("commentsArray"));
-document.getElementById("contact-details-display-notes-container").innerHTML = "";
-
-for (let i = 0; i < comments.length; i++){
-
-    if (comments[i].contact == y.firstName + " "+ y.lastName){
-      let newComment = document.createElement("p");
-      let newCommentNode = document.createTextNode(comments[i].comment);
-    newComment.appendChild(newCommentNode);
-    document.getElementById("contact-details-display-notes-container").appendChild(newComment);
-    }
-
-}
-
+    // Save to local Storage
+    // localStorage.setItem("commentsArray", JSON.stringify(comments));
+    document.getElementById("addCommentInput").value = "";
  
 
-//////////////////////////////////////////////////////////////////////////
+  })
+
+
+
+  // Get info from local Storage
+  comments = JSON.parse(localStorage.getItem("commentsArray"));
+  document.getElementById("contact-details-display-notes-container").innerHTML = "";
+
+  if (comments) {
+    for (let i = 0; i < comments.length; i++) {
+
+      if (comments[i].contact == y.firstName + " " + y.lastName) {
+        let newComment = document.createElement("p");
+        let newCommentNode = document.createTextNode(comments[i].comment);
+        newComment.appendChild(newCommentNode);
+        document.getElementById("contact-details-display-notes-container").appendChild(newComment);
+      }
+
+    }
+
+  }
+
+
+
+
+  //////////////////////////////////////////////////////////////////////////
 
 
 
@@ -687,29 +689,29 @@ function search_contact() {
 }
 
 removeBtn.addEventListener("click", function () {
-      
+
   let company = document.getElementById("contact-display-name").innerHTML;
   console.log(company)
   $.get("https://www.5daef5cbf2946f001481d066.mockapi.io/contacts", function (data) {
     for (let contact of data) {
-      let string = contact.companyName + " - <span>" + contact.firstName + " " + contact.lastName+"</span>";
-      if(string == company){
-        
+      let string = contact.companyName + " - <span>" + contact.firstName + " " + contact.lastName + "</span>";
+      if (string == company) {
+
         let confirm = window.confirm("Are you sure you want to delete this contact?");
-        
+
         if (confirm == true) {
-    //ref.remove();
-    
-    deleteitem(contact.id);
-   
+          //ref.remove();
+
+          deleteitem(contact.id);
+
+        }
+        document.getElementById("contact-details").style.display = "none";
+
       }
-      document.getElementById("contact-details").style.display = "none";
-      
     }
-     } 
-     
+
   });
-  
+
   contactList.style.display = "flex";
   contactHeader.style.display = "flex";
 });
@@ -720,36 +722,36 @@ updateBtn.addEventListener("click", function () {
   let company = document.getElementById("contact-display-name").innerHTML;
   $.get("https://www.5daef5cbf2946f001481d066.mockapi.io/contacts", function (data) {
     for (let y of data) {
-      let string = y.companyName + " - <span>" + y.firstName + " " + y.lastName+"</span>";
-      if(string == company){
+      let string = y.companyName + " - <span>" + y.firstName + " " + y.lastName + "</span>";
+      if (string == company) {
         console.log("Edit happens")
-  y.companyName = document.getElementById("company_name").value;
-  y.companyWeb = document.getElementById("company_web").value;
-  y.companyAddress = document.getElementById("company_address").value;
-  y.firstName = document.getElementById("first_name").value;
-  y.lastName = document.getElementById("last_name").value;
-  y.tel = document.getElementById("tel").value;
-  y.email = document.getElementById("email").value;
-  edititem(y.id);
+        y.companyName = document.getElementById("company_name").value;
+        y.companyWeb = document.getElementById("company_web").value;
+        y.companyAddress = document.getElementById("company_address").value;
+        y.firstName = document.getElementById("first_name").value;
+        y.lastName = document.getElementById("last_name").value;
+        y.tel = document.getElementById("tel").value;
+        y.email = document.getElementById("email").value;
+        edititem(y.id);
 
-  showDetails2(y.id);
-  document.getElementById("contact-display-name").innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
-  //ref.innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
+        showDetails2(y.id);
+        document.getElementById("contact-display-name").innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
+        //ref.innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
+      }
     }
-  }
   });
 
-    //does not update
-  
-  
+  //does not update
+
+
   document.getElementById("contact-display-name").style.display = "flex";
   document.getElementById("contact-details").style.display = "flex";
-  contactInfoDisplay.style.display = "flex";  
+  contactInfoDisplay.style.display = "flex";
   addNewContact.style.display = "none";
   backBtn.style.display = "flex";
   removeBtn.style.display = "flex";
   editBtn.style.display = "flex";
-  
+
   //window.location.reload();   /// not sure is good here with reload
 });
 
