@@ -350,31 +350,35 @@ function displayDetails(contact) {
     contactDetails.style.display = "flex";
     contactEventsDisplay.style.display = "none";
     contactNotesDisplay.style.display = "none";
-
+    console.log("contact")
     document.getElementById("contact-display-name").innerHTML = contact.target.innerHTML;
     var nodes = Array.prototype.slice.call(document.getElementById('contact-list').children),
       ref = contact.target;
+      console.log("ref= " +ref)
     //console.log(nodes.indexOf(contact.target).toString());
     //  console.log( nodes.indexOf( ref ));
 
     console.log(contact.target.id.slice(13));
     var idNumber = contact.target.id.slice(13);
+    
     //showDetails2(idNumber);showDetails(idNumber);
     showDetails2(idNumber);
 
-    removeBtn.addEventListener("click", function () {
-      contactList.style.display = "flex";
-      contactHeader.style.display = "flex";
+    /*removeBtn.addEventListener("click", function () {
+      
       contactDetails.style.display = "none";
 
       let confirm = window.confirm("Are you sure you want to delete this contact?");
-
+      console.log("ref= " + ref)
       if (confirm == true) {
         ref.remove();
         deleteitem(idNumber);
+        
       }
-
-    });
+      
+      contactList.style.display = "flex";
+      contactHeader.style.display = "flex";
+    });*/
     var y = contact_list.contacts.find(x => x.id === idNumber);
 
     editBtn.addEventListener("click", function () {
@@ -610,3 +614,53 @@ function search_contact() {
     }
   }
 }
+
+removeBtn.addEventListener("click", function () {
+      
+  
+  let company = document.getElementById("contact-display-name").innerHTML;
+  console.log(company)
+  $.get("https://www.5daef5cbf2946f001481d066.mockapi.io/contacts", function (data) {
+    for (let contact of data) {
+      let string = contact.companyName + " - <span>" + contact.firstName + " " + contact.lastName+"</span>";
+      if(string == company){
+        
+        let confirm = window.confirm("Are you sure you want to delete this contact?");
+        
+        if (confirm == true) {
+    //ref.remove();
+    console.log()
+    deleteitem(contact.id);
+    
+      }
+      document.getElementById("contact-details").style.display = "none";
+    }
+     } 
+  });
+  
+
+  
+    
+  
+  
+  contactList.style.display = "flex";
+  contactHeader.style.display = "flex";
+});
+
+
+
+    /*removeBtn.addEventListener("click", function () {
+      
+      contactDetails.style.display = "none";
+
+      let confirm = window.confirm("Are you sure you want to delete this contact?");
+      console.log("ref= " + ref)
+      if (confirm == true) {
+        ref.remove();
+        deleteitem(idNumber);
+        
+      }
+      
+      contactList.style.display = "flex";
+      contactHeader.style.display = "flex";
+    });*/
