@@ -295,6 +295,7 @@ function edititem(id) {
     //}
   }).done(function (msg) {
     console.log(msg);
+    location.reload();
   });
 }
 //=======================================================================
@@ -661,7 +662,7 @@ updateBtn.addEventListener("click", function () {
   y.tel = document.getElementById("tel").value;
   y.email = document.getElementById("email").value;
   edititem(y.id);
-  location.reload();
+
   showDetails2(y.id);
   document.getElementById("contact-display-name").innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
   //ref.innerHTML = y.companyName + " - " + y.firstName + " " + y.lastName;
