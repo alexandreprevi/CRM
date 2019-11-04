@@ -354,13 +354,13 @@ function displayDetails(contact) {
     document.getElementById("contact-display-name").innerHTML = contact.target.innerHTML;
     var nodes = Array.prototype.slice.call(document.getElementById('contact-list').children),
       ref = contact.target;
-      console.log("ref info: ")
+      
     //console.log(nodes.indexOf(contact.target).toString());
     //  console.log( nodes.indexOf( ref ));
 
     console.log(contact.target.id.slice(13));
     var idNumber = contact.target.id.slice(13);
-    
+    var y = contact_list.contacts.find(x => x.id === idNumber);
     //showDetails2(idNumber);showDetails(idNumber);
     showDetails2(idNumber);
 
@@ -379,7 +379,7 @@ function displayDetails(contact) {
       contactList.style.display = "flex";
       contactHeader.style.display = "flex";
     });*/
-    
+    console.log("ref info: " + ref + " | " + ref.innerHTML)
     console.log(y)
     editBtn.addEventListener("click", function () {
       console.log("edit")
@@ -389,9 +389,9 @@ function displayDetails(contact) {
       backBtn.style.display = "none";
       removeBtn.style.display = "none";
       editBtn.style.display = "none";
-      document.getElementById("contact-display-name").style.display = "none";
+      
       document.getElementById("contact-details").style.display = "none";
-      var y = contact_list.contacts.find(x => x.id === idNumber);
+
       console.log(contact_list.contacts);
       console.log(y);
 
@@ -630,7 +630,7 @@ removeBtn.addEventListener("click", function () {
     //ref.remove();
     console.log()
     deleteitem(contact.id);
-    ref.remove();
+   
       }
       document.getElementById("contact-details").style.display = "none";
       location.reload();
