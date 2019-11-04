@@ -224,48 +224,6 @@ class ContactItem {
 }
 
 
-//////////////////////////////////////////////////////////////////////////
-// TRY TO ADD COMMENTS //
-/* 
-
-let comments = [];
-
-class Comment {
-  constructor(comment, contact){
-    this.comment = comment;
-    this.contact = contact
-  }
-}
-
-
-
-
-console.log(comments);
-
-// Add comment
-let addCommentBtn = document.getElementById("addCommentContact");
-addCommentBtn.addEventListener("click", function(){
-
-  let commentInputComment = document.getElementById("addCommentInput").value;
-  let contactInputComment = "Get the contact";
-
-  let newComment = new Comment(commentInputComment, contactInputComment);
-  comments.push(newComment);
-
-  // Save to local Storage
-  localStorage.setItem("commentsArray", JSON.stringify(comments));
-  document.getElementById("addCommentInput").value = "";
-
-})
-
-
-
-// Get info from local Storage
-comments = JSON.parse(localStorage.getItem("commentsArray"));
-
- */
-
-//////////////////////////////////////////////////////////////////////////
 
 
 // IMPORT DATA FROM MOCK API ////////////////////////////
@@ -490,13 +448,13 @@ function displayDetails(contact) {
 
 }
 
-
-
 //======================
 backBtn.addEventListener("click", function () {
+  location.reload();
   contactDetails.style.display = "none";
   contactList.style.display = "flex";
   contactHeader.style.display = "flex";
+
 });
 
 eventsBtn.addEventListener("click", function () {
@@ -510,6 +468,7 @@ eventsBtn.addEventListener("click", function () {
   notesBtn.classList.remove("active");
 });
 notesBtn.addEventListener("click", function () {
+  
   contactInfoDisplay.style.display = "none";
   contactEventsDisplay.style.display = "none";
   contactNotesDisplay.style.display = "flex";
@@ -588,6 +547,13 @@ function compare(a, b) {
   return comparison;
 }
 
+class Comment {
+  constructor(comment, contact){
+    this.comment = comment;
+    this.contact = contact
+  }
+}
+
 // this function is to show details of contact on the contact-list
 function showDetails2(contactId) {
   //  var contactInfoDisplay=document.getElementById("contact-details-display-info");
@@ -639,6 +605,64 @@ function showDetails2(contactId) {
       contactEventsDisplay.innerHTML += myCalendar.events[i].date + " " + myCalendar.events[i].startTime + " " + myCalendar.events[i].title + " " + myCalendar.events[i].place + "</br>";
     }
   }
+
+
+  
+//////////////////////////////////////////////////////////////////////////
+// TRY TO ADD COMMENTS //
+ 
+
+let comments = [];
+
+
+
+
+
+console.log(comments);
+
+// Add comment
+let addCommentBtn = document.getElementById("addCommentContact");
+addCommentBtn.addEventListener("click", function(e){
+
+  let commentInputComment = document.getElementById("addCommentInput").value;
+  let contactInputComment = y.firstName + " " + y.lastName;
+
+  let newComment = new Comment(commentInputComment, contactInputComment);
+  comments.push(newComment);
+
+  let newCommentShow = document.createElement("p");
+  let newCommentNode = document.createTextNode(commentInputComment);
+    newCommentShow.appendChild(newCommentNode);
+    document.getElementById("contact-details-display-notes-container").appendChild(newCommentShow);
+
+  // Save to local Storage
+  localStorage.setItem("commentsArray", JSON.stringify(comments));
+  document.getElementById("addCommentInput").value = "";
+  
+
+})
+
+
+
+// Get info from local Storage
+comments = JSON.parse(localStorage.getItem("commentsArray"));
+document.getElementById("contact-details-display-notes-container").innerHTML = "";
+
+for (let i = 0; i < comments.length; i++){
+
+    if (comments[i].contact == y.firstName + " "+ y.lastName){
+      let newComment = document.createElement("p");
+      let newCommentNode = document.createTextNode(comments[i].comment);
+    newComment.appendChild(newCommentNode);
+    document.getElementById("contact-details-display-notes-container").appendChild(newComment);
+    }
+
+}
+
+ 
+
+//////////////////////////////////////////////////////////////////////////
+
 
 
 }
@@ -725,3 +749,4 @@ updateBtn.addEventListener("click", function () {
   
   //window.location.reload();   /// not sure is good here with reload
 });
+
