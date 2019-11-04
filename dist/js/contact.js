@@ -628,14 +628,15 @@ removeBtn.addEventListener("click", function () {
         
         if (confirm == true) {
     //ref.remove();
-    console.log()
+    console.log(contact.id)
     deleteitem(contact.id);
    
       }
       document.getElementById("contact-details").style.display = "none";
-      location.reload();
+      
     }
      } 
+     
   });
   
   contactList.style.display = "flex";
